@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const cookieParser = require("cookie-parser");
 const {createTokens, validateToken} = require('./JTW')
-const { sequelize, User, Adventure } = require('./models');
+const { sequelize, User, Post, Comment } = require('./models');
 
 
 app.use(  express.json() );
@@ -68,6 +68,53 @@ app.post('/login', async(req, res) =>{
     }
 
 });
+
+app.post('/post', validateToken , async(req, res) =>{
+    const { userUuid, name} = req.body
+    try {
+        const user = await User.findOne( { where: { uuid: userUuid }})
+        
+        const post = await Post.create({ name, userId: user.id })
+        return res.json(post)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(error)
+    }
+});
+
+
+
+app.post('/user', async(req, res) =>{
+
+    const { username, email, password} = req.body
+    try {
+        const user = await User.create({username , email, password })
+        
+        return res.json(user)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(error)
+    }
+});
+
+app.post('/comment' , async(req, res) =>{
+    const {  body , postUuid, userUuid } = req.body //
+    try {
+
+        //console.log( postUuid, userUuid  );
+        const user = await User.findOne( { where: { uuid: userUuid }}) 
+
+        const post = await Post.findOne( { where: { uuid: postUuid }})
+       
+        const comment = await Comment.create({ body, userId: user.id , postID: post.id  })
+        return res.json(comment)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(error)
+    }
+});
+
+
 /*
 
 
@@ -88,18 +135,6 @@ app.get('/user', validateToken , async(req, res) =>{
 });
 
 
-app.post('/user', async(req, res) =>{
-
-    const { username, email, password} = req.body
-    try {
-        const user = await User.create({username , email, password })
-        
-        return res.json(user)
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json(error)
-    }
-});
 
 
 app.get('/users', async(req, res) =>{
@@ -113,18 +148,6 @@ app.get('/users', async(req, res) =>{
 
 });
 
-app.post('/adventure', validateToken , async(req, res) =>{
-    const { userUuid, name} = req.body
-    try {
-        const user = await User.findOne( { where: { uuid: userUuid }})
-        
-        const adventure = await Adventure.create({ name, userId: user.id })
-        return res.json(adventure)
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json(error)
-    }
-});
 
 
 app.get('/adventure', async(req, res) =>{

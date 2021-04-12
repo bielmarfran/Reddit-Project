@@ -3,33 +3,32 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Adventure extends Model {
+  class Comment extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ User }) {
+    static associate({ User, Post }) {
       // define association here
-      this.belongsTo(User, {foreignKey : 'userId', as: 'user'})
+      this.belongsTo(User, {foreignKey : 'userID', as: 'user'});
+      this.belongsTo(Post, {foreignKey : 'postID', as: 'post'});
     }
-    toJSON(){
-      return { ...this.get(), id: undefined, userId: undefined}
-    }
-  }
-  Adventure.init({
+
+  };
+  Comment.init({
     uuid:{
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    name: {
+    body: {
       type: DataTypes.STRING,
       allowNull: false
     },
   }, {
     sequelize,
-    tableName: 'adventures',
-    modelName: 'Adventure',
+    tableName: 'comments',
+    modelName: 'Comment',
   });
-  return Adventure;
+  return Comment;
 };

@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "lootsplitter",
+    "database": "socialdb",
     "host": "localhost",
     "dialect": "mysql"
   },
