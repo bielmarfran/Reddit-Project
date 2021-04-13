@@ -23,16 +23,15 @@ function performLogin() {
     
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
-   /// headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
     headers.append('Origin','http://localhost:3000');
-    //headers.append('Auto','');
 
-    fetch('http://localhost:8080/login', {
+
+    fetch('http://localhost:8080/auth', {
         mode: 'cors',
         method: 'POST',
         credentials: 'include',
         headers: headers,
-        body: JSON.stringify({'email': 'teste@ggg.com', 'password': '123445'})
+        body: JSON.stringify({'email': 'bielmarfran@gmail.com', 'password': '1234'})
     })
     .then(response => response.json())
     .then(json => console.log(json))

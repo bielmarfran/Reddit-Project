@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { sequelize, User, Post } = require('../models');
 
+
 router.get("/", async(req, res) =>{
     const uuid = req.uuid;
     console.log(req.uuid);
@@ -18,8 +19,27 @@ router.get("/", async(req, res) =>{
 
 });
 
+
+router.get("/:uuid", async(req, res) =>{
+    const uuid = req.params.uuid;
+    console.log("DENTRO ROTA",req.uuid);
+    try {
+        const post = await Post.findOne({
+            where: { uuid },
+            include: 'comments'
+        })
+        return res.json(post)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({error :'Error Get'})
+    }
+
+});
+
+
 router.post('/', async(req, res) =>{
-    const { userUuid, name} = req.body
+    const name = req.body;
+    const userUuid = req.uuid;
     try {
         const user = await User.findOne( { where: { uuid: userUuid }})
         

@@ -24,6 +24,7 @@ const validateToken = (req, res, next) => {
     if (validToken) {
       req.authenticated = true;
       req.uuid = validToken.uuid;
+      req.username = validToken.username;
       console.log(validToken) ;
       return next();
     }

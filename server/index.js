@@ -33,7 +33,7 @@ app.use("/comment", validateToken , commentRouter);
 
 
 const authRouter = require('./routes/auth');
-app.use("/auth" , postRouter);
+app.use("/auth" , authRouter);
 
 
 
