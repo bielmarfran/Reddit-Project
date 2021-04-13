@@ -5,7 +5,7 @@ const cors = require('cors');
 //const db = require("./db");
 
 const cookieParser = require("cookie-parser");
-const {createTokens, validateToken} = require('./JTW')
+const {createTokens, validateToken} = require('./Middleware/jtw')
 const { sequelize, User, Post, Comment } = require('./models');
 
 
@@ -23,8 +23,17 @@ app.use((req, res, next) => {
 });
 
 // Routers
+
 const postRouter = require('./routes/posts');
 app.use("/posts", validateToken , postRouter);
+
+
+const commentRouter = require('./routes/comment');
+app.use("/comment", validateToken , commentRouter);
+
+
+const authRouter = require('./routes/auth');
+app.use("/auth" , postRouter);
 
 
 
@@ -37,50 +46,9 @@ app.listen(PORT, async () => {
 })
 
 
-app.post('/login', async(req, res) =>{
-    const { email, password} = req.body
-    try {
-        const user = await User.findOne({ where: { email: email } }).then(async function (user) {
-            if (!user) {
-                return res.status(400).json({error :'Acesso não autorizado'})
-            } else if (!await user.validPassword(password)) {
-                return res.status(400).json({error :'Acesso não autorizado'})
-            } 
-            console.log(user.uuid);
 
-            const acessToken = createTokens(user);
-            res.cookie("access-token",acessToken,{
-                maxAge:60 * 60 * 24 * 30 * 1000,
-                httpOnly: true,
-                path: '/',
-                secure: false,
-                sameSite: 'Strict',
-                domain: 'localhost',
-                
-            });
-            return res.json(user)
-        });
 
-  
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({error :'Error Get'})
-    }
 
-});
-
-app.post('/post', validateToken , async(req, res) =>{
-    const { userUuid, name} = req.body
-    try {
-        const user = await User.findOne( { where: { uuid: userUuid }})
-        
-        const post = await Post.create({ name, userId: user.id })
-        return res.json(post)
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json(error)
-    }
-});
 
 
 
@@ -91,23 +59,6 @@ app.post('/user', async(req, res) =>{
         const user = await User.create({username , email, password })
         
         return res.json(user)
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json(error)
-    }
-});
-
-app.post('/comment' , async(req, res) =>{
-    const {  body , postUuid, userUuid } = req.body //
-    try {
-
-        //console.log( postUuid, userUuid  );
-        const user = await User.findOne( { where: { uuid: userUuid }}) 
-
-        const post = await Post.findOne( { where: { uuid: postUuid }})
-       
-        const comment = await Comment.create({ body, userId: user.id , postID: post.id  })
-        return res.json(comment)
     } catch (error) {
         console.log(error)
         return res.status(500).json(error)

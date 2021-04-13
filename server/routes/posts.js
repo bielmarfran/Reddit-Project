@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { sequelize, User, Adventure } = require('../models');
+const { sequelize, User, Post } = require('../models');
 
 router.get("/", async(req, res) =>{
     const uuid = req.uuid;
@@ -8,7 +8,7 @@ router.get("/", async(req, res) =>{
     try {
         const user = await User.findOne({
             where: { uuid },
-            include: 'adventures'
+            include: 'posts'
         })
         return res.json(user)
     } catch (error) {
@@ -18,8 +18,17 @@ router.get("/", async(req, res) =>{
 
 });
 
-router.post("/", (req, res) => {
-    res.send("Test");
+router.post('/', async(req, res) =>{
+    const { userUuid, name} = req.body
+    try {
+        const user = await User.findOne( { where: { uuid: userUuid }})
+        
+        const post = await Post.create({ name, userId: user.id })
+        return res.json(post)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(error)
+    }
 });
 
 
