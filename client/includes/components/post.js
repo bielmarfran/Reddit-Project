@@ -1,6 +1,8 @@
 
-function createPost(post){
+function createPost(res){
+    var post = res.posts;
     console.log(post);
+    console.log(res.comments2);
     const body = document.body;
 
     const div = document.createElement("div"); 
@@ -23,11 +25,16 @@ function createPost(post){
                     <span class="text-grey">Posted by</span>
                     <a href="#" class="text-grey mx-1 no-underline hover:underline">${autor}</a>
                     <span class="text-grey">${time}</span>
+
+                    <svg class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+                    </svg>
+
                 </div>
                 <div>
                     <h2 class="text-lg font-medium mb-1">${title}</h2>
                 </div>
-                <div class="mt-10 mb-2">
+                <div class="mt-8 mb-2">
                     What is Lorem Ipsum?
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since
                      the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, 
@@ -56,18 +63,15 @@ function createPost(post){
                 <div class="w-full md:w-full px-3  mt-2">
                     <div class="p-0 m-0">
                         <p class="text-xs ml-0.5 mb-0.5">Comentar como <a class="text-blue-500">Usuario</a></p>
-                        <textarea class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" placeholder='Type Your Comment' required>
+                        <textarea class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" id="commentBody" placeholder='Type Your Comment' required>
                         
                         </textarea>
                         <div class="modal-footer py-3 px-5 border0-t text-right">
-                            <button
-                            class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-green-500 rounded shadow ripple hover:shadow-lg hover:bg-green-600 focus:outline-none"
+                            <button onclick="postComment('${post.uuid}')" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-green-500 rounded shadow ripple hover:shadow-lg hover:bg-green-600 focus:outline-none"
                             >
                                 Commentar
                             </button>
                         </div>
-                        
-
                     </div>
                 </div>
                 </div>
@@ -96,7 +100,11 @@ function createPost(post){
                     <span class="ml-2">${autor}</span>
                 </a>                        
                 <span class="text-grey ml-2">${time}</span>
+                <svg class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                    <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+                </svg>
             </div>
+
             <div class="ml-7 mb-5">
                 ${bodyComment}
             </div>

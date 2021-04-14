@@ -2,6 +2,7 @@ function test(message){
     window.alert(message);
 }
 
+
 function createPosts(res){
     const body = document.body;
     for (let index = 0; index < 1; index++) {
@@ -16,7 +17,7 @@ function createPosts(res){
         const time = `2 hours ago`;
     
         div.innerHTML = `
-        <div class="w-full sm:w-10/12 md:8/12 lg:w-7/12 my-2 mx-auto py-2 px-10" onClick="test('${post.uuid}')">
+        <div class="w-full sm:w-10/12 md:8/12 lg:w-7/12 my-2 mx-auto py-2 px-10" onClick="openPost('${post.uuid}')">
             <div class="flex border border-grey-light-alt hover:border-grey rounded bg-white cursor-pointer hover:shadow-lg">
     
                 <div class="w-11/12 pt-2 pl-5">
@@ -50,35 +51,4 @@ function createPosts(res){
     });
 }
     
-    /*
-        
-    var count = Object.keys(obj.adventures).length
-    console.log(obj)
-    console.log(obj.adventures[0].name)
-    const body = document.body;
-    for (let i = 0; i < count; i++) {
-        const div = document.createElement("div");  
-        div.setAttribute("class","listItem"); 
-        div.setAttribute("id","item1"+i); 
-        body.querySelector('#listAdventures').appendChild(div);
-    
-        const span = document.createElement("span"); 
-        span.setAttribute("class","bg-gray-400 h-2 w-2 m-2 rounded-full");
-        span.setAttribute("id","item2"+i); 
-        body.querySelector('#item1'+i).appendChild(span);
-    
-        const div2 = document.createElement("div");  
-        div2.innerText = obj.adventures[i].name;
-        div2.setAttribute("class","flex-grow font-medium px-2");
-        body.setAttribute("id","item3"+i); 
-        body.querySelector('#item1'+i).appendChild(div2);
-    
-    
-        const div3 = document.createElement("div");  
-        div3.innerText = "Players 5"
-        div3.setAttribute("class","text-sm font-normal text-gray-500 tracking-wide");
-        div3.setAttribute("id","item4"+i); 
-        body.querySelector('#item1'+i).appendChild(div3);
-      }
-      */
 }

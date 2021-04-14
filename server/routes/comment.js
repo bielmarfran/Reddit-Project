@@ -6,17 +6,17 @@ router.get("/", async(req, res) =>{
   
 });
 
-router.post('/' , async(req, res) =>{
-    const {  body , postUuid } = req.body //
+router.post('/' , async(req, res) =>{  
+    const { body , postUuid } = req.body //
     const userUuid = req.uuid;
     try {
+        console.log("-----------",body, userUuid,postUuid )
         const user = await User.findOne( { where: { uuid: userUuid }}) 
-
         const post = await Post.findOne( { where: { uuid: postUuid }})
         post.countComments ++;
-        
+
         await post.save()
-       
+
         const comment = await Comment.create({ body, userId: user.id , postID: post.id , order: post.countComments+1 })
   
         return res.json(comment)
