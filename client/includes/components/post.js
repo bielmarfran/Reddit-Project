@@ -1,17 +1,16 @@
+function createPost(res) {
+  var post = res.posts;
+  console.log(post);
+  console.log(res.comments2);
+  const body = document.body;
 
-function createPost(res){
-    var post = res.posts;
-    console.log(post);
-    console.log(res.comments2);
-    const body = document.body;
-
-    const div = document.createElement("div"); 
-    const area = `r/tailwind`;
-    const autor = `r/bielmarfran`;
-    const title = post.name;
-    const comments = post.countComments;
-    const time = `2 hours ago`;
-    div.innerHTML = `
+  const div = document.createElement("div");
+  const area = `r/tailwind`;
+  const autor = `r/bielmarfran`;
+  const title = post.name;
+  const comments = post.countComments;
+  const time = `2 hours ago`;
+  div.innerHTML = `
     <div class="w-full sm:w-10/12 md:8/12 lg:w-7/12 m-auto p-10">
     <div class="flex border border-grey-light-alt hover:border-grey rounded bg-white cursor-pointer">
         <div>
@@ -80,16 +79,16 @@ function createPost(res){
         </div>
     </div>`;
 
-    body.querySelector('#app').appendChild(div);
-    post.comments.forEach(comment => {
-        const div = document.createElement("div"); 
-        //const area = `r/tailwind`;
-        const autor = comment.userID;
-        //const title = post.name;
-        const bodyComment = comment.body;
-        //const comments = post.countComments;
-        const time = `2 hours ago`;
-        div.innerHTML = `
+  body.querySelector("#app").appendChild(div);
+  post.comments.forEach((comment) => {
+    const div = document.createElement("div");
+    //const area = `r/tailwind`;
+    const autor = comment.userID;
+    //const title = post.name;
+    const bodyComment = comment.body;
+    //const comments = post.countComments;
+    const time = `2 hours ago`;
+    div.innerHTML = `
         <div class="mb-5 mt-5">
             <hr>
         </div>
@@ -110,19 +109,16 @@ function createPost(res){
             </div>
         </div>
         `;
-        body.querySelector('#bodyPost').appendChild(div);
-    });
-         /*
+    body.querySelector("#bodyPost").appendChild(div);
+  });
+  /*
         const area = `r/tailwind`;
         const autor = res.username;
         const title = post.name;
         const comments = post.countComments;
         const time = `2 hours ago`;
-        
-    
+           
     */
-      
-        
-    //
 
+  //
 }

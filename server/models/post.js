@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     /**
@@ -11,32 +9,35 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ User, Comment }) {
       // define association here
-      this.belongsTo(User,  {foreignKey : 'userId', as: 'user'})
+      this.belongsTo(User, { foreignKey: "userId", as: "user" });
 
-      this.hasMany(Comment, {foreignKey : 'postID', as: 'comments' })
+      this.hasMany(Comment, { foreignKey: "postID", as: "comments" });
     }
-    toJSON(){
-      return { ...this.get(), id: undefined, userId: undefined}
+    toJSON() {
+      return { ...this.get(), id: undefined, userId: undefined };
     }
   }
-  Post.init({
-    uuid:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+  Post.init(
+    {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      countComments: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    countComments: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-  }, {
-    sequelize,
-    tableName: 'posts',
-    modelName: 'Post',
-  });
+    {
+      sequelize,
+      tableName: "posts",
+      modelName: "Post",
+    }
+  );
   return Post;
 };

@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Comment extends Model {
     /**
@@ -11,31 +9,39 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ User, Post }) {
       // define association here
-      this.belongsTo(User, {foreignKey : 'userID', as: 'user'});
-      this.belongsTo(Post, {foreignKey : 'postID', as: 'post'});
+      this.belongsTo(User, { foreignKey: "userID", as: "user" });
+      this.belongsTo(Post, { foreignKey: "postID", as: "post" });
     }
-    toJSON(){
-      return { ...this.get(), id: undefined, userId: undefined, postID: undefined, userID: undefined}
+    toJSON() {
+      return {
+        ...this.get(),
+        id: undefined,
+        userId: undefined,
+        postID: undefined,
+        userID: undefined,
+      };
     }
-
-  };
-  Comment.init({
-    uuid:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+  }
+  Comment.init(
+    {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      body: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      order: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-    body: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    order: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-  }, {
-    sequelize,
-    tableName: 'comments',
-    modelName: 'Comment',
-  });
+    {
+      sequelize,
+      tableName: "comments",
+      modelName: "Comment",
+    }
+  );
   return Comment;
 };

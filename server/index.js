@@ -1,72 +1,58 @@
-const express = require ('express');
+const express = require("express");
 const app = express();
 const PORT = 8080;
-const cors = require('cors');
+const cors = require("cors");
 //const db = require("./db");
 
 const cookieParser = require("cookie-parser");
-const {createTokens, validateToken} = require('./Middleware/jtw')
-const { sequelize, User, Post, Comment } = require('./models');
+const { createTokens, validateToken } = require("./Middleware/jtw");
+const { sequelize, User, Post, Comment } = require("./models");
 
-
-app.use(  express.json() );
-app.use(  cookieParser() );
-app.options('*', cors({credentials: true, origin: 'http://localhost:3000'}))
+app.use(express.json());
+app.use(cookieParser());
+app.options("*", cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-    res.header("Access-Control-Allow-Credentials", 'true');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Origin');
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Origin"
+  );
 
-    //app.use(cors({credentials: true, origin: 'http://localhost:3000'}));//
-    next();
+  //app.use(cors({credentials: true, origin: 'http://localhost:3000'}));//
+  next();
 });
-
 
 // Routers
 
-const postRouter = require('./routes/posts');
-app.use("/posts", validateToken , postRouter);
+const postRouter = require("./routes/posts");
+app.use("/posts", validateToken, postRouter);
 
+const commentRouter = require("./routes/comment");
+app.use("/comment", validateToken, commentRouter);
 
-const commentRouter = require('./routes/comment');
-app.use("/comment", validateToken , commentRouter);
-
-
-const authRouter = require('./routes/auth');
-app.use("/auth" , authRouter);
-
-
-
-
+const authRouter = require("./routes/auth");
+app.use("/auth", authRouter);
 
 app.listen(PORT, async () => {
-    console.log(`its alive on http://localhost:${PORT}`)
-    await sequelize.authenticate()
-    console.log('Database Connected')
-})
-
-
-
-
-
-
-
-
-app.post('/user', async(req, res) =>{
-
-    const { username, email, password} = req.body
-    try {
-        const user = await User.create({username , email, password })
-        
-        return res.json(user)
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json(error)
-    }
+  console.log(`its alive on http://localhost:${PORT}`);
+  await sequelize.authenticate();
+  console.log("Database Connected");
 });
 
+app.post("/user", async (req, res) => {
+  const { username, email, password } = req.body;
+  try {
+    const user = await User.create({ username, email, password });
+
+    return res.json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
 
 /*
 
@@ -161,4 +147,3 @@ app.put('/user/:uuid', async(req, res) =>{
 });
 
 */
-

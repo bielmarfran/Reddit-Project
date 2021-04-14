@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 }, false);
 
-
+function sayHi(name){  
+    return 'Result: ' + name
+}
 
 
 //
