@@ -42,15 +42,26 @@ app.listen(PORT, async () => {
   console.log("Database Connected");
 });
 
-app.post("/user", async (req, res) => {
-  const { username, email, password } = req.body;
+app.post("/logout", validateToken, async (req, res) => {
+  const uuid = req.uuid;
   try {
-    const user = await User.create({ username, email, password });
-
-    return res.json(user);
+    const user = await User.findOne({ where: { uuid: uuid } }).then(
+      async function (user) {
+        const acessToken = createTokens(user);
+        res.cookie("access-token", acessToken, {
+          maxAge: 0,
+          httpOnly: true,
+          path: "/",
+          secure: false,
+          sameSite: "Strict",
+          domain: "localhost",
+        });
+        return res.json({ response: "Logout OK" });
+      }
+    );
   } catch (error) {
     console.log(error);
-    return res.status(500).json(error);
+    return res.status(500).json({ error: "Error Get" });
   }
 });
 

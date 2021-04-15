@@ -1,46 +1,30 @@
+document.addEventListener(
+  "DOMContentLoaded",
+  async function () {
+    await performGetPosts();
+  },
+  false
+);
 
-
-document.addEventListener('DOMContentLoaded', async function() {    
-    await performGetPosts()
-    
-   
-}, false);
-
-
-
-
-
-
- function performGetPosts() {
-     for (let index = 0; index < 12; index++) {
-       // createListItens();
-         
-     }
-
-    
-    let headers = new Headers();
-
-    //headers.append('Content-Type', 'application/json');
-    //headers.append('Accept', 'application/json');
-   /// headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
-    //headers.append('Origin','http://localhost:3000');
-    //const cookieValue = document.cookie;
-    //console.log(cookieValue.substring(13, cookieValue.length))
-    //headers.append('access-token',cookieValue.substring(13, cookieValue.length));
-    
-    //headers.append('Auto','');
-
-    fetch('http://localhost:8080/posts', {
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include',
-        //headers: headers
-    })
-    .then(response => response.json())
-    .then(json => createPosts(json))//console.log(json)
-    .catch(error => console.log('Authorization failed : ' + error.message));
-  
-
-    
+function openPost(uuid) {
+  postUuid = uuid;
+  console.log(postUuid);
+  window.location.replace(`http://localhost:3000/post.html?uuid=${uuid}`);
+  debugger;
 }
 
+function performGetPosts() {
+  fetch("http://localhost:8080/posts", {
+    mode: "cors",
+    method: "GET",
+    credentials: "include",
+    //headers: headers,
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      json.error != null
+        ? window.location.replace("http://localhost:3000/login.html")
+        : createPosts2(json);
+    }) //console.log(json)
+    .catch((error) => console.log("Authorization failed : " + error.message));
+}

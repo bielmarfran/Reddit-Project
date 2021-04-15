@@ -1,124 +1,128 @@
-function createPost(res) {
+function createPostDom(res) {
+  console.log(res);
   var post = res.posts;
-  console.log(post);
-  console.log(res.comments2);
+
   const body = document.body;
 
   const div = document.createElement("div");
-  const area = `r/tailwind`;
-  const autor = `r/bielmarfran`;
-  const title = post.name;
+  div.setAttribute("id", post.uuid);
+  const topic = post.topic;
+  const autor = post.user.username;
+  const title = post.title;
+  const bodyComment = post.body;
   const comments = post.countComments;
   const time = `2 hours ago`;
   div.innerHTML = `
-    <div class="w-full sm:w-10/12 md:8/12 lg:w-7/12 m-auto p-10">
-    <div class="flex border border-grey-light-alt hover:border-grey rounded bg-white cursor-pointer">
-        <div>
-            <div class="w-11/12 pt-2 pl-8" id="bodyPost">
-                <div class="flex items-center text-xs mb-2">
-                    <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
-                        <img class="rounded-full border h-5 w-5" src="https://avatars0.githubusercontent.com/u/30317862?s=200&v=4">
-                        <span class="ml-2">${area}</span>
-                    </a>
-                    <span class="text-grey-light mx-1 text-xxs">•</span>
-                    <span class="text-grey">Posted by</span>
-                    <a href="#" class="text-grey mx-1 no-underline hover:underline">${autor}</a>
-                    <span class="text-grey">${time}</span>
-
-                    <svg class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
-                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
-                    </svg>
-
-                </div>
-                <div>
-                    <h2 class="text-lg font-medium mb-1">${title}</h2>
-                </div>
-                <div class="mt-8 mb-2">
-                    What is Lorem Ipsum?
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since
-                     the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, 
-                     but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-                     sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-                </div>
-                <div class="inline-flex items-center my-1">
-                    <a href="" class="py-1 pl-1 pr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
-                        <svg class="inline fill-current" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z"></path>
-                        </svg>
-                        ${comments}<span class="hidden md:inline">&nbsp;comments</span>
-                    </a>
-                    <!--<a href="/hagnerd/setting-up-tailwind-with-create-react-app-4jd" class="py-1 pl-1 pr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
-                        <svg class="inline fill-current" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z"></path>
-                        </svg>
-                        <span class="hidden md:inline">&nbsp;reactions</span>
-                    </a>-->
-                </div>
-                <div class="mb-5 mt-5">
-                    <hr>
-                </div>
-            
-                <div class="w-full md:w-full px-3  mt-2">
-                    <div class="p-0 m-0">
-                        <p class="text-xs ml-0.5 mb-0.5">Comentar como <a class="text-blue-500">Usuario</a></p>
-                        <textarea class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" id="commentBody" placeholder='Type Your Comment' required>
-                        
-                        </textarea>
-                        <div class="modal-footer py-3 px-5 border0-t text-right">
-                            <button onclick="postComment('${post.uuid}')" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-green-500 rounded shadow ripple hover:shadow-lg hover:bg-green-600 focus:outline-none"
-                            >
-                                Commentar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-        </div>
-    </div>`;
+      <div class="w-full sm:w-10/12 md:8/12 lg:w-7/12 m-auto p-10">
+      <div class="flex border border-grey-light-alt hover:border-grey rounded bg-white ">
+          <div class="w-full pr-4"">
+              <div class="w-full pt-2 pl-4" id="bodyPost">
+                  <div class="flex items-center text-xs mb-2">
+                      <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
+                          <img class="rounded-full border h-5 w-5" src="https://avatars0.githubusercontent.com/u/30317862?s=200&v=4">
+                          <span class="ml-2">${topic}</span>
+                      </a>
+                      <span class="text-grey-light mx-1 text-xxs">•</span>
+                      <span class="text-grey">Posted by</span>
+                      <a href="#" class="text-grey mx-1 no-underline hover:underline">${autor}</a>
+                      <span class="text-grey">${time}</span>
+  
+                      <svg class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+                          <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+                      </svg>
+  
+                  </div>
+                  <div>
+                      <h2 class="text-lg font-medium mb-1">${title}</h2>
+                  </div>
+                  <div class="mt-8 mb-2 lg:w-full">
+                  What is Lorem Ipsum?
+  
+  
+                  </div>
+                  <div class="inline-flex items-center my-1">
+                      <a  class="py-1 pl-1 pr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
+                          <svg class="inline fill-current" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z"></path>
+                          </svg>
+                          ${comments}<span class="hidden md:inline">&nbsp;comments</span>
+                      </a>
+                      <a href="" class="py-1 pl-1 pr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
+                          <svg xmlns="http://www.w3.org/2000/svg"  class="inline fill-current pb-0.5" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                          <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                          </svg>
+                          <span class="hidden md:inline">&nbsp;Editar</span>
+                      </a>
+                  </div>
+                  <div class="mb-5 mt-5">
+                      <hr>
+                  </div>
+              
+                  <div class="w-full md:w-full px-3  mt-2">
+                      <div class="p-0 m-0">
+                          <p class="text-xs ml-0.5 mb-0.5">Comentar como <a class="text-blue-500">${post.username}</a></p>
+                          <textarea class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" id="commentBody" placeholder="'Type Your Comment' required">
+                          </textarea>
+                          <div class="modal-footer py-3 px-5 border0-t text-right">
+                              <button onclick="postComment('${post.uuid}')" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                              >
+                                  Commentar
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+  
+          </div>
+      </div>`;
 
   body.querySelector("#app").appendChild(div);
   post.comments.forEach((comment) => {
-    const div = document.createElement("div");
+    const div2 = document.createElement("div");
     //const area = `r/tailwind`;
-    const autor = comment.userID;
+    const autor = comment.user.username;
     //const title = post.name;
     const bodyComment = comment.body;
     //const comments = post.countComments;
     const time = `2 hours ago`;
-    div.innerHTML = `
-        <div class="mb-5 mt-5">
-            <hr>
-        </div>
-        <div name="comment">
-            <div class="flex items-center text-xs ">
-                <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
-                    <img class="rounded-full border h-5 w-5" src="https://avatars0.githubusercontent.com/u/30317862?s=200&v=4">
-                    <span class="ml-2">${autor}</span>
-                </a>                        
-                <span class="text-grey ml-2">${time}</span>
-                <svg class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
-                    <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
-                </svg>
-            </div>
+    const tet = `
+          <svg onclick="deleteComment('${comment.uuid}','${post.uuid}')" class="ml-auto mr-2 fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+          </svg>
+      `;
+    const edit = `
+          <a href="" class="py-1 pl-1 mr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
+          <svg xmlns="http://www.w3.org/2000/svg"  class="inline fill-current pb-0.5" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+          <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+          </svg>`;
 
-            <div class="ml-7 mb-5">
-                ${bodyComment}
-            </div>
-        </div>
-        `;
-    body.querySelector("#bodyPost").appendChild(div);
+    div2.innerHTML = `
+          <div class="mb-5 mt-5">
+              <hr>
+          </div>
+          <div name="comment">
+              <div class="flex items-center text-xs ">
+                  <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
+                      <img class="rounded-full border h-5 w-5" src="https://avatars0.githubusercontent.com/u/30317862?s=200&v=4">
+                      <span class="ml-2">${autor}</span>
+                  </a>                        
+                  <span class="text-grey ml-2">${time}</span>
+                  ${comment.owner ? edit : ""}
+              </a>
+              
+                  ${comment.owner ? tet : ""}
+              </div>
+  
+              <div class="ml-7 mb-5 mt-5">
+                  ${bodyComment}
+              </div>
+  
+          </a>
+          </div>
+          `;
+    body.querySelector("#bodyPost").appendChild(div2);
   });
-  /*
-        const area = `r/tailwind`;
-        const autor = res.username;
-        const title = post.name;
-        const comments = post.countComments;
-        const time = `2 hours ago`;
-           
-    */
-
-  //
 }

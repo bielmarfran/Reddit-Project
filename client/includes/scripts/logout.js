@@ -1,4 +1,4 @@
-function performLogin() {
+function performLogout() {
   let headers = new Headers();
 
   headers.append("Content-Type", "application/json");
@@ -6,22 +6,29 @@ function performLogin() {
   headers.append("Origin", "http://localhost:3000");
 
   //const usernameUser = document.getElementById("usernameUser").value;
-  const emailUser = document.getElementById("email").value;
-  const passwordUser = document.getElementById("password").value;
 
-  fetch("http://localhost:8080/auth", {
+  fetch("http://localhost:8080/logout", {
     mode: "cors",
     method: "POST",
     credentials: "include",
     headers: headers,
-    body: JSON.stringify({ email: emailUser, password: passwordUser }),
   })
     .then((response) => response.json())
     .then((json) => {
-      json.response == "Logado com Sucesso"
-        ? window.location.replace("http://localhost:3000/")
+      json.response == "Logout OK"
+        ? window.location.replace("http://localhost:3000/login.html")
         : "";
     })
     .catch((error) => console.log("Authorization failed : " + error.message));
   debugger;
 }
+/*
+function openPost() {
+  console.log(document.getElementsByName("postHolder").id);
+
+  window.location.replace(
+    `http://localhost:3000/post.html?uuid=${
+      document.getElementsByName("postHolder").id
+    }`
+  );
+}*/

@@ -23,11 +23,24 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      name: {
+      topic: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      body: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       countComments: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      commentsOrder: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,

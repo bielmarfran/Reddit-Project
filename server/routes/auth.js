@@ -29,8 +29,6 @@ router.post("/", async (req, res) => {
         } else if (!(await user.validPassword(password))) {
           return res.status(400).json({ error: "Acesso não autorizado" });
         }
-        console.log(user.uuid);
-
         const acessToken = createTokens(user);
         res.cookie("access-token", acessToken, {
           maxAge: 60 * 60 * 24 * 30 * 1000,
@@ -40,7 +38,7 @@ router.post("/", async (req, res) => {
           sameSite: "Strict",
           domain: "localhost",
         });
-        return res.json(user);
+        return res.json({ response: "Logado com Sucesso" });
       }
     );
   } catch (error) {
@@ -50,6 +48,18 @@ router.post("/", async (req, res) => {
 });
 router.post("/", (req, res) => {
   res.send("Test");
+});
+
+router.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
+  try {
+    const user = await User.create({ username, email, password });
+
+    return res.json({ response: "Conta Criada com sucesso" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
 });
 
 module.exports = router;

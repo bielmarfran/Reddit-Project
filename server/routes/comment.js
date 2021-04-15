@@ -12,6 +12,7 @@ router.post("/", async (req, res) => {
     const user = await User.findOne({ where: { uuid: userUuid } });
     const post = await Post.findOne({ where: { uuid: postUuid } });
     post.countComments++;
+    //post.commentsOrder++;
 
     await post.save();
 
@@ -19,13 +20,33 @@ router.post("/", async (req, res) => {
       body,
       userId: user.id,
       postID: post.id,
-      order: post.countComments + 1,
+      order: post.commentsOrder + 1,
     });
 
     return res.json(comment);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
+  }
+});
+
+router.delete("/:uuid", async (req, res) => {
+  const { postUuid } = req.body;
+  const commentUuid = req.params.uuid; //
+  const userUuid = req.uuid;
+
+  try {
+    const user = await User.findOne({ where: { uuid: userUuid } });
+    const post = await Post.findOne({ where: { uuid: postUuid } });
+    const comment = await Comment.findOne({
+      where: { uuid: commentUuid, userId: user.id, postId: post.id },
+    });
+    post.countComments--;
+    await comment.destroy();
+    return res.json({ message: "Comment Deleted!" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error Delete" });
   }
 });
 

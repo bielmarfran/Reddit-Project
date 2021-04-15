@@ -12,7 +12,15 @@ module.exports = {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      name: {
+      topic: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      body: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -21,6 +29,11 @@ module.exports = {
         allowNull: false,
       },
       countComments: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      commentsOrder: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
