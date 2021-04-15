@@ -4,7 +4,7 @@ document.addEventListener(
   "DOMContentLoaded",
   async function () {
     postUuid = document.location.search.substring(6);
-
+    window.MY = {};
     await performGetPost();
   },
   false

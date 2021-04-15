@@ -1,5 +1,6 @@
 function createPostDom(res) {
   console.log(res);
+  MY.post = res;
   var post = res.posts;
 
   const body = document.body;
@@ -36,16 +37,17 @@ function createPostDom(res) {
                       <h2 class="text-lg font-medium mb-1">${title}</h2>
                   </div>
                   <div class="mt-8 mb-2 lg:w-full">
-                  What is Lorem Ipsum?
+                  ${bodyComment}
   
   
                   </div>
                   <div class="inline-flex items-center my-1">
-                      <a  class="py-1 pl-1 pr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
+                      <a  class="py-1 pl-1 pr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black" id="totalComments">
                           <svg class="inline fill-current" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
                           <path d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z"></path>
                           </svg>
-                          ${comments}<span class="hidden md:inline">&nbsp;comments</span>
+                          ${comments}
+                          <span class="hidden md:inline">&nbsp;comments</span>
                       </a>
                       <a href="" class="py-1 pl-1 pr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
                           <svg xmlns="http://www.w3.org/2000/svg"  class="inline fill-current pb-0.5" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -64,7 +66,7 @@ function createPostDom(res) {
                           <p class="text-xs ml-0.5 mb-0.5">Comentar como <a class="text-blue-500">${post.username}</a></p>
                           <textarea class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" id="commentBody" placeholder="'Type Your Comment' required">
                           </textarea>
-                          <div class="modal-footer py-3 px-5 border0-t text-right">
+                          <div class="modal-footer py-3 px-5 border0-t text-right" id="commentButton">
                               <button onclick="postComment('${post.uuid}')" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
                               >
                                   Commentar
@@ -100,7 +102,7 @@ function createCommentDom(comment, postUuid) {
           </svg>
       `;
   const edit = `
-          <a href="" class="py-1 pl-1 mr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
+          <a  onclick="editComment('${comment.uuid}')" class="py-1 pl-1 mr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black" >
           <svg xmlns="http://www.w3.org/2000/svg"  class="inline fill-current pb-0.5" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
           <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
           <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
@@ -110,7 +112,7 @@ function createCommentDom(comment, postUuid) {
           <div class="mb-5 mt-5">
               <hr>
           </div>
-          <div name="comment">
+          <div id="comment">
               <div class="flex items-center text-xs ">
                   <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
                       <img class="rounded-full border h-5 w-5" src="https://avatars0.githubusercontent.com/u/30317862?s=200&v=4">

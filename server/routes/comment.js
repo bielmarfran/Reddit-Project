@@ -4,6 +4,26 @@ const { sequelize, User, Post, Comment } = require("../models");
 
 router.get("/", async (req, res) => {});
 
+router.put("/", async (req, res) => {
+  const { body, postUuid } = req.body;
+  const { userUuid } = req.uuid;
+  try {
+    console.log(body, postUuid);
+    //const user = await User.findOne({ where: { uuid: userUuid } });
+    const comment = await Comment.findOne({
+      where: { uuid: postUuid },
+    });
+
+    comment.body = body;
+    await comment.save();
+
+    return res.json(comment);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error PUT" });
+  }
+});
+
 router.post("/", async (req, res) => {
   const { body, postUuid } = req.body; //
   const userUuid = req.uuid;
