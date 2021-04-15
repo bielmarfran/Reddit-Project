@@ -61,7 +61,16 @@ router.post("/", (req, res) => {
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   try {
-    const user = await User.create({ username, email, password });
+    const userUsername = await User.findOne({ where: { username } });
+    const userEmail = await User.findOne({ where: { email } });
+
+    if (userUsername != null) {
+      res.status(418).send({ error: "Username ja existe!" });
+    } else if (userEmail != null) {
+      res.status(418).send({ error: "Email ja existe!" });
+    } else {
+      const user = await User.create({ username, email, password });
+    }
 
     return res.json({ response: "Conta Criada com sucesso" });
   } catch (error) {

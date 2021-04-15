@@ -1,3 +1,15 @@
+document.addEventListener(
+  "DOMContentLoaded",
+  async function () {
+    document
+      .getElementById(`performLogin`)
+      .addEventListener("click", function () {
+        performLogin();
+      });
+  },
+  false
+);
+
 function performLogin() {
   let headers = new Headers();
 

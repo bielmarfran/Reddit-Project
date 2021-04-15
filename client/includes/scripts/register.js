@@ -1,3 +1,15 @@
+document.addEventListener(
+  "DOMContentLoaded",
+  async function () {
+    document
+      .getElementById(`performRegister`)
+      .addEventListener("click", function () {
+        performRegister();
+      });
+  },
+  false
+);
+
 function performRegister() {
   let headers = new Headers();
 

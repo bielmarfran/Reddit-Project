@@ -11,11 +11,6 @@
     ></script>
   </head>
   <body>
-    <!-- component -->
-    <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"
-      defer
-    ></script>
     <div class="flex flex-col h-screen bg-gray-100">
       <div class="grid place-items-center mx-2 my-20 sm:my-auto">
         <div
@@ -25,50 +20,76 @@
             <div class="relative flex flex-wrap">
               <div class="w-full relative">
                 <div class="md:mt-6">
-                  <div class="text-center font-semibold text-black">Social</div>
-                  <div class="text-center font-base text-black">Registro</div>
-                  <form
-                    class="mt-8"
-                    x-data="{password: '',password_confirm: ''}"
-                  >
+                  <div class="text-5xl text-center font-semibold text-black">
+                    Social
+                  </div>
+                  <div class="text-3xl text-center font-base text-black mt-4">
+                    Registro
+                  </div>
+                  <form class="mt-8">
                     <div class="mx-auto max-w-lg">
                       <div class="py-1">
-                        <span class="px-1 text-sm text-gray-600">Username</span>
-                        <input
-                          placeholder=""
-                          type="text"
-                          id="usernameUser"
-                          class="text-md block inputRegister"
-                        />
-                      </div>
-                      <div class="py-1">
-                        <span class="px-1 text-sm text-gray-600">Email</span>
-                        <input
-                          placeholder=""
-                          type="email"
-                          id="emailUser"
-                          class="text-md block inputRegister"
-                        />
-                      </div>
-                      <div class="py-1">
-                        <span class="px-1 text-sm text-gray-600">Password</span>
-                        <input
-                          placeholder=""
-                          type="password"
-                          id="passwordUser"
-                          x-model="password"
-                          class="text-md block inputRegister"
-                        />
-                      </div>
-                      <div class="py-1">
-                        <span class="px-1 text-sm text-gray-600"
-                          >Password Confirm</span
+                        <label
+                          for="usernameUser"
+                          class="block text-xs font-semibold text-gray-600 uppercase"
+                          >Username</label
                         >
                         <input
-                          placeholder=""
+                          id="usernameUser"
+                          type="email"
+                          name="email"
+                          placeholder="e-mail address"
+                          autocomplete="email"
+                          class="block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                          required
+                        />
+                      </div>
+                      <div class="py-1">
+                        <label
+                          for="email"
+                          class="block text-xs font-semibold text-gray-600 uppercase"
+                          >E-Email</label
+                        >
+                        <input
+                          id="emailUser"
+                          type="email"
+                          name="email"
+                          placeholder="e-mail address"
+                          autocomplete="email"
+                          class="block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                          required
+                        />
+                      </div>
+                      <div class="py-1">
+                        <label
+                          for="passwordUser"
+                          class="block text-xs font-semibold text-gray-600 uppercase"
+                          >Password</label
+                        >
+                        <input
+                          id="passwordUser"
                           type="password"
-                          x-model="password_confirm"
-                          class="text-md block inputRegister"
+                          name="password"
+                          placeholder="password"
+                          autocomplete="current-password"
+                          class="block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                          required
+                        />
+                      </div>
+                      <div class="py-1">
+                        <label
+                          for="password_confirm"
+                          class="block text-xs font-semibold text-gray-600 uppercase"
+                          >Password Confirm</label
+                        >
+                        <input
+                          id="password_confirm"
+                          type="password"
+                          name="password"
+                          placeholder="password"
+                          autocomplete="current-password"
+                          class="block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                          required
                         />
                       </div>
                       <div class="flex justify-start mt-3 ml-4 p-1">
@@ -167,11 +188,7 @@
                           </span>
                         </label>
                       </div>
-                      <button
-                        onclick="performRegister()"
-                        type="button"
-                        class="buttonRegister"
-                      >
+                      <button id="performRegister" type="button" class="button">
                         Register
                       </button>
                     </div>

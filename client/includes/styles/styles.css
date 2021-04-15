@@ -1,4 +1,3 @@
-
 @tailwind base;
 
 @tailwind components;
@@ -12,30 +11,29 @@ body{
 }
 */
 .hello {
-    color: red;
+  color: red;
 }
 
-.inputIndex{
-    @apply w-full rounded-md bg-gray-200 text-gray-700 leading-tight focus:outline-none py-2;
+.inputIndex {
+  @apply w-full rounded-md bg-gray-200 text-gray-700 leading-tight focus:outline-none py-2;
 }
 
-.inputRegister{
-    @apply  px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none
+.inputRegister {
+  @apply px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none;
 }
 
-.listItem{
-    @apply flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2;
+.listItem {
+  @apply flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2;
 }
 
-.headerTable{
-    @apply px-6 py-3 text-left text-base font-medium bg-gray-800 text-white uppercase tracking-wider  border-gray-300 hidden lg:table-cell;
+.headerTable {
+  @apply px-6 py-3 text-left text-base font-medium bg-gray-800 text-white uppercase tracking-wider  border-gray-300 hidden lg:table-cell;
 }
 
-.specialHeader{
-    @apply lg:hidden absolute top-0 left-0 bg-gray-800 text-white px-2 py-1 text-xs font-bold uppercase;
+.specialHeader {
+  @apply lg:hidden absolute top-0 left-0 bg-gray-800 text-white px-2 py-1 text-xs font-bold uppercase;
 }
 
-
-.buttonRegister{
-    @apply mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black;
+.button {
+  @apply mt-3 text-lg font-semibold bg-blue-400 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-blue-500;
 }
