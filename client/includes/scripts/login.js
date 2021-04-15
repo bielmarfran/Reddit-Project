@@ -32,10 +32,16 @@ function performLogin() {
     .then((json) => {
       if (json.response == "Logado com Sucesso") {
         window.location.replace("http://localhost:3000/");
-      } else {
-        ("");
+      } else if (json.error == "Acesso não autorizado") {
+        showAlert(json.error);
       }
     })
     .catch((error) => console.log("Authorization failed : " + error.message));
-  //debugger;
+}
+
+function showAlert(msg) {
+  var alert = document.getElementById("alert");
+  alert.setAttribute("class", "");
+  var alertMessage = document.getElementById("alertMessage");
+  alertMessage.innerHTML = msg;
 }

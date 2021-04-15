@@ -13,8 +13,6 @@ document.addEventListener(
 function performRegister() {
   let headers = new Headers();
 
-  debugger;
-
   headers.append("Content-Type", "application/json");
   headers.append("Accept", "application/json");
   headers.append("Origin", "http://localhost:3000");
@@ -39,8 +37,27 @@ function performRegister() {
       console.log(json);
       if (json.response == "Conta Criada com sucesso") {
         window.location.replace("http://localhost:3000/login.html");
+      } else if (json.error == "Email ja existe!") {
+        showAlert(json.error);
+      } else if (json.error == "Username ja existe!") {
+        console.log(json.error);
       }
     })
     .catch((error) => console.log("Authorization failed : " + error.message));
-  debugger;
+  // debugger;
+}
+
+function showAlert(msg) {
+  var alert = document.getElementById("alert");
+  alert.setAttribute("class", "");
+  var alertMessage = document.getElementById("alertMessage");
+  alertMessage.innerHTML = msg;
+  /*
+  alert.children[0].classList.remove("opacity-100");
+  alert.children[0].classList.add("opacity-0");
+  setTimeout(function () {
+    //document.getElementById(key).close();
+    //document.body.removeAttribute("style");
+  }, 100);
+  */
 }
