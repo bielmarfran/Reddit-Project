@@ -8,7 +8,7 @@
     <script src="./node_modules/axios/dist/axios.min.js"></script>
     <script
       type="text/javascript"
-      src="./includes/scripts/getPosts.js"
+      src="./includes/scripts/loadIndex.js"
     ></script>
     <script
       type="text/javascript"
@@ -87,7 +87,7 @@
         <div class="flex-initial">
           <div class="flex justify-end items-center relative">
             <button
-              onclick="openModal('mymodalcentered')"
+              id="openModal"
               class="inline-block px-6 py-2 text-md font-bold leading-6 text-center text-white uppercase transition bg-blue-400 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
             >
               Criar Post
@@ -95,7 +95,7 @@
             <div class="block">
               <div class="inline relative">
                 <button
-                  onclick="performLogout()"
+                  id="performLogout"
                   class="inline-block bg-transparent hover:bg-gray-200 text-blue-400 font-semibold hover:text-gray-800 ml-4 py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                 >
                   Logout
@@ -176,14 +176,14 @@
             <div class="px-5 py-4 flex justify-end">
               <button
                 type="button"
-                onclick="createPost()"
+                id="createPost"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
               >
                 Ok
               </button>
               <button
                 type="button"
-                onclick="modalClose('mymodalcentered')"
+                id="modalClose"
                 class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-400 hover:border-transparent rounded"
               >
                 Close

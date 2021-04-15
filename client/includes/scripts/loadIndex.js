@@ -2,6 +2,24 @@ document.addEventListener(
   "DOMContentLoaded",
   async function () {
     await performGetPosts();
+    document
+      .getElementById(`performLogout`)
+      .addEventListener("click", function () {
+        performLogout();
+      });
+    document.getElementById(`openModal`).addEventListener("click", function () {
+      openModal("mymodalcentered");
+    });
+    document
+      .getElementById(`createPost`)
+      .addEventListener("click", function () {
+        createPost();
+      });
+    document
+      .getElementById(`modalClose`)
+      .addEventListener("click", function () {
+        modalClose("mymodalcentered");
+      });
   },
   false
 );

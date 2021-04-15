@@ -6,6 +6,11 @@ document.addEventListener(
     postUuid = document.location.search.substring(6);
     window.MY = {};
     await performGetPost();
+    document
+      .getElementById(`performLogout`)
+      .addEventListener("click", function () {
+        performLogout();
+      });
   },
   false
 );

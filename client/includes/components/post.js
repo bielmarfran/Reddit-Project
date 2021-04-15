@@ -63,7 +63,7 @@ function createPostDom(res) {
                           <textarea class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="body" id="commentBody" placeholder="'Type Your Comment' required">
                           </textarea>
                           <div class="modal-footer py-3 px-5 border0-t text-right" id="commentButton">
-                              <button onclick="postComment('${post.uuid}')" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                              <button id="postComment-${post.uuid}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
                               >
                                   Commentar
                               </button>
@@ -77,6 +77,12 @@ function createPostDom(res) {
       </div>`;
 
   body.querySelector("#app").appendChild(div);
+
+  document
+    .getElementById(`postComment-${post.uuid}`)
+    .addEventListener("click", function () {
+      postComment(post.uuid);
+    });
   post.comments.forEach((comment) => {
     createCommentDom(comment, post.uuid);
   });
@@ -93,12 +99,12 @@ function createCommentDom(comment, postUuid) {
   //const comments = post.countComments;
   const time = `2 hours ago`;
   const tet = `
-          <svg onclick="deleteComment('${comment.uuid}','${postUuid}')" class="ml-auto mr-2 fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+          <svg id="deleteComment-${comment.uuid}" class="ml-auto mr-2 fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
               <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
           </svg>
       `;
   const edit = `
-          <a  onclick="editComment('${comment.uuid}')" class="py-1 pl-1 mr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black" >
+          <a  id="editComment-${comment.uuid}" class="py-1 pl-1 mr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black" >
           <svg xmlns="http://www.w3.org/2000/svg"  class="inline fill-current pb-0.5" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
           <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
           <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
@@ -129,4 +135,17 @@ function createCommentDom(comment, postUuid) {
           </div>
           `;
   body.querySelector("#bodyPost").appendChild(div2);
+
+  if (comment.owner) {
+    document
+      .getElementById(`deleteComment-${comment.uuid}`)
+      .addEventListener("click", function () {
+        deleteComment(comment.uuid, postUuid);
+      });
+    document
+      .getElementById(`editComment-${comment.uuid}`)
+      .addEventListener("click", function () {
+        editComment(comment.uuid);
+      });
+  }
 }

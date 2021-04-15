@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./includes/styles/styles.css" />
     <script src="./node_modules/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="./includes/scripts/getPost.js"></script>
+    <script
+      type="text/javascript"
+      src="./includes/scripts/loadPost.js"
+    ></script>
     <script type="text/javascript" src="./includes/components/post.js"></script>
     <script type="text/javascript" src="./includes/scripts/comment.js"></script>
     <script type="text/javascript" src="./includes/scripts/logout.js"></script>
@@ -82,7 +85,8 @@
             <div class="block">
               <div class="inline relative">
                 <button
-                  onclick="performLogout()"
+                  id="performLogout"
+                  ;
                   class="inline-block bg-transparent hover:bg-gray-200 text-blue-400 font-semibold hover:text-gray-800 ml-4 py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                 >
                   Logout

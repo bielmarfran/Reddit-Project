@@ -70,8 +70,7 @@ function createPostDom(post) {
     document
       .getElementById(`removePost-${post.uuid}`)
       .addEventListener("click", function () {
-        //removePost(post.uuid);
-        console.log(post.uuid);
+        FunctionAssistant(post.uuid);
       });
   }
 
@@ -80,4 +79,10 @@ function createPostDom(post) {
     .addEventListener("click", function () {
       openPost(post.uuid);
     });
+}
+
+// ? For some Reason you cant call removePost for the
+// ? removePost lister you need to call a second function to act as as buffer
+function FunctionAssistant(post) {
+  removePost(post);
 }
