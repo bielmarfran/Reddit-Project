@@ -33,12 +33,15 @@ document.addEventListener(
 async function getProfile() {
   var x = document.cookie;
   var path = x.substring(x.lastIndexOf("=") + 1) + ".jpg";
-  await fetch(`http://localhost:8080/public/` + path)
+  var path2 = decodeURIComponent(path);
+  console.log(path2);
+  debugger;
+  await fetch(`http://localhost:8080/public/` + path2)
     .then((response) => {
       if (response.ok) {
         document
           .getElementById("profile")
-          .setAttribute("src", "http://localhost:8080/public/bielmarfran.jpg");
+          .setAttribute("src", "http://localhost:8080/public/" + path2);
       } else if (response.status === 404) {
         document
           .getElementById("profile")
@@ -67,10 +70,16 @@ function performGetPosts() {
     .then((response) => response.json())
     .then((json) => {
       if (json.error != null) {
-        window.location.replace("http://localhost:3000/login.html");
+        window.location.replace(
+          "http://localhost:3000/login.html?erro=expired"
+        );
       } else {
         createPosts2(json);
       }
     }) //console.log(json)
     .catch((error) => console.log("Authorization failed : " + error.message));
+}
+
+function formDO() {
+  document.forms["uploadForm"].submit();
 }

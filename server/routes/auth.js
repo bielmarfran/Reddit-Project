@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
         }
         const acessToken = createTokens(user);
         res.cookie("access-token", acessToken, {
-          maxAge: 60 * 60 * 24 * 30 * 1000,
+          maxAge: 60 * 60 * 24 * 30 * 1000, //
           httpOnly: true,
           path: "/",
           secure: false,

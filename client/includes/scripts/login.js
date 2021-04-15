@@ -1,6 +1,12 @@
+var error;
 document.addEventListener(
   "DOMContentLoaded",
   async function () {
+    error = document.location.search.substring(7);
+    if (error != null) {
+      var msg = "Sessão Expirada";
+      showAlert(msg);
+    }
     document
       .getElementById(`performLogin`)
       .addEventListener("click", function () {
