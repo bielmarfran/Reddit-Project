@@ -14,7 +14,13 @@ function postComment(uuid) {
     body: JSON.stringify({ body: commentBody, postUuid: uuid }),
   })
     .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then((json) => {
+      if (json.uuid != null) {
+        json.owner = true;
+        createCommentDom(json, uuid);
+        document.getElementById("commentBody").value = "";
+      }
+    })
     .catch((error) => console.log("Authorization failed : " + error.message));
   //debugger;
 }
@@ -39,7 +45,14 @@ function deleteComment(commentUuid, postUuid) {
     body: JSON.stringify({ postUuid: postUuid }),
   })
     .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then((json) => {
+      json.response == "Comment Deleted!" ? removePostDom(commentUuid) : "";
+    })
     .catch((error) => console.log("Authorization failed : " + error.message));
   //debugger;
+}
+
+function removePostDom(key) {
+  var myobj = document.getElementById(key);
+  myobj.remove();
 }

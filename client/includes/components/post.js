@@ -80,26 +80,33 @@ function createPostDom(res) {
 
   body.querySelector("#app").appendChild(div);
   post.comments.forEach((comment) => {
-    const div2 = document.createElement("div");
-    //const area = `r/tailwind`;
-    const autor = comment.user.username;
-    //const title = post.name;
-    const bodyComment = comment.body;
-    //const comments = post.countComments;
-    const time = `2 hours ago`;
-    const tet = `
-          <svg onclick="deleteComment('${comment.uuid}','${post.uuid}')" class="ml-auto mr-2 fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+    createCommentDom(comment, post.uuid);
+  });
+}
+
+function createCommentDom(comment, postUuid) {
+  const body = document.body;
+  const div2 = document.createElement("div");
+  div2.setAttribute("id", comment.uuid);
+  //const area = `r/tailwind`;
+  const autor = comment.user.username;
+  //const title = post.name;
+  const bodyComment = comment.body;
+  //const comments = post.countComments;
+  const time = `2 hours ago`;
+  const tet = `
+          <svg onclick="deleteComment('${comment.uuid}','${postUuid}')" class="ml-auto mr-2 fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
               <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
           </svg>
       `;
-    const edit = `
+  const edit = `
           <a href="" class="py-1 pl-1 mr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
           <svg xmlns="http://www.w3.org/2000/svg"  class="inline fill-current pb-0.5" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
           <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
           <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
           </svg>`;
 
-    div2.innerHTML = `
+  div2.innerHTML = `
           <div class="mb-5 mt-5">
               <hr>
           </div>
@@ -116,13 +123,12 @@ function createPostDom(res) {
                   ${comment.owner ? tet : ""}
               </div>
   
-              <div class="ml-7 mb-5 mt-5">
+              <div class="ml-7 mb-5 mt-5 ">
                   ${bodyComment}
               </div>
   
           </a>
           </div>
           `;
-    body.querySelector("#bodyPost").appendChild(div2);
-  });
+  body.querySelector("#bodyPost").appendChild(div2);
 }
