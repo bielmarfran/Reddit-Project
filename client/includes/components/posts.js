@@ -35,7 +35,7 @@ function createPostDom(post) {
         <div class="w-11/12 pt-2 pl-5"  id="openPost-${post.uuid}" )">
             <div class="flex items-center text-xs mb-2">
                 <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
-                    <img class="rounded-full border h-5 w-5" src="https://avatars0.githubusercontent.com/u/30317862?s=200&v=4">
+                    <img class="rounded-full border h-5 w-5" src="../../img/${topic}.svg">
                     <span class="ml-2">${topic}</span>
                 </a>
                 <span class="text-grey-light mx-1 text-xxs">•</span>

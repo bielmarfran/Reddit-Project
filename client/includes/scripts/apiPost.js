@@ -1,6 +1,8 @@
 function createPost() {
   let headers = new Headers();
-  const postTopic = document.getElementById("postTopic").value;
+  var e = document.getElementById("postTopic");
+  var value = e.options[e.selectedIndex].value;
+  const postTopic = e.options[e.selectedIndex].text;
   const postTitle = document.getElementById("postTitle").value;
   const postBody = document.getElementById("postBody").value;
 
