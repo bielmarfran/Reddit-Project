@@ -3,12 +3,9 @@ function postComment(uuid) {
 
   headers.append("Content-Type", "application/json");
   headers.append("Accept", "application/json");
-  /*
-      headers.append('Origin','http://localhost:3000');
-      */
+
   const commentBody = document.getElementById("commentBody").value;
 
-  console.log(uuid, commentBody);
   fetch("http://localhost:8080/comment", {
     mode: "cors",
     method: "POST",

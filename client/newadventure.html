@@ -1,99 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>New Adventure</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./includes/styles/styles.css"/>
-    <script  type="text/javascript" src="./includes/scripts/registerAdventure.js"></script>  
-</head>
-<body>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./includes/styles/styles.css" />
+  </head>
+  <body>
     <!-- component -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"
+      defer
+    ></script>
     <div class="flex flex-col h-screen bg-gray-100">
-        <div class="grid place-items-center mx-2 my-20 sm:my-auto">
-            <div class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
-                px-6 py-10 sm:px-10 sm:py-6 
-                bg-white rounded-lg shadow-md lg:shadow-lg">
-                <div class="max-w-sm mx-auto px-6">
-                    <div class="relative flex flex-wrap">
-                        <div class="w-full relative">
-                            <div class="md:mt-6">
-                                <div class="text-center font-semibold text-black">
-                                    Loot Splitter
-                                </div>
-                                <div class="text-center font-base text-black">
-                                    New Adventure
-                                </div>
-                                <form class="mt-8" x-data="{password: '',password_confirm: ''}">
-                                    <div class="mx-auto max-w-lg ">
-                                        <div class="py-1">
-                                            <span class="px-1 text-sm text-gray-600">Nome da Aventura</span>
-                                            <input placeholder="" type="text"
-                                                    class="text-md block inputRegister ">
-                                        </div>
-                                        <div class="py-1">
-                                            <span class="px-1 text-sm text-gray-600">Numero de Jogadores</span>
-                                            <input placeholder="" type="number"
-                                                    class="text-md block inputRegister">
-                                        </div>
-                                        <div class="bg-gray-300 shadow-md rounded-lg px-3 py-2 mb-4 mt-4">
-                                            <div class="block text-gray-700 text-lg font-semibold py-2 px-2">
-                                                Jogadores
-                                            </div>
-                                            <div class="flex items-center ">
-            
-                                                <div class="bg-gray-200 rounded-md w-4/5">
-                                                    <input class="inputIndex" id="search" type="text" placeholder="Adicione os Players">
-                                                </div>
-                                                 <button class="w-1/5   hover:text-white  fill-current text-green-600  flex-wrap">
-                                                    <img src="./includes/imgs/plus.svg" class="bg-center"/>
-                    
-                                                </button>
-                                            </div>
-                                            <div class="py-3 text-sm">
-                                                <div class="listItem">
-                                                    <span class="bg-gray-400 h-2 w-2 m-2 rounded-full"></span>
-                                                    <div class="flex-grow font-medium px-2">Aventura X.</div>
-                                                    <div class="text-sm font-normal text-gray-500 tracking-wide">Players 5</div>
-                                                </div>
-                                                <div class="listItem">
-                                                    <span class="bg-gray-400 h-2 w-2 m-2 rounded-full"></span>
-                                                    <div class="flex-grow font-medium px-2">Aventura Y</div>
-                                                    <div class="text-sm font-normal text-gray-500 tracking-wide">Players 6</div>
-                                                </div>
-                                                <div class="listItem">
-                                                    <span class="bg-gray-400 h-2 w-2 m-2 rounded-full"></span>
-                                                    <div class="flex-grow font-medium px-2">Aventura YX</div>
-                                                    <div class="text-sm font-normal text-gray-500 tracking-wide">Players 7</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                      
-                  
-                                        <button class="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black" onclick="performNewAdventure()">
-                                            Adicionar Aventura
-                                        </button>
-                                    </div>
-                                </form>
-            
-                                <div class="text-sm font-semibold block sm:hidden py-6 flex justify-center">
-                                    <a href="#" class="text-black font-normal border-b-2 border-gray-200 hover:border-teal-500">
-                                        You're already member?
-                                        <span class="text-black font-semibold">
-                                         Login
-                                        </span>
-                                    </a>
-                                </div>
-            
-                            </div>
+      <div class="grid place-items-center mx-2 my-20 sm:my-auto">
+        <div
+          class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 px-6 py-10 sm:px-10 sm:py-6 bg-white rounded-lg shadow-md lg:shadow-lg"
+        >
+          <div class="max-w-sm mx-auto px-6">
+            <div class="relative flex flex-wrap">
+              <div class="w-full relative">
+                <div class="md:mt-6">
+                  <div class="text-center font-semibold text-black">
+                    Loot Splitter
+                  </div>
+                  <div class="text-center font-base text-black">
+                    New Adventure
+                  </div>
+                  <form
+                    class="mt-8"
+                    x-data="{password: '',password_confirm: ''}"
+                  >
+                    <div class="mx-auto max-w-lg">
+                      <div class="py-1">
+                        <span class="px-1 text-sm text-gray-600"
+                          >Nome da Aventura</span
+                        >
+                        <input
+                          placeholder=""
+                          type="text"
+                          class="text-md block inputRegister"
+                        />
+                      </div>
+                      <div class="py-1">
+                        <span class="px-1 text-sm text-gray-600"
+                          >Numero de Jogadores</span
+                        >
+                        <input
+                          placeholder=""
+                          type="number"
+                          class="text-md block inputRegister"
+                        />
+                      </div>
+                      <div
+                        class="bg-gray-300 shadow-md rounded-lg px-3 py-2 mb-4 mt-4"
+                      >
+                        <div
+                          class="block text-gray-700 text-lg font-semibold py-2 px-2"
+                        >
+                          Jogadores
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                        <div class="flex items-center">
+                          <div class="bg-gray-200 rounded-md w-4/5">
+                            <input
+                              class="inputIndex"
+                              id="search"
+                              type="text"
+                              placeholder="Adicione os Players"
+                            />
+                          </div>
+                          <button
+                            class="w-1/5 hover:text-white fill-current text-green-600 flex-wrap"
+                          >
+                            <img
+                              src="./includes/imgs/plus.svg"
+                              class="bg-center"
+                            />
+                          </button>
+                        </div>
+                        <div class="py-3 text-sm">
+                          <div class="listItem">
+                            <span
+                              class="bg-gray-400 h-2 w-2 m-2 rounded-full"
+                            ></span>
+                            <div class="flex-grow font-medium px-2">
+                              Aventura X.
+                            </div>
+                            <div
+                              class="text-sm font-normal text-gray-500 tracking-wide"
+                            >
+                              Players 5
+                            </div>
+                          </div>
+                          <div class="listItem">
+                            <span
+                              class="bg-gray-400 h-2 w-2 m-2 rounded-full"
+                            ></span>
+                            <div class="flex-grow font-medium px-2">
+                              Aventura Y
+                            </div>
+                            <div
+                              class="text-sm font-normal text-gray-500 tracking-wide"
+                            >
+                              Players 6
+                            </div>
+                          </div>
+                          <div class="listItem">
+                            <span
+                              class="bg-gray-400 h-2 w-2 m-2 rounded-full"
+                            ></span>
+                            <div class="flex-grow font-medium px-2">
+                              Aventura YX
+                            </div>
+                            <div
+                              class="text-sm font-normal text-gray-500 tracking-wide"
+                            >
+                              Players 7
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-</body>
+                      <button
+                        class="mt-3 text-lg font-semibold bg-gray-800 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black"
+                        onclick="performNewAdventure()"
+                      >
+                        Adicionar Aventura
+                      </button>
+                    </div>
+                  </form>
+
+                  <div
+                    class="text-sm font-semibold block sm:hidden py-6 flex justify-center"
+                  >
+                    <a
+                      href="#"
+                      class="text-black font-normal border-b-2 border-gray-200 hover:border-teal-500"
+                    >
+                      You're already member?
+                      <span class="text-black font-semibold"> Login </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
