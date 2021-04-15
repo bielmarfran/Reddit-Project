@@ -23,7 +23,7 @@ function createPostDom(post) {
   const comments = post.countComments;
   const time = `2 hours ago`;
   const removePost = `
-    <svg onclick="removePost('${post.uuid}')" class="ml-auto fill-current text-gray-700 w-6 h-6 mr-7 cursor-pointer hover:shadow-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+    <svg id="removePost-${post.uuid}" class="ml-auto fill-current text-gray-700 w-6 h-6 mr-7 cursor-pointer hover:shadow-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
         <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
     </svg>
     `;
@@ -32,7 +32,7 @@ function createPostDom(post) {
     <div class="w-full sm:w-10/12 md:8/12 lg:w-7/12 my-2 mx-auto py-2 px-10" >
       <div class="flex border border-grey-light-alt hover:border-grey rounded bg-white cursor-pointer hover:shadow-lg">
     
-        <div class="w-11/12 pt-2 pl-5"  onClick="openPost('${post.uuid}')">
+        <div class="w-11/12 pt-2 pl-5"  id="openPost-${post.uuid}" )">
             <div class="flex items-center text-xs mb-2">
                 <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
                     <img class="rounded-full border h-5 w-5" src="https://avatars0.githubusercontent.com/u/30317862?s=200&v=4">
@@ -65,5 +65,19 @@ function createPostDom(post) {
   </div>`;
 
   body.querySelector("#app").appendChild(div);
-  //document.getElementById("openPost").addEventListener("click", openPost());
+
+  if (post.owner) {
+    document
+      .getElementById(`removePost-${post.uuid}`)
+      .addEventListener("click", function () {
+        //removePost(post.uuid);
+        console.log(post.uuid);
+      });
+  }
+
+  document
+    .getElementById(`openPost-${post.uuid}`)
+    .addEventListener("click", function () {
+      openPost(post.uuid);
+    });
 }

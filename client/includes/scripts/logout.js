@@ -5,8 +5,6 @@ function performLogout() {
   headers.append("Accept", "application/json");
   headers.append("Origin", "http://localhost:3000");
 
-  //const usernameUser = document.getElementById("usernameUser").value;
-
   fetch("http://localhost:8080/logout", {
     mode: "cors",
     method: "POST",
@@ -20,15 +18,4 @@ function performLogout() {
         : "";
     })
     .catch((error) => console.log("Authorization failed : " + error.message));
-  debugger;
 }
-/*
-function openPost() {
-  console.log(document.getElementsByName("postHolder").id);
-
-  window.location.replace(
-    `http://localhost:3000/post.html?uuid=${
-      document.getElementsByName("postHolder").id
-    }`
-  );
-}*/

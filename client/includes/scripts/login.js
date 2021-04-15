@@ -23,5 +23,5 @@ function performLogin() {
         : "";
     })
     .catch((error) => console.log("Authorization failed : " + error.message));
-  debugger;
+  //debugger;
 }
