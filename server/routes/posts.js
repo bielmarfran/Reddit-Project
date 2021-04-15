@@ -90,7 +90,7 @@ router.delete("/:uuid", async (req, res) => {
     return res.json({ response: "Post Deleted!" });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error Delete" });
+    return res.status(500).json({ error: "Error Delete" + error });
   }
 });
 

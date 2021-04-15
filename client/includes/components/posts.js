@@ -15,7 +15,7 @@ function createPosts2(res) {
 function createPostDom(post) {
   const body = document.body;
   const div = document.createElement("div");
-  div.setAttribute("id", `${post.id}`);
+  div.setAttribute("id", `${post.uuid}`);
   div.setAttribute("name", `postHolder`);
   const topic = post.topic;
   const autor = post.user.username;

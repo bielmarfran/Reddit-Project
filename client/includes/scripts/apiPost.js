@@ -52,11 +52,12 @@ function removePost(postUuid) {
         ? removePostDom(postUuid)
         : console.log("json");
     })
-    .catch((error) => console.log("Authorization failed : " + error.message));
+    .catch((error) => console.log("Authorization failed : " + error));
   //debugger;
 }
 
 function removePostDom(key) {
+  console.log(key);
   var myobj = document.getElementById(key);
   myobj.remove();
 }
