@@ -38,6 +38,14 @@ router.post("/", async (req, res) => {
           sameSite: "Strict",
           domain: "localhost",
         });
+        res.cookie("username", user.username, {
+          maxAge: 60 * 60 * 24 * 30 * 1000,
+          httpOnly: false,
+          path: "/",
+          secure: false,
+          sameSite: "Strict",
+          domain: "localhost",
+        });
         return res.json({ response: "Logado com Sucesso" });
       }
     );

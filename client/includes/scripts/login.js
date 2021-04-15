@@ -18,9 +18,11 @@ function performLogin() {
   })
     .then((response) => response.json())
     .then((json) => {
-      json.response == "Logado com Sucesso"
-        ? window.location.replace("http://localhost:3000/")
-        : "";
+      if (json.response == "Logado com Sucesso") {
+        window.location.replace("http://localhost:3000/");
+      } else {
+        ("");
+      }
     })
     .catch((error) => console.log("Authorization failed : " + error.message));
   //debugger;

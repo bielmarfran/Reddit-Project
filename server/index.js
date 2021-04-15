@@ -5,11 +5,13 @@ const cors = require("cors");
 //const db = require("./db");
 
 const cookieParser = require("cookie-parser");
+const fileUpload = require("express-fileupload");
 const { createTokens, validateToken } = require("./Middleware/jtw");
 const { sequelize, User, Post, Comment } = require("./models");
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(fileUpload());
 app.options("*", cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use((req, res, next) => {
@@ -56,6 +58,15 @@ app.post("/logout", validateToken, async (req, res) => {
           sameSite: "Strict",
           domain: "localhost",
         });
+        res.cookie("username", user.username, {
+          maxAge: 0,
+          httpOnly: false,
+          path: "/",
+          secure: false,
+          sameSite: "Strict",
+          domain: "localhost",
+        });
+
         return res.json({ response: "Logout OK" });
       }
     );
@@ -64,6 +75,48 @@ app.post("/logout", validateToken, async (req, res) => {
     return res.status(500).json({ error: "Error Get" });
   }
 });
+
+app.post("/upload", validateToken, async (req, res) => {
+  const uuid = req.uuid;
+  //console.log(req);
+  let sampleFile;
+  let uploadPath;
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send("No files were uploaded.");
+  }
+
+  const user = await User.findOne({ where: { uuid: uuid } });
+
+  sampleFile = req.files.sampleFile;
+  //console.log(sampleFile);
+  const ext = sampleFile.name.substring(sampleFile.name.lastIndexOf("."));
+  uploadPath = __dirname + "\\public\\" + req.username + ext;
+
+  user.profilePicture = req.username + ext;
+
+  user.save();
+  console.log(uploadPath);
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(uploadPath, function (err) {
+    if (err) return res.status(500).send(err);
+
+    res.send("File uploaded!");
+  });
+});
+
+app.use("/public", express.static("./public"));
+//app.use(express.static("/public"));
+/*
+app.get("/public", (req, res) => {
+  res.send("Hello World!");
+  res.sendFile("//server/public/Carros.svg");
+});
+*/
+//app.get("/upload", function (req, res) {
+//
+//});
 
 /*
 

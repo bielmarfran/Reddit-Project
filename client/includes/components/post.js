@@ -20,13 +20,8 @@ function createPostDom(res) {
               <div class="w-full pt-2 pl-4" id="bodyPost">
                   <div class="flex items-center text-xs mb-2">
                   <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
-                  <img class="rounded-full border h-5 w-5" src="../../img/comida.svg">
+                  <img class="rounded-full border h-5 w-5" src="../../img/${topic}.svg">
                   <span class="ml-2">${topic}</span>
-                  </a>
-
-                      ${comments}
-                      <span class="hidden md:inline">&nbsp;comments</span>
-                  </a>
                       <span class="text-grey-light mx-1 text-xxs">•</span>
                       <span class="text-grey">Posted by</span>
                       <a href="#" class="text-grey mx-1 no-underline hover:underline">${autor}</a>
@@ -121,7 +116,7 @@ function createCommentDom(comment, postUuid) {
           <div id="comment">
               <div class="flex items-center text-xs ">
                   <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
-                      <img class="rounded-full border h-5 w-5" src="https://avatars0.githubusercontent.com/u/30317862?s=200&v=4">
+                      <img class="rounded-full border h-5 w-5" src="../../img/profile_default.svg">
                       <span class="ml-2">${autor}</span>
                   </a>                        
                   <span class="text-grey ml-2">${time}</span>

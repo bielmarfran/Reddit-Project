@@ -101,6 +101,9 @@
                 </button>
               </div>
             </div>
+            <div>
+              <img id="profile" class="rounded-full border ml-4 h-12 w-12" />
+            </div>
           </div>
         </div>
         <!-- end login -->
@@ -114,7 +117,7 @@
         <div
           class="p-7 flex justify-center items-center fixed left-0 top-0 w-full h-full bg-gray-900 bg-opacity-50 z-50 transition-opacity duration-300 opacity-0"
         >
-          <div class="md:w-2/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
+          <div class="md:w-6/12 sm:w-full rounded-lg shadow-lg bg-white my-3">
             <div
               class="flex justify-between border-b border-gray-100 px-5 py-4"
             >
@@ -139,15 +142,7 @@
               <header
                 class="flex flex-col justify-center items-center p-3 text-gray-600"
               >
-                <h2 class="font-semibold text-2xl" id="lootName">11</h2>
-                <h2 class="font-semibold text-2xl" id="lootValue">22</h2>
                 <div class="py-1">
-                  <!--<input
-                    placeholder=""
-                    type="text"
-                    id="postTopic"
-                    class="text-md block inputRegister"
-                  />-->
                   <label for="topic">Escolha to Topico:</label>
 
                   <div class="relative inline-flex">
@@ -215,6 +210,62 @@
           </div>
         </div>
       </dialog>
+      <dialog
+        id="mymodalCenteredProfile"
+        class="bg-transparent z-0 relative w-screen h-screen"
+      >
+        <div
+          class="p-7 flex justify-center items-center fixed left-0 top-0 w-full h-full bg-gray-900 bg-opacity-50 z-50 transition-opacity duration-300 opacity-0"
+        >
+          <div class="md:w-1/3 sm:w-full rounded-lg shadow-lg bg-white my-3">
+            <div
+              class="flex justify-between border-b border-gray-100 px-5 py-4"
+            >
+              <div>
+                <i class="fa fa-exclamation-triangle text-orange-500"></i>
+                <span class="font-bold text-gray-700 text-lg">Perfil</span>
+              </div>
+              <div>
+                <button>
+                  <i
+                    class="fa fa-times-circle text-red-500 hover:text-red-600 transition duration-150"
+                  ></i>
+                </button>
+              </div>
+            </div>
+            <div class="w-full p-3 md:mb-0">
+              <form
+                ref="uploadForm"
+                id="uploadForm"
+                action="http://localhost:8080/upload"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <input type="file" name="sampleFile" />
+                <input type="submit" value="Upload!" />
+              </form>
+            </div>
+
+            <div class="px-5 py-4 flex justify-end">
+              <button
+                type="button"
+                onclick="addPlayer2('mymodalcentered2')"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
+              >
+                Ok
+              </button>
+              <button
+                type="button"
+                onclick="modalClose('mymodalCenteredProfile')"
+                class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </dialog>
+
       <nav
         class="bg-white w-full flex relative items-center justify-center mx-auto py-6 px-12 h-20"
       >

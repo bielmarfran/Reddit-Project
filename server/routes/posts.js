@@ -8,10 +8,10 @@ router.get("/", async (req, res) => {
   try {
     const user = await User.findOne({ where: { uuid: uuid } });
     const post = await Post.findAll({ include: "user" });
+    console.log(post);
 
     post.forEach((element) => {
-      //const user2 = await User.findOne({ where: { id: element.dataValues.userId } });
-      //element.dataValues.username = user2.username;
+      element.dataValues.username = user.username;
       element.userId == user.id
         ? (element.dataValues.owner = true)
         : (element.dataValues.owner = false);

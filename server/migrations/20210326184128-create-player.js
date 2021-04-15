@@ -24,6 +24,10 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      profilePicture: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
