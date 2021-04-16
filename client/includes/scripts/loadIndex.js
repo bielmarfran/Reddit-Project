@@ -26,6 +26,26 @@ document.addEventListener(
     document.getElementById(`profile`).addEventListener("click", function () {
       openModal("mymodalCenteredProfile");
     });
+    document
+      .getElementById(`submitPhoto`)
+      .addEventListener("click", function () {
+        var supportMsg = document.getElementById(`uploadMsg`);
+        if (window.frames["dummyframe"].document != null) {
+          var files = document.getElementsByName("sampleFile")[0].files;
+          if (files.length == 0) {
+            supportMsg.setAttribute("class", "text-red-400");
+            supportMsg.innerHTML = "Sem Ficheiro ou inválido";
+          } else {
+            supportMsg.setAttribute("class", "text-blue-400");
+          }
+        }
+      });
+    document
+      .getElementById(`modal2Close`)
+      .addEventListener("click", function () {
+        modalClose("mymodalCenteredProfile");
+        location.reload();
+      });
   },
   false
 );
@@ -78,8 +98,4 @@ function performGetPosts() {
       }
     }) //console.log(json)
     .catch((error) => console.log("Authorization failed : " + error.message));
-}
-
-function formDO() {
-  document.forms["uploadForm"].submit();
 }

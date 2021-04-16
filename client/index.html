@@ -235,22 +235,32 @@
               </div>
             </div>
             <div class="w-full p-3 md:mb-0">
+              <iframe name="dummyframe" id="dummyframe" class="hidden"></iframe>
               <form
                 ref="uploadForm"
                 id="uploadForm"
                 action="http://localhost:8080/upload"
+                target="dummyframe"
                 method="post"
                 enctype="multipart/form-data"
               >
                 <input type="file" name="sampleFile" />
-                <input type="submit" value="Upload!" />
+                <input
+                  id="submitPhoto"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
+                  type="submit"
+                  value="Upload!"
+                />
               </form>
+              <span class="hidden" id="uploadMsg"
+                >Ficheiro Carregado com Sucesso</span
+              >
             </div>
 
             <div class="px-5 py-4 flex justify-end">
               <button
                 type="button"
-                onclick="formDO()"
+                id="modal2Close"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
               >
                 Ok

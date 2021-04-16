@@ -3,7 +3,7 @@ document.addEventListener(
   "DOMContentLoaded",
   async function () {
     error = document.location.search.substring(7);
-    if (error != null && erro != "") {
+    if (error != null && error != "") {
       console.log(error);
       var msg = "Sessão Expirada";
       showAlert(msg);
