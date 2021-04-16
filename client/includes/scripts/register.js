@@ -6,9 +6,52 @@ document.addEventListener(
       .addEventListener("click", function () {
         performRegister();
       });
+    document
+      .getElementById(`emailUser`)
+      .addEventListener("change", function () {
+        //var email = document.getElementById("emailUser");
+        validateEmail();
+      });
+    document
+      .getElementById(`passwordUser`)
+      .addEventListener("change", function () {
+        //var email = document.getElementById("emailUser");
+        validatePassword();
+      });
+    document
+      .getElementById(`password_confirm`)
+      .addEventListener("change", function () {
+        //var email = document.getElementById("emailUser");
+        validatePassword();
+      });
+    //
   },
   false
 );
+
+function validateEmail() {
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  var email = document.getElementById("emailUser").value;
+  var error = document.getElementById("errorEmail");
+  if (email.match(mailformat)) {
+    //alert("valid");
+    error.setAttribute("class", "text-red-500 hidden");
+  } else {
+    error.setAttribute("class", "text-red-500");
+    //alert("invalid");
+  }
+}
+
+function validatePassword() {
+  var password = document.getElementById("passwordUser").value;
+  var password_confirm = document.getElementById("password_confirm").value;
+  var error = document.getElementById("errorPassword");
+  if (password === password_confirm) {
+    error.setAttribute("class", "text-red-500 hidden");
+  } else {
+    error.setAttribute("class", "text-red-500");
+  }
+}
 
 function performRegister() {
   let headers = new Headers();

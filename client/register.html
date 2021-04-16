@@ -49,7 +49,7 @@
                         <label
                           for="usernameUser"
                           class="block text-xs font-semibold text-gray-600 uppercase"
-                          >Username</label
+                          >Nome de Usuário</label
                         >
                         <input
                           id="usernameUser"
@@ -65,7 +65,7 @@
                         <label
                           for="email"
                           class="block text-xs font-semibold text-gray-600 uppercase"
-                          >E-Email</label
+                          >Email</label
                         >
                         <input
                           id="emailUser"
@@ -81,7 +81,7 @@
                         <label
                           for="passwordUser"
                           class="block text-xs font-semibold text-gray-600 uppercase"
-                          >Password</label
+                          >Senha</label
                         >
                         <input
                           id="passwordUser"
@@ -97,7 +97,7 @@
                         <label
                           for="password_confirm"
                           class="block text-xs font-semibold text-gray-600 uppercase"
-                          >Password Confirm</label
+                          >Confimar Senha</label
                         >
                         <input
                           id="password_confirm"
@@ -109,75 +109,13 @@
                           required
                         />
                       </div>
-                      <div class="flex justify-start mt-3 ml-4 p-1">
-                        <ul>
-                          <li class="flex items-center py-1">
-                            <div
-                              :class="{'bg-green-200 text-green-700': password == password_confirm && password.length > 0, 'bg-red-200 text-red-700':password != password_confirm || password.length == 0}"
-                              class="rounded-full p-1 fill-current"
-                            >
-                              <svg
-                                class="w-4 h-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  x-show="password == password_confirm && password.length > 0"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M5 13l4 4L19 7"
-                                />
-                                <path
-                                  x-show="password != password_confirm || password.length == 0"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12"
-                                />
-                              </svg>
-                            </div>
-                            <span
-                              :class="{'text-green-700': password == password_confirm && password.length > 0, 'text-red-700':password != password_confirm || password.length == 0}"
-                              class="font-medium text-sm ml-3"
-                              x-text="password == password_confirm && password.length > 0 ? 'Passwords match' : 'Passwords do not match' "
-                            ></span>
-                          </li>
-                          <li class="flex items-center py-1">
-                            <div
-                              :class="{'bg-green-200 text-green-700': password.length > 7, 'bg-red-200 text-red-700':password.length < 7 }"
-                              class="rounded-full p-1 fill-current"
-                            >
-                              <svg
-                                class="w-4 h-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  x-show="password.length > 7"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M5 13l4 4L19 7"
-                                />
-                                <path
-                                  x-show="password.length < 7"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12"
-                                />
-                              </svg>
-                            </div>
-                            <span
-                              :class="{'text-green-700': password.length > 7, 'text-red-700':password.length < 7 }"
-                              class="font-medium text-sm ml-3"
-                              x-text="password.length > 7 ? 'The minimum length is reached' : 'At least 8 characters required' "
-                            ></span>
-                          </li>
-                        </ul>
+                      <div class="flex justify-start mt-4">
+                        <span class="text-red-500 hidden" id="errorEmail"
+                          >O email esta incorreto</span
+                        >
+                        <span class="text-red-500 hidden" id="errorPassword"
+                          >As senhas sao diferentes</span
+                        >
                       </div>
                       <div class="flex justify-start">
                         <label
@@ -188,39 +126,40 @@
                             type="checkbox"
                           />
                           <span
-                            class="ml-2 text-sm py-2 text-gray-600 text-left"
-                            >Accept the
+                            class="ml-2 text-sm py-2 text-blue-600 text-left"
+                            >Aceito os
                             <a
                               href="#"
                               class="font-semibold text-black border-b-2 border-gray-200 hover:border-gray-500"
                             >
-                              Terms and Conditions of the site </a
-                            >and
+                              Termos e Condições do site </a
+                            >e
                             <a
                               href="#"
                               class="font-semibold text-black border-b-2 border-gray-200 hover:border-gray-500"
                             >
-                              the information data policy.</a
+                              a política de dados de informação.</a
                             >
                           </span>
                         </label>
                       </div>
                       <button id="performRegister" type="button" class="button">
-                        Register
+                        Registrar
                       </button>
                     </div>
                   </form>
-
-                  <div
-                    class="text-sm font-semibold block sm:hidden py-6 flex justify-center"
-                  >
+                  <div class="flex justify-start mt-4">
                     <a
-                      href="#"
+                      href="/login.html"
                       class="text-black font-normal border-b-2 border-gray-200 hover:border-teal-500"
-                      >You're already member?
+                      >Você já tem uma conta?
                       <span class="text-black font-semibold"> Login </span>
                     </a>
                   </div>
+
+                  <div
+                    class="text-sm font-semibold block sm:hidden py-6 flex justify-center"
+                  ></div>
                 </div>
               </div>
             </div>

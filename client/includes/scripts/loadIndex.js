@@ -35,7 +35,7 @@ async function getProfile() {
   var path = x.substring(x.lastIndexOf("=") + 1) + ".jpg";
   var path2 = decodeURIComponent(path);
   console.log(path2);
-  debugger;
+  //debugger;
   await fetch(`http://localhost:8080/public/` + path2)
     .then((response) => {
       if (response.ok) {
@@ -57,7 +57,7 @@ function openPost(uuid) {
   postUuid = uuid;
   console.log(postUuid);
   window.location.replace(`http://localhost:3000/post.html?uuid=${uuid}`);
-  debugger;
+  //debugger;
 }
 
 function performGetPosts() {

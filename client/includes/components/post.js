@@ -82,12 +82,12 @@ function createPostDom(res) {
     .addEventListener("click", function () {
       postComment(post.uuid);
     });
-  post.comments.forEach((comment) => {
-    createCommentDom(comment, post.uuid);
+  post.comments.forEach((comment, index) => {
+    createCommentDom(comment, post.uuid, index);
   });
 }
 
-function createCommentDom(comment, postUuid) {
+function createCommentDom(comment, postUuid, index) {
   const body = document.body;
   const div2 = document.createElement("div");
   div2.setAttribute("id", comment.uuid);
@@ -108,7 +108,7 @@ function createCommentDom(comment, postUuid) {
           <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
           <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
           </svg>`;
-
+  var profile = "profile" + index;
   div2.innerHTML = `
           <div class="mb-5 mt-5">
               <hr>
@@ -116,7 +116,7 @@ function createCommentDom(comment, postUuid) {
           <div id="comment">
               <div class="flex items-center text-xs ">
                   <a href="#" class="font-semibold no-underline hover:underline text-black flex items-center">
-                      <img class="rounded-full border h-5 w-5" src="../../img/profile_default.svg">
+                      <img class="rounded-full border h-5 w-5" src="../../img/profile_default.svg" id="${profile}">
                       <span class="ml-2">${autor}</span>
                   </a>                        
                   <span class="text-grey ml-2">${time}</span>
@@ -134,6 +134,7 @@ function createCommentDom(comment, postUuid) {
           </div>
           `;
   body.querySelector("#bodyPost").appendChild(div2);
+  getProfile(comment.user.profilePicture, profile);
 
   if (comment.owner) {
     document
@@ -147,4 +148,28 @@ function createCommentDom(comment, postUuid) {
         editComment(comment.uuid);
       });
   }
+}
+
+async function getProfile(path2, profile) {
+  //var x = document.cookie;
+  //var path = x.substring(x.lastIndexOf("=") + 1) + ".jpg";
+  //var path2 = decodeURIComponent(path);
+  console.log(path2);
+  //debugger;
+  await fetch(`http://localhost:8080/public/` + path2)
+    .then((response) => {
+      if (response.ok) {
+        document
+          .getElementById(profile)
+          .setAttribute("src", "http://localhost:8080/public/" + path2);
+      } else if (response.status === 404) {
+        document
+          .getElementById(profile)
+          .setAttribute("src", "../../img/profile_default.svg");
+      } else {
+        return Promise.reject("some other error: " + response.status);
+      }
+    })
+    .then((data) => console.log("data is", data))
+    .catch((error) => console.log("error is", error));
 }
