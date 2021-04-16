@@ -2,7 +2,7 @@
 
 ## Client
 
-    cd/client
+    cd client
 
     npm install
 
@@ -10,7 +10,7 @@
 
 ## Server
 
-    cd/server
+    cd server
 
     npm install
 
