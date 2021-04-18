@@ -3,6 +3,7 @@ import {useState} from "react";
  
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Login from './pages/login.jsx';
+import Register from './pages/register.jsx';
 import Profile from './pages/profile.jsx';
 import ProtectedRoute from './pages/protectedRoute';
 
@@ -11,13 +12,19 @@ import ProtectedRoute from './pages/protectedRoute';
   return (
     <Router>
       <Switch>
-        <Route path="/" exact>{/*path="/login" component={Login}*/}
-          <button onClick={() => { setIsAuth(true)}}>Login</button>
-          <button onClick={() => { setIsAuth(false)}}>Logout</button>
+        <ProtectedRoute path="/" isAuth={isAuth}>
+          
           <Link to="/profile">Go to Profile</Link>
-        </Route>
-        {/*     <Route exact path="/profile" component={() => <Profile authorized = {true} />}/> */}
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+
+        </ProtectedRoute>
+
         <ProtectedRoute path="/profile" component= {Profile} isAuth={isAuth} /> 
+        <Route path="/login" exact component={Login}/>
+        <Route path="/register" exact component={Register}/>
+
+
       </Switch>
 
     </Router>
