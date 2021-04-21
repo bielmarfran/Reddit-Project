@@ -9,7 +9,7 @@ function protectedRoute({ isAuth: isAuth, component: Component, ...rest}) {
                 return <Component />;
             }else{
                 return (
-                    <Redirect to={{ pathname: '/login', state: {from: props.location} }}/>
+                    <Redirect to={{ pathname: '/login', state: {from: props.location, error:'Acesso não Autorizado'} }}/>
                 );    
             }
         }}   
