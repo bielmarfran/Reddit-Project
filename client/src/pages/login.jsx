@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { callAlert } from "../helpers/callAlert";
 import * as Yup from "yup";
-import AlertWarningRed from "../components/AlertWarningRed";
 
 function Login({ location }) {
   let history = useHistory();
@@ -11,8 +11,7 @@ function Login({ location }) {
     email: "",
     password: "",
   };
-  const onSubmit = (data, errors) => {
-    console.log(data);
+  const onSubmit = (data) => {
     console.log(data);
   };
   const validationMsg = {
@@ -41,7 +40,7 @@ function Login({ location }) {
               Login
             </h2>
             {typeof location.state !== "undefined"
-              ? callAlert(location.state.error)
+              ? callAlert(location.state)
               : ""}
 
             <Formik
@@ -116,8 +115,33 @@ function Login({ location }) {
   function handleClick() {
     history.push("/register");
   }
-  function callAlert(msg) {
-    return <AlertWarningRed errorMsg={msg} />;
+  function performLogin(data) {
+    let headers = new Headers();
+
+    headers.append("Content-Type", "application/json");
+    headers.append("Accept", "application/json");
+    headers.append("Origin", "http://localhost:3000");
+
+    //const usernameUser = document.getElementById("usernameUser").value;
+    const emailUser = data.email;
+    const passwordUser = data.password;
+
+    fetch("http://localhost:8080/auth", {
+      mode: "cors",
+      method: "POST",
+      credentials: "include",
+      headers: headers,
+      body: JSON.stringify({ email: emailUser, password: passwordUser }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.response == "Logado com Sucesso") {
+          window.location.replace("http://localhost:3000/");
+        } else if (json.error == "Acesso não autorizado") {
+          showAlert(json.error);
+        }
+      })
+      .catch((error) => console.log("Authorization failed : " + error.message));
   }
 }
 

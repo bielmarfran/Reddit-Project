@@ -1,11 +1,13 @@
 import React from "react";
-import { withRouter, useHistory } from "react-router-dom";
+import { useState } from "react";
+import { withRouter, useHistory, Redirect } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { callAlert } from "../helpers/callAlert";
 import * as Yup from "yup";
 
 function Register() {
+  var [msg, setMsg] = useState("");
   let history = useHistory();
-
   const initialValues = {
     username: "",
     email: "",
@@ -13,9 +15,9 @@ function Register() {
     password_confirm: "",
   };
 
-  const onSubmit = (data, errors) => {
+  const onSubmit = (data) => {
     console.log(data);
-    console.log(data);
+    performRegister(data);
   };
   const validationMsg = {
     usernameMin: "Mínimo 4 caracteres!",
@@ -39,6 +41,12 @@ function Register() {
       .required(validationMsg.passwordRequired)
       .min(8, validationMsg.passwordMin)
       .max(32, validationMsg.passwordMax),
+
+    password_confirm: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required(validationMsg.passwordRequired)
+      .min(8, validationMsg.passwordMin)
+      .max(32, validationMsg.passwordMax),
   });
 
   return (
@@ -55,7 +63,7 @@ function Register() {
                   <div className="text-3xl text-center font-base text-black mt-4">
                     Registro
                   </div>
-
+                  {msg === "" ? "" : callAlert(msg)}
                   <Formik
                     initialValues={initialValues}
                     onSubmit={onSubmit}
@@ -64,12 +72,12 @@ function Register() {
                     <Form className="mt-8">
                       <div className="py-1">
                         <label
-                          forHtml="usernameUser"
+                          htmlFor="usernameUser"
                           className="block text-xs font-semibold text-gray-600 uppercase"
                         >
                           Nome do Usuario
                         </label>
-                        <input
+                        <Field
                           id="usernameUser"
                           type="text"
                           name="username"
@@ -78,16 +86,21 @@ function Register() {
                           className="inputRegister"
                           required
                         />
+                        <ErrorMessage
+                          name="username"
+                          component="span"
+                          className="text-red-500 my-3"
+                        />
                       </div>
 
                       <div className="py-1">
                         <label
-                          forHtml="email"
+                          htmlFor="email"
                           className="block text-xs font-semibold text-gray-600 uppercase"
                         >
                           Email
                         </label>
-                        <input
+                        <Field
                           id="email"
                           type="email"
                           name="email"
@@ -96,16 +109,21 @@ function Register() {
                           className="inputRegister"
                           required
                         />
+                        <ErrorMessage
+                          name="email"
+                          component="span"
+                          className="text-red-500 my-3"
+                        />
                       </div>
 
                       <div className="py-1">
                         <label
-                          forHtml="password"
+                          htmlFor="password"
                           className="block text-xs font-semibold text-gray-600 uppercase"
                         >
                           Senha
                         </label>
-                        <input
+                        <Field
                           id="password"
                           type="password"
                           name="password"
@@ -114,23 +132,33 @@ function Register() {
                           className="inputRegister"
                           required
                         />
+                        <ErrorMessage
+                          name="password"
+                          component="span"
+                          className="text-red-500 my-3"
+                        />
                       </div>
 
                       <div className="py-1">
                         <label
-                          forHtml="password_confirm"
+                          htmlFor="password_confirm"
                           className="block text-xs font-semibold text-gray-600 uppercase"
                         >
                           Confimar Senha
                         </label>
-                        <input
+                        <Field
                           id="password_confirm"
                           type="password"
-                          name="password"
+                          name="password_confirm"
                           placeholder="password"
                           autoComplete="current-password"
                           className="inputRegister"
                           required
+                        />
+                        <ErrorMessage
+                          name="password_confirm"
+                          component="span"
+                          className="text-red-500 my-3"
                         />
                       </div>
                       <div className="flex justify-start mt-4">
@@ -146,7 +174,7 @@ function Register() {
                       </div>
                       <button
                         id="performRegister"
-                        type="button"
+                        type="submit"
                         className="button"
                       >
                         Registrar
@@ -175,6 +203,42 @@ function Register() {
   );
   function handleClick() {
     history.push("/login");
+  }
+  function performRegister(data) {
+    let headers = new Headers();
+
+    headers.append("Content-Type", "application/json");
+    headers.append("Accept", "application/json");
+    headers.append("Origin", "http://localhost:3000");
+
+    const usernameUser = data.username;
+    const emailUser = data.email;
+    const passwordUser = data.password;
+
+    fetch("http://localhost:8080/auth/register", {
+      mode: "cors",
+      method: "POST",
+      credentials: "include",
+      headers: headers,
+      body: JSON.stringify({
+        username: usernameUser,
+        email: emailUser,
+        password: passwordUser,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        if (json.response === "Conta Criada com sucesso") {
+          history.push("/login", { message: json.response });
+        } else if (json.error == "Email ja existe!") {
+          setMsg(json.error);
+        } else if (json.error == "Username ja existe!") {
+          setMsg(json.error);
+        }
+      })
+      .catch((error) => console.log("Authorization failed : " + error.message));
+    // debugger;
   }
 }
 
