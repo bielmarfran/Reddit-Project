@@ -7,12 +7,14 @@ import * as Yup from "yup";
 function Login({ location }) {
   let history = useHistory();
   console.log(location);
+
   const initialValues = {
     email: "",
     password: "",
   };
   const onSubmit = (data) => {
     console.log(data);
+    performLogin(data);
   };
   const validationMsg = {
     email: "Insira um email valido!",
@@ -136,7 +138,7 @@ function Login({ location }) {
       .then((response) => response.json())
       .then((json) => {
         if (json.response == "Logado com Sucesso") {
-          window.location.replace("http://localhost:3000/");
+          history.push("/feed", { message: json.response });
         } else if (json.error == "Acesso não autorizado") {
           showAlert(json.error);
         }

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Login from "./pages/login.jsx";
 import Register from "./pages/register.jsx";
 import Profile from "./pages/profile.jsx";
+import Feed from "./pages/feed.jsx";
 import ProtectedRoute from "./pages/protectedRoute";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       </Switch>
       <Route path="/login" component={Login} exact />
       <Route path="/register" component={Register} exact />
+      <Route path="/feed" component={Feed} exact />
     </Router>
   );
 }
