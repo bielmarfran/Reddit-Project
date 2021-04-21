@@ -2,10 +2,8 @@ import React from "react";
 import {withRouter} from 'react-router-dom';
 
 
-function Profile( { authorized }){
-   //if(!authorized){
-   // return <Redirect to="./login" />
-   //}
+function Profile(){
+   
     return(
         <div>
             Profile

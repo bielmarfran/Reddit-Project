@@ -38,7 +38,7 @@ function Login() {
 
             <form class="mt-10" method="POST">
               <label
-                for="email"
+                forHtml="email"
                 class="block text-xs font-semibold text-gray-600 uppercase"
               >
                 E-mail
@@ -48,13 +48,13 @@ function Login() {
                 type="email"
                 name="email"
                 placeholder="e-mail address"
-                autocomplete="email"
+                autoComplete="email"
                 class="block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
                 required
               />
 
               <label
-                for="password"
+                forHtml="password"
                 class="block mt-2 text-xs font-semibold text-gray-600 uppercase"
               >
                 Password
@@ -64,7 +64,7 @@ function Login() {
                 type="password"
                 name="password"
                 placeholder="password"
-                autocomplete="current-password"
+                autoComplete="current-password"
                 class="block w-full py-3 px-1 mt-2 mb-4 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
                 required
               />

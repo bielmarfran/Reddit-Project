@@ -12,21 +12,17 @@ import ProtectedRoute from './pages/protectedRoute';
   return (
     <Router>
       <Switch>
-        <ProtectedRoute path="/" isAuth={isAuth}>
-          
+        <Route path="/" exact>{/*path="/login" component={Login}*/}
+            {/* <button onClick={() => { setIsAuth(true)}}>Login</button>
+          <button onClick={() => { setIsAuth(false)}}>Logout</button>*/}
           <Link to="/profile">Go to Profile</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-
-        </ProtectedRoute>
-
+        </Route>
+        {/*     <Route exact path="/profile" component={() => <Profile authorized = {true} />}/> */}
         <ProtectedRoute path="/profile" component= {Profile} isAuth={isAuth} /> 
-        <Route path="/login" exact component={Login}/>
-        <Route path="/register" exact component={Register}/>
-
 
       </Switch>
-
+      <Route path="/login"  component= {Login} exact />
+      <Route path="/register"  component= {Register} exact />
     </Router>
   
   );
