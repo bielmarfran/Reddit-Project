@@ -2,17 +2,18 @@ import React from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
+import PostCard from "../components/PostCard";
 
 function Feed({ data }) {
   let history = useHistory();
   console.log(data);
   return (
     <div className="bg-gray-200">
-      <div class="flex flex-col h-screen justify-between">
-        <nav class="bg-white w-full flex relative justify-between items-center mx-auto py-6 px-8 h-20 sm:px-10 ">
-          <div class="flex">
-            <a class="_o6689fn" href="/">
-              <div class="md:block">
+      <div className="flex flex-col h-screen justify-between">
+        <nav className="bg-white w-full flex relative justify-between items-center mx-auto py-6 px-8 h-20 sm:px-10 ">
+          <div className="flex">
+            <a className="_o6689fn" href="/">
+              <div className="md:block">
                 <svg
                   enable-background="new 0 0 55 55"
                   height="55px"
@@ -70,7 +71,7 @@ function Feed({ data }) {
             <div className="">
               <button
                 id="openModal"
-                class="inline-block px-6 py-2 text-md font-bold leading-6 text-center text-white uppercase transition bg-blue-400 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                className="inline-block px-6 py-2 text-md font-bold leading-6 text-center text-white uppercase transition bg-blue-400 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
               >
                 Criar Post
               </button>
@@ -79,7 +80,7 @@ function Feed({ data }) {
               {" "}
               <button
                 id="performLogout"
-                class="inline-block bg-transparent hover:bg-gray-200 text-blue-400 font-semibold hover:text-gray-800 ml-4 py-1 px-4 border border-blue-500 hover:border-transparent rounded"
+                className="inline-block bg-transparent hover:bg-gray-200 text-blue-400 font-semibold hover:text-gray-800 ml-4 py-1 px-4 border border-blue-500 hover:border-transparent rounded"
               >
                 Logout
               </button>
@@ -87,17 +88,19 @@ function Feed({ data }) {
             <div className="pl-3.5 pt-1.5">
               <img
                 id="profile"
-                class="rounded-full border ml-4 h-12 w-12"
+                className="rounded-full border ml-4 h-12 w-12"
                 src="/img/profile_default.svg"
               />
             </div>
           </div>
         </nav>
 
-        <div id="app" class="mb-auto"></div>
+        <div id="app" className="mb-auto">
+          {<PostCard postData={"state.error"} />}
+        </div>
 
-        <nav class="bg-white w-full flex relative items-center justify-center mx-auto py-6 px-12 h-20">
-          <div class="flex mx-auto text-black text-center">
+        <nav className="bg-white w-full flex relative items-center justify-center mx-auto py-6 px-12 h-20">
+          <div className="flex mx-auto text-black text-center">
             Copyright Business Name © 2021
           </div>
         </nav>
