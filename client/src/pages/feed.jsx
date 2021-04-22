@@ -3,6 +3,7 @@ import { useHistory, withRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
 import PostCard from "../components/PostCard";
+import MenuDrop from "../components/MenuDrop";
 
 function Feed({ data }) {
   let history = useHistory();
@@ -67,35 +68,22 @@ function Feed({ data }) {
               </div>
             </a>
           </div>
-          <div className="flex flex-wrap justify-center">
-            <div className="">
+
+          <div className="flex  space-x-4 ">
+            <div className="self-center">
               <button
                 id="openModal"
-                className="inline-block px-6 py-2 text-md font-bold leading-6 text-center text-white uppercase transition bg-blue-400 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                className="inline-block mt-0 px-6 py-2 text-md font-bold leading-6 text-center text-white uppercase transition bg-blue-400 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
               >
                 Criar Post
               </button>
             </div>
-            <div className="">
-              {" "}
-              <button
-                id="performLogout"
-                className="inline-block bg-transparent hover:bg-gray-200 text-blue-400 font-semibold hover:text-gray-800 ml-4 py-1 px-4 border border-blue-500 hover:border-transparent rounded"
-              >
-                Logout
-              </button>
-            </div>
-            <div className="pl-3.5 pt-1.5">
-              <img
-                id="profile"
-                className="rounded-full border ml-4 h-12 w-12"
-                src="/img/profile_default.svg"
-              />
-            </div>
+
+            <div className="self-center">{<MenuDrop />}</div>
           </div>
         </nav>
-
-        <div id="app" className="mb-auto">
+        <div id="app" className="mb-auto grid">
+          {" "}
           {<PostCard postData={"state.error"} />}
         </div>
 

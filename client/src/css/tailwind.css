@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
-    @apply mt-3 text-lg font-semibold bg-blue-400 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-blue-500;
+.button {
+  @apply mt-3 text-lg font-semibold bg-blue-400 w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-blue-500;
 }
-  
 
 .inputRegister {
-    @apply block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200;
+  @apply block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200;
 }
-
