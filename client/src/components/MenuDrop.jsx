@@ -10,7 +10,7 @@ export default function MenuDrop() {
         {({ open }) => (
           <>
             <div>
-              <Menu.Button className="inline-flex justify-center w-full px-4 py-2 mt-0 text-sm font-medium text-black bg-gray-300 rounded-md bg-opacity-20  hover:bg-gray-500">
+              <Menu.Button className="inline-flex justify-center w-full px-4 py-2 mt-0 text-sm font-medium text-black bg-gray-200 rounded-md bg-opacity-20  hover:bg-gray-200">
                 <img
                   id="profile"
                   className="rounded-full border  h-11 w-11"
@@ -43,7 +43,7 @@ export default function MenuDrop() {
                     {({ active }) => (
                       <button
                         className={`${
-                          active ? "bg-gray-500 text-black" : "text-gray-900"
+                          active ? "bg-gray-200 text-black" : "text-gray-900"
                         } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                       >
                         {active ? (
@@ -65,7 +65,7 @@ export default function MenuDrop() {
                     {({ active }) => (
                       <button
                         className={`${
-                          active ? "bg-gray-500 text-black" : "text-gray-900"
+                          active ? "bg-gray-200 text-black" : "text-gray-900"
                         } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                       >
                         {active ? (
@@ -89,7 +89,7 @@ export default function MenuDrop() {
                     {({ active }) => (
                       <button
                         className={`${
-                          active ? "bg-gray-500 text-black" : "text-gray-900"
+                          active ? "bg-gray-200 text-black" : "text-gray-900"
                         } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                       >
                         {active ? (
@@ -148,8 +148,7 @@ function ProfileIcon(props) {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        fill="#8B5CF6"
-        stroke="#C4B5FD"
+        stroke="currentColor"
         strokeWidth={2}
         d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
       />
@@ -183,18 +182,8 @@ function DuplicateInactiveIcon(props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M4 4H12V12H4V4Z"
-        fill="#EDE9FE"
-        stroke="#A78BFA"
-        strokeWidth="2"
-      />
-      <path
-        d="M8 8H16V16H8V8Z"
-        fill="#EDE9FE"
-        stroke="#A78BFA"
-        strokeWidth="2"
-      />
+      <path d="M4 4H12V12H4V4Z" stroke="currentColor" strokeWidth="2" />
+      <path d="M8 8H16V16H8V8Z" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
 }
@@ -207,18 +196,8 @@ function DuplicateActiveIcon(props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M4 4H12V12H4V4Z"
-        fill="#8B5CF6"
-        stroke="#C4B5FD"
-        strokeWidth="2"
-      />
-      <path
-        d="M8 8H16V16H8V8Z"
-        fill="#8B5CF6"
-        stroke="#C4B5FD"
-        strokeWidth="2"
-      />
+      <path d="M4 4H12V12H4V4Z" stroke="currentColor" strokeWidth="2" />
+      <path d="M8 8H16V16H8V8Z" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
 }
@@ -237,8 +216,7 @@ function DuplicateLogoutIcon(props) {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        fill="#EDE9FE"
-        stroke="#A78BFA"
+        stroke="currentColor"
         d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
       />
     </svg>

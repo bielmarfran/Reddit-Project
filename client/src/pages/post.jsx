@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useHistory, withRouter, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
-import { getPost } from "../helpers/getPost";
+import { getPost } from "../helpers/postOperations";
 import PostInfo from "../components/Post";
 import Header from "../components/header";
 import Footer from "../components/footer";

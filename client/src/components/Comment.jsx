@@ -4,7 +4,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 
 export default function Comment({ commentData }) {
   //console.log(commentData);
-  commentData = {
+  /*commentData = {
     uuid: "9e289a2e-6a26-449f-a49c-45b6106a15a7",
     topic: "Comida",
     title: "Post X2",
@@ -20,7 +20,7 @@ export default function Comment({ commentData }) {
     },
     username: "bielmarfran@gmail.com",
     owner: true,
-  };
+  };*/
   const uuid = commentData.uuid;
   const topic = commentData.topic;
   const autor = commentData.user.username;
@@ -49,18 +49,29 @@ export default function Comment({ commentData }) {
           <span className="ml-2">{autor}</span>
         </a>
         <span className="text-grey ml-2">${time}</span>
-        {commentData.owner ? "edit" : ""}
+        {commentData.owner ? editComment() : ""}
+        {commentData.owner ? removeComment() : ""}
       </div>
-      {commentData.owner ? "tet" : ""}
+
       <div className="ml-7 mb-5 mt-5 ">{body}</div>
     </div>
   );
 
+  function handleClick() {
+    window.alert("sdsd");
+  }
+
   function removeComment() {
-    return <EditIcon className="w-5 h-5 mr-2" aria-hidden="true" />;
+    return (
+      <div className="ml-auto hover:shadow-lg">
+        <a onClick={handleClick}>
+          <RemoveIcon className="w-5 h-5" aria-hidden="true" />
+        </a>
+      </div>
+    );
   }
   function editComment() {
-    return <EditIcon className="w-5 h-5 mr-2" aria-hidden="true" />;
+    return <EditIcon className="w-5 h-5 ml-2" aria-hidden="true" />;
   }
 }
 
@@ -68,7 +79,7 @@ function EditIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
+      className="h-5 w-5 ml-2"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -87,7 +98,7 @@ function RemoveIcon(params) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
+      className="h-6 w-6 "
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

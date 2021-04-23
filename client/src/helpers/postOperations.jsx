@@ -1,5 +1,5 @@
 import React from "react";
-import { getApi } from "../helpers/apiCalls";
+import { getApi } from "./apiCalls";
 
 let headers = new Headers();
 
