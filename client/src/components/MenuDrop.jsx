@@ -36,28 +36,28 @@ export default function MenuDrop() {
             >
               <Menu.Items
                 static
-                className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                className="absolute right-0 w-44 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div className="px-1 py-1 ">
                   <Menu.Item>
                     {({ active }) => (
                       <button
                         className={`${
-                          active ? "bg-violet-500 text-white" : "text-gray-900"
+                          active ? "bg-gray-500 text-black" : "text-gray-900"
                         } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                       >
                         {active ? (
-                          <EditActiveIcon
+                          <ProfileIcon
                             className="w-5 h-5 mr-2"
                             aria-hidden="true"
                           />
                         ) : (
-                          <EditInactiveIcon
+                          <ProfileIcon
                             className="w-5 h-5 mr-2"
                             aria-hidden="true"
                           />
                         )}
-                        Edit
+                        <div className="ml-2">Profile</div>
                       </button>
                     )}
                   </Menu.Item>
@@ -65,7 +65,7 @@ export default function MenuDrop() {
                     {({ active }) => (
                       <button
                         className={`${
-                          active ? "bg-violet-500 text-white" : "text-gray-900"
+                          active ? "bg-gray-500 text-black" : "text-gray-900"
                         } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                       >
                         {active ? (
@@ -79,7 +79,31 @@ export default function MenuDrop() {
                             aria-hidden="true"
                           />
                         )}
-                        Duplicate
+                        <div className="ml-2">Duplicate</div>
+                      </button>
+                    )}
+                  </Menu.Item>
+                </div>
+                <div className="px-1 py-1">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        className={`${
+                          active ? "bg-gray-500 text-black" : "text-gray-900"
+                        } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                      >
+                        {active ? (
+                          <DuplicateLogoutIcon
+                            className="w-5 h-5 mr-2"
+                            aria-hidden="true"
+                          />
+                        ) : (
+                          <DuplicateLogoutIcon
+                            className="w-5 h-5 mr-2"
+                            aria-hidden="true"
+                          />
+                        )}
+                        <div className="ml-2">Sair</div>
                       </button>
                     )}
                   </Menu.Item>
@@ -106,6 +130,28 @@ function EditInactiveIcon(props) {
         fill="#EDE9FE"
         stroke="#A78BFA"
         strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+function ProfileIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="#8B5CF6"
+        stroke="#C4B5FD"
+        strokeWidth={2}
+        d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
       />
     </svg>
   );
@@ -172,6 +218,28 @@ function DuplicateActiveIcon(props) {
         fill="#8B5CF6"
         stroke="#C4B5FD"
         strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+function DuplicateLogoutIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        fill="#EDE9FE"
+        stroke="#A78BFA"
+        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
       />
     </svg>
   );

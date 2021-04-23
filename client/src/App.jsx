@@ -7,6 +7,7 @@ import Register from "./pages/register.jsx";
 import Profile from "./pages/profile.jsx";
 import Feed from "./pages/feed.jsx";
 import Test from "./pages/test.jsx";
+import Post from "./pages/post.jsx";
 import ProtectedRoute from "./pages/protectedRoute";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route path="/login" component={Login} exact />
       <Route path="/register" component={Register} exact />
       <Route path="/feed" component={Feed} exact />
+      <Route path="/post" component={Post} exact />
       <Route path="/test" component={Test} exact />
     </Router>
   );
