@@ -2,7 +2,7 @@ import React from "react";
 import getTime from "../helpers/getTime";
 
 export default function PostCard({ postData }) {
-  console.log(postData);
+  //console.log(postData);
   const uuid = postData.uuid;
   const topic = postData.topic;
   const autor = postData.user.username;

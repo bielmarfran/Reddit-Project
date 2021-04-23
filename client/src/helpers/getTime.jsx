@@ -12,7 +12,7 @@ export default function getApi(time) {
   //console.log(new Date().toISOString());
   var Difference_In_Time = dateNow.getTime() - datePost.getTime();
 
-  console.log(Difference_In_Time / hour);
+  //console.log(Difference_In_Time / hour);
 
   if (Difference_In_Time / year > 1) {
     var result = Math.trunc(Difference_In_Time / year);

@@ -5,19 +5,18 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
 import { getApi } from "../helpers/apiCalls";
 import PostCard from "../components/PostCard";
-import MenuDrop from "../components/MenuDrop";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
 function Feed({ data }) {
   let history = useHistory();
   const [listOfPosts, setListOfPosts] = useState([]);
-  //console.log(data);
-  var numbers = [1, 2, 3, 4, 5];
 
   useEffect(() => {
     getApi("").then((response) => {
       console.log(response);
+      if (typeof response.error !== "undefined")
+        history.push("/login", { error: "Acesso não Autorizado" });
       setListOfPosts(response);
     });
   }, []);
