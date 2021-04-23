@@ -48,7 +48,7 @@ export default function Comment({ commentData }) {
           />
           <span className="ml-2">{autor}</span>
         </a>
-        <span className="text-grey ml-2">${time}</span>
+        <span className="text-grey ml-2">{time}</span>
         {commentData.owner ? editComment() : ""}
         {commentData.owner ? removeComment() : ""}
       </div>

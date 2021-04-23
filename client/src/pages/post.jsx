@@ -17,17 +17,18 @@ function Post({ data }) {
 
   useEffect(() => {
     getPost(id).then((response) => {
+      if (typeof response.error !== "undefined")
+        history.push("/login", { error: "Acesso não Autorizado" });
+      if (response == "TypeError: Failed to fetch")
+        history.push("/login", { error: "Servidor Off" });
+
       setPost(response);
       console.log(response);
     });
   }, []);
   /**
-   * if (typeof response.error !== "undefined")
-        history.push("/login", { error: "Acesso não Autorizado" });
-      if (response == "TypeError: Failed to fetch")
-        history.push("/login", { error: "Servidor Off" });
-//
-  */
+   *
+   */
   console.log(post);
   return (
     <div className="bg-gray-200">

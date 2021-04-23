@@ -138,7 +138,7 @@ function Login({ location }) {
       .then((response) => response.json())
       .then((json) => {
         if (json.response == "Logado com Sucesso") {
-          history.push("/feed", { message: json.response });
+          history.push("/", { message: json.response });
         } else if (json.error == "Acesso não autorizado") {
           showAlert(json.error);
         }
