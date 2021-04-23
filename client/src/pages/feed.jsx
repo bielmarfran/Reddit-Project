@@ -9,7 +9,7 @@ import PostCard from "../components/PostCard";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
-function Feed({ data }) {
+function Feed() {
   let history = useHistory();
   const [listOfPosts, setListOfPosts] = useState([]);
 
@@ -27,7 +27,7 @@ function Feed({ data }) {
 
   return (
     <div className="bg-gray-200">
-      <Header />
+      <Header hide={true} />
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
           {Object.keys(listOfPosts).map((i) => (

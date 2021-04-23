@@ -3,37 +3,13 @@ import getTime from "../helpers/getTime";
 import Comment from "../components/Comment";
 
 export default function Post({ postData }) {
-  console.log("Teste ", postData);
-
-  var data = {
-    uuid: "9e289a2e-6a26-449f-a49c-45b6106a15a7",
-    topic: "Comida",
-    title: "Post X2",
-    body: "Post X2",
-    countComments: 0,
-    commentsOrder: 0,
-    createdAt: "2021-04-22T20:17:14.000Z",
-    updatedAt: "2021-04-22T20:17:14.000Z",
-    user: {
-      username: "bielmarfran@gmail.com",
-      email: "bielmarfran@gmail.com",
-      profilePicture: null,
-    },
-    username: "bielmarfran@gmail.com",
-    owner: true,
-  };
-  if (postData.lengh > 0) {
-    data = postData;
-  } else {
-    return "Erro";
-  }
-  const uuid = data.uuid;
-  const topic = data.topic;
-  const autor = data.user.username;
-  const title = data.title;
-  const body = data.body;
-  const comments = data.countComments;
-  var t = getTime(data.updatedAt);
+  const uuid = postData.posts.uuid;
+  const topic = postData.posts.topic;
+  const autor = postData.posts.user.username;
+  const title = postData.posts.title;
+  const body = postData.posts.body;
+  const comments = postData.posts.countComments;
+  var t = getTime(postData.posts.updatedAt);
   var time = t;
   const removePost = "";
   return (

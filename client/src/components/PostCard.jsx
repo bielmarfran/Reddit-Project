@@ -12,7 +12,6 @@ export default function PostCard({ postData }) {
   const comments = postData.countComments;
   var t = getTime(postData.updatedAt);
   var time = t;
-  const removePost = "";
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10">
       <div className="flex border border-grey-light-alt hover:border-grey rounded bg-white cursor-pointer hover:shadow-lg">
@@ -53,11 +52,23 @@ export default function PostCard({ postData }) {
             </a>
           </div>
         </div>
+        <div className="w-1/12 pt-2">{postData.owner ? removePost() : ""}</div>
       </div>
-      <div className="w-1/12 pt-2"></div>
     </div>
   );
   function handleClick() {
     history.push("/post/" + uuid);
+  }
+  function removePost() {
+    return (
+      <svg
+        id="removePost-${post.uuid}"
+        class="ml-auto fill-current text-gray-700 w-6 h-6 mr-7 cursor-pointer hover:shadow-lg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 18 18"
+      >
+        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
+      </svg>
+    );
   }
 }

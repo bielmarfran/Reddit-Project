@@ -1,7 +1,7 @@
 import React from "react";
 import MenuDrop from "../components/MenuDrop";
 
-export default function Header() {
+export default function Header(hide) {
   return (
     <nav className="bg-white w-full flex relative justify-between items-center mx-auto py-6 px-8 h-20 sm:px-10 ">
       <div className="flex">
@@ -62,17 +62,24 @@ export default function Header() {
       </div>
 
       <div className="flex  space-x-4 ">
-        <div className="self-center">
-          <button
-            id="openModal"
-            className="inline-block mt-0 px-6 py-2 text-md font-bold leading-6 text-center text-white uppercase transition bg-blue-400 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
-          >
-            Criar Post
-          </button>
-        </div>
+        <div className="self-center">{showButton(hide)}</div>
 
         <div className="self-center">{<MenuDrop />}</div>
       </div>
     </nav>
   );
+  function showButton(hide) {
+    if (hide.hide == true) {
+      return (
+        <button
+          id="openModal"
+          className="inline-block mt-0 px-6 py-2 text-md font-bold leading-6 text-center text-white uppercase transition bg-blue-400 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+        >
+          Criar Post
+        </button>
+      );
+    } else {
+      return "";
+    }
+  }
 }
