@@ -1,17 +1,16 @@
 import React from "react";
 
-export async function getApi(state) {
+export async function getApi(requset) {
   try {
-    const response = await fetch("http://localhost:8080/posts", {
-      mode: "cors",
+    const response = await fetch(requset.url, {
+      mode: requset.mode,
       method: "GET",
-      credentials: "include",
+      credentials: requset.credentials,
       //headers: headers,
     });
     const json = await response.json();
     return json;
   } catch (error) {
-    console.log(error);
     return error;
   }
 }

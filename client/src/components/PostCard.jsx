@@ -1,8 +1,10 @@
 import React from "react";
 import getTime from "../helpers/getTime";
+import { useHistory } from "react-router-dom";
 
 export default function PostCard({ postData }) {
   //console.log(postData);
+  let history = useHistory();
   const uuid = postData.uuid;
   const topic = postData.topic;
   const autor = postData.user.username;
@@ -14,7 +16,7 @@ export default function PostCard({ postData }) {
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10">
       <div className="flex border border-grey-light-alt hover:border-grey rounded bg-white cursor-pointer hover:shadow-lg">
-        <div className="w-11/12 pt-2 pl-5" id="openPost">
+        <div className="w-11/12 pt-2 pl-5" onClick={handleClick}>
           <div className="flex items-center text-xs mb-2">
             <a
               href="#"
@@ -55,4 +57,7 @@ export default function PostCard({ postData }) {
       <div className="w-1/12 pt-2"></div>
     </div>
   );
+  function handleClick() {
+    history.push("/post/" + uuid);
+  }
 }

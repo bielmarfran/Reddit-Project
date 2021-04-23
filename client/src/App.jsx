@@ -29,7 +29,7 @@ function App() {
       <Route path="/login" component={Login} exact />
       <Route path="/register" component={Register} exact />
       <Route path="/feed" component={Feed} exact />
-      <Route path="/post" component={Post} exact />
+      <Route path="/post/:id" component={Post} exact />
     </Router>
   );
 }

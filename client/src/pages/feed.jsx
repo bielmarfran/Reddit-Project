@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
+import { getAllPosts } from "../helpers/getPost";
 import { getApi } from "../helpers/apiCalls";
 import PostCard from "../components/PostCard";
 import Header from "../components/header";
@@ -13,12 +14,15 @@ function Feed({ data }) {
   const [listOfPosts, setListOfPosts] = useState([]);
 
   useEffect(() => {
-    getApi("").then((response) => {
+    getAllPosts("").then((response) => {
       console.log(response);
       if (typeof response.error !== "undefined")
         history.push("/login", { error: "Acesso não Autorizado" });
+      if (response == "TypeError: Failed to fetch")
+        history.push("/login", { error: "Servidor Off" });
+
       setListOfPosts(response);
-    });
+    }); /**/
   }, []);
 
   return (

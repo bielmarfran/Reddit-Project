@@ -32,26 +32,26 @@ export default function Comment({ commentData }) {
   const removePost = "";
   return (
     <div id="comment">
-      <div class="mb-5 mt-5">
+      <div className="mb-5 mt-5">
         <hr></hr>
       </div>
-      <div class="flex items-center text-xs ">
+      <div className="flex items-center text-xs ">
         <a
           href="#"
-          class="font-semibold no-underline hover:underline text-black flex items-center"
+          className="font-semibold no-underline hover:underline text-black flex items-center"
         >
           <img
             id={profile}
             className="rounded-full border h-5 w-5"
             src="../../img/profile_default.svg"
           />
-          <span class="ml-2">{autor}</span>
+          <span className="ml-2">{autor}</span>
         </a>
-        <span class="text-grey ml-2">${time}</span>
+        <span className="text-grey ml-2">${time}</span>
         {commentData.owner ? "edit" : ""}
       </div>
       {commentData.owner ? "tet" : ""}
-      <div class="ml-7 mb-5 mt-5 ">{body}</div>
+      <div className="ml-7 mb-5 mt-5 ">{body}</div>
     </div>
   );
 }

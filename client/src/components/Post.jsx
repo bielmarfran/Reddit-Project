@@ -3,8 +3,9 @@ import getTime from "../helpers/getTime";
 import Comment from "../components/Comment";
 
 export default function Post({ postData }) {
-  //console.log(postData);
-  postData = {
+  console.log("Teste ", postData);
+
+  var data = {
     uuid: "9e289a2e-6a26-449f-a49c-45b6106a15a7",
     topic: "Comida",
     title: "Post X2",
@@ -21,20 +22,25 @@ export default function Post({ postData }) {
     username: "bielmarfran@gmail.com",
     owner: true,
   };
-  const uuid = postData.uuid;
-  const topic = postData.topic;
-  const autor = postData.user.username;
-  const title = postData.title;
-  const body = postData.body;
-  const comments = postData.countComments;
-  var t = getTime(postData.updatedAt);
+  if (postData.lengh > 0) {
+    data = postData;
+  } else {
+    return "Erro";
+  }
+  const uuid = data.uuid;
+  const topic = data.topic;
+  const autor = data.user.username;
+  const title = data.title;
+  const body = data.body;
+  const comments = data.countComments;
+  var t = getTime(data.updatedAt);
   var time = t;
   const removePost = "";
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10">
-      <div class="flex border border-grey-light-alt hover:border-grey rounded bg-white ">
-        <div class="w-full pr-4">
-          <div class="w-full pt-2 pl-4" id="bodyPost">
+      <div className="flex border border-grey-light-alt hover:border-grey rounded bg-white ">
+        <div className="w-full pr-4">
+          <div className="w-full pt-2 pl-4" id="bodyPost">
             <div className="flex items-center text-xs mb-2">
               <a
                 href="#"
@@ -59,7 +65,7 @@ export default function Post({ postData }) {
             <div>
               <h2 className="text-lg font-medium mb-1">{title}</h2>
             </div>
-            <div class="ml-7 mb-5 mt-5 ">{body}</div>
+            <div className="ml-7 mb-5 mt-5 ">{body}</div>
             <div className="inline-flex items-center my-1">
               <a className="py-1 pl-1 pr-2 text-gray-600 text-sm rounded hover:bg-gray-100 hover:text-black">
                 <svg
@@ -74,28 +80,28 @@ export default function Post({ postData }) {
                 <span className="hidden md:inline">&nbsp;comments</span>
               </a>
             </div>
-            <div class="mb-5 mt-5">
+            <div className="mb-5 mt-5">
               <hr></hr>
             </div>
 
-            <div class="w-full md:w-full px-3  mt-2">
-              <div class="p-0 m-0"></div>
-              <p class="text-xs ml-0.5 mb-0.5">
-                Comentar como <a class="text-blue-500">{autor}</a>
+            <div className="w-full md:w-full px-3  mt-2">
+              <div className="p-0 m-0"></div>
+              <p className="text-xs ml-0.5 mb-0.5">
+                Comentar como <a className="text-blue-500">{autor}</a>
               </p>
               <textarea
-                class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
+                className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
                 name="body"
                 id="commentBody"
                 placeholder="'Type Your Comment' required"
               ></textarea>
               <div
-                class="modal-footer py-3 px-5 border0-t text-right"
+                className="modal-footer py-3 px-5 border0-t text-right"
                 id="commentButton"
               >
                 <button
                   id="postComment-{post.uuid}"
-                  class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                  className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
                 >
                   Commentar
                 </button>
