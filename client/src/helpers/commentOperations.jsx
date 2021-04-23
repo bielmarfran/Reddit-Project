@@ -6,4 +6,4 @@ let headers = new Headers();
 headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
 
-export async function getC(requestInfo) {}
+export async function postComment(requestInfo) {}

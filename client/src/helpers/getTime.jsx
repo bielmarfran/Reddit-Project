@@ -13,9 +13,9 @@ export default function getApi(time) {
   var Difference_In_Time = dateNow.getTime() - datePost.getTime();
 
   //console.log(Difference_In_Time / hour);
-
-  if (Difference_In_Time / year > 1) {
-    var result = Math.trunc(Difference_In_Time / year);
+  var difYear = Difference_In_Time / year;
+  if (difYear > 1) {
+    var result = Math.trunc(difYear);
     return result + " anos";
   } else if (Difference_In_Time / month > 1) {
     var result = Math.trunc(Difference_In_Time / month);
