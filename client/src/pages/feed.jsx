@@ -1,10 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory, withRouter } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { callAlert } from "../helpers/callAlert";
 import { getAllPosts } from "../helpers/postOperations";
-import { getApi } from "../helpers/apiCalls";
 import PostCard from "../components/PostCard";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -12,6 +9,11 @@ import Footer from "../components/footer";
 function Feed() {
   let history = useHistory();
   const [listOfPosts, setListOfPosts] = useState([]);
+  //console.log(this.props);
+  const getValue = (data) => {
+    const newList = listOfPosts.filter((item) => item.uuid !== data);
+    setListOfPosts(newList);
+  };
 
   useEffect(() => {
     getAllPosts("").then((response) => {
@@ -31,7 +33,7 @@ function Feed() {
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
           {Object.keys(listOfPosts).map((i) => (
-            <PostCard postData={listOfPosts[i]} key={i} />
+            <PostCard postData={listOfPosts[i]} key={i} getValue={getValue} />
           ))}
         </div>
       </div>
