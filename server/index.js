@@ -67,12 +67,12 @@ app.post("/logout", validateToken, async (req, res) => {
           domain: "localhost",
         });
 
-        return res.json({ response: "Logout OK" });
+        return res.json({ response: "Logout Successful" });
       }
     );
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error Get" });
+    return res.status(500).json({ error: "Error POST" });
   }
 });
 

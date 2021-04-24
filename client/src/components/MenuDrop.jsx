@@ -1,9 +1,12 @@
 import React from "react";
 import { Menu, Transition } from "@headlessui/react";
+import { useHistory } from "react-router-dom";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-
+import { performLogout } from "../helpers/authOperations";
+performLogout;
 export default function MenuDrop() {
+  let history = useHistory();
   return (
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
@@ -40,7 +43,7 @@ export default function MenuDrop() {
             >
               <Menu.Items
                 static
-                className="absolute right-0 w-44 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                className="absolute right-0 w-full mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div className="px-1 py-1 ">
                   <Menu.Item>
@@ -95,6 +98,7 @@ export default function MenuDrop() {
                         className={`${
                           active ? "bg-gray-200 text-black" : "text-gray-900"
                         } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                        onClick={handleClickLogout}
                       >
                         {active ? (
                           <DuplicateLogoutIcon
@@ -124,6 +128,14 @@ export default function MenuDrop() {
     var cookieUsername = cookie.substring(cookie.lastIndexOf("=") + 1);
     var username = decodeURIComponent(cookieUsername);
     return username;
+  }
+  async function handleClickLogout() {
+    const response = await performLogout();
+    if (response.response == "Logout Successful") {
+      history.push("/login", { message: response.response });
+    } // else if (response.error == "Acesso não autorizado") {
+    //showAlert(response.error);
+    //}
   }
 }
 
