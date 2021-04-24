@@ -34,4 +34,18 @@ export async function postApi(request) {
 
 export function putApi(state) {}
 
-export function deleteApi(state) {}
+export async function deleteApi(request) {
+  try {
+    const response = await fetch(baseUrl + request.url, {
+      mode: request.mode,
+      method: "DELETE",
+      credentials: request.credentials,
+      headers: request.headers,
+    });
+
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    return error;
+  }
+}

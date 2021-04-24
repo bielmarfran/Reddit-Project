@@ -31,7 +31,7 @@ function Feed() {
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
           {Object.keys(listOfPosts).map((i) => (
-            <PostCard postData={listOfPosts[i]} />
+            <PostCard postData={listOfPosts[i]} key={i} />
           ))}
         </div>
       </div>
