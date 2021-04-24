@@ -1,11 +1,11 @@
 import React from "react";
 
-export async function getApi(requset) {
+export async function getApi(request) {
   try {
-    const response = await fetch(requset.url, {
-      mode: requset.mode,
+    const response = await fetch(request.url, {
+      mode: request.mode,
       method: "GET",
-      credentials: requset.credentials,
+      credentials: request.credentials,
       //headers: headers,
     });
     const json = await response.json();
@@ -15,7 +15,21 @@ export async function getApi(requset) {
   }
 }
 
-export function postApi(state) {}
+export async function postApi(request) {
+  try {
+    const response = await fetch(request.url, {
+      mode: request.mode,
+      method: "POST",
+      credentials: request.credentials,
+      headers: request.headers,
+      body: request.body,
+    });
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    return error;
+  }
+}
 
 export function putApi(state) {}
 

@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
+import { performLogin } from "../helpers/authOperations";
 import * as Yup from "yup";
 
 function Login({ location }) {
@@ -12,9 +13,15 @@ function Login({ location }) {
     email: "",
     password: "",
   };
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    performLogin(data);
+    const response = await performLogin(data);
+    console.log(response);
+    if (response.response == "Logado com Sucesso") {
+      history.push("/", { message: response.response });
+    } else if (response.error == "Acesso não autorizado") {
+      showAlert(response.error);
+    }
   };
   const validationMsg = {
     email: "Insira um email valido!",
@@ -116,34 +123,6 @@ function Login({ location }) {
   );
   function handleClick() {
     history.push("/register");
-  }
-  function performLogin(data) {
-    let headers = new Headers();
-
-    headers.append("Content-Type", "application/json");
-    headers.append("Accept", "application/json");
-    headers.append("Origin", "http://localhost:3000");
-
-    //const usernameUser = document.getElementById("usernameUser").value;
-    const emailUser = data.email;
-    const passwordUser = data.password;
-
-    fetch("http://localhost:8080/auth", {
-      mode: "cors",
-      method: "POST",
-      credentials: "include",
-      headers: headers,
-      body: JSON.stringify({ email: emailUser, password: passwordUser }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.response == "Logado com Sucesso") {
-          history.push("/", { message: json.response });
-        } else if (json.error == "Acesso não autorizado") {
-          showAlert(json.error);
-        }
-      })
-      .catch((error) => console.log("Authorization failed : " + error.message));
   }
 }
 

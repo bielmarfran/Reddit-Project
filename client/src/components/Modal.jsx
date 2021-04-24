@@ -5,7 +5,6 @@ import { Fragment, useRef, useEffect, useState } from "react";
 export default function Modal() {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef();
-  var openModalTest = false;
 
   function closeModal() {
     setOpen(false);
