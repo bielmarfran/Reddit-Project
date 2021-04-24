@@ -22,7 +22,7 @@ function Feed() {
         history.push("/login", { error: "Servidor Off" });
 
       setListOfPosts(response);
-    });
+    }); /**/
   }, []);
 
   return (

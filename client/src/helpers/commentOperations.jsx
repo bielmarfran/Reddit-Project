@@ -8,7 +8,7 @@ headers.append("Accept", "application/json");
 
 export async function postComment(requestInfo) {
   const request = {
-    url: `http://localhost:8080/posts/${requestInfo}`,
+    url: `/posts/${requestInfo}`,
     mode: "cors",
     credentials: "include",
   };

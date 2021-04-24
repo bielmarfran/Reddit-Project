@@ -8,7 +8,7 @@ headers.append("Accept", "application/json");
 
 export async function getPost(requestInfo) {
   const request = {
-    url: `http://localhost:8080/posts/${requestInfo}`,
+    url: `/posts/${requestInfo}`,
     mode: "cors",
     credentials: "include",
   };
@@ -18,7 +18,7 @@ export async function getPost(requestInfo) {
 
 export async function getAllPosts(requestInfo) {
   const request = {
-    url: `http://localhost:8080/posts`,
+    url: `/posts`,
     mode: "cors",
     credentials: "include",
   };

@@ -1,8 +1,9 @@
 import React from "react";
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export async function getApi(request) {
   try {
-    const response = await fetch(request.url, {
+    const response = await fetch(baseUrl + request.url, {
       mode: request.mode,
       method: "GET",
       credentials: request.credentials,
@@ -17,7 +18,7 @@ export async function getApi(request) {
 
 export async function postApi(request) {
   try {
-    const response = await fetch(request.url, {
+    const response = await fetch(baseUrl + request.url, {
       mode: request.mode,
       method: "POST",
       credentials: request.credentials,

@@ -11,7 +11,7 @@ export async function performLogin(requestInfo) {
   const emailUser = requestInfo.email;
   const passwordUser = requestInfo.password;
   const request = {
-    url: `http://localhost:8080/auth`,
+    url: `/auth`,
     mode: "cors",
     credentials: "include",
     headers: headers,
