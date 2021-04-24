@@ -73,7 +73,7 @@ export default function Header(hide) {
     if (hide.hide == true) {
       return (
         <div>
-          <Modal />
+          <Modal title={"Adicionar Novo Post"} />
         </div>
       );
       /* <button

@@ -2,7 +2,7 @@ import React from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useRef, useEffect, useState } from "react";
 
-export default function Modal() {
+export default function Modal({ title }) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef();
 
@@ -62,12 +62,12 @@ export default function Modal() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="inline-block w-full max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Payment successful
+                  {title}
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
@@ -76,13 +76,66 @@ export default function Modal() {
                   </p>
                 </div>
 
+                <div className="py-1">
+                  <label for="topic">Escolha to Topico:</label>
+
+                  <div className="relative inline-flex">
+                    <svg
+                      className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 412 232"
+                    >
+                      <path
+                        d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                        fill="#648299"
+                        fill-rule="nonzero"
+                      />
+                    </svg>
+                    <select
+                      id="postTopic"
+                      className="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+                    >
+                      <option value=""></option>
+                      <option value="Comida">Comida</option>
+                      <option value="Carros">Carros</option>
+                      <option value="Programacao">Programação</option>
+                      <option value="Outros">Outros</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="py-1">
+                  <span className="px-1 text-sm text-gray-600">Titulo</span>
+                  <input
+                    placeholder=""
+                    type="text"
+                    id="postTitle"
+                    className="text-md block inputRegister"
+                  />
+                </div>
+                <div className="py-1">
+                  <span className="px-1 text-sm text-gray-600">Corpo</span>
+                  <input
+                    placeholder=""
+                    type="text"
+                    id="postBody"
+                    className="text-md block inputRegister"
+                  />
+                </div>
+
                 <div className="mt-4">
                   <button
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                     onClick={closeModal}
                   >
-                    Got it, thanks!
+                    Criar
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex justify-center ml-4 px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    onClick={closeModal}
+                  >
+                    Cancelar
                   </button>
                 </div>
               </div>
