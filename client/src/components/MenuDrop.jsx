@@ -16,7 +16,11 @@ export default function MenuDrop() {
                   className="rounded-full border  h-11 w-11"
                   src="/img/profile_default.svg"
                 />
-                <div className="ml-4 text-center self-center">Username</div>
+                <div className="ml-4 text-center self-center">
+                  {typeof getUsernameCookie() !== "undefined"
+                    ? getUsernameCookie()
+                    : "Username"}
+                </div>
 
                 <ChevronDownIcon
                   className="self-center w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
@@ -115,6 +119,12 @@ export default function MenuDrop() {
       </Menu>
     </div>
   );
+  function getUsernameCookie() {
+    var cookie = document.cookie;
+    var cookieUsername = cookie.substring(cookie.lastIndexOf("=") + 1);
+    var username = decodeURIComponent(cookieUsername);
+    return username;
+  }
 }
 
 function EditInactiveIcon(props) {

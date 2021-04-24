@@ -3,6 +3,7 @@ import { useState } from "react";
 import { withRouter, useHistory, Redirect } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
+import { performRegister } from "../helpers/registerOperations";
 import * as Yup from "yup";
 
 function Register() {
@@ -15,9 +16,17 @@ function Register() {
     password_confirm: "",
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    performRegister(data);
+    const response = await performRegister(data);
+    console.log(response);
+    if (response.response === "Conta Criada com sucesso") {
+      history.push("/login", { message: response.response });
+    } else if (response.error == "Email ja existe!") {
+      setMsg(response.error);
+    } else if (response.error == "Username ja existe!") {
+      setMsg(response.error);
+    }
   };
   const validationMsg = {
     usernameMin: "Mínimo 4 caracteres!",
@@ -204,42 +213,5 @@ function Register() {
   function handleClick() {
     history.push("/login");
   }
-  function performRegister(data) {
-    let headers = new Headers();
-
-    headers.append("Content-Type", "application/json");
-    headers.append("Accept", "application/json");
-    headers.append("Origin", "http://localhost:3000");
-
-    const usernameUser = data.username;
-    const emailUser = data.email;
-    const passwordUser = data.password;
-
-    fetch("http://localhost:8080/auth/register", {
-      mode: "cors",
-      method: "POST",
-      credentials: "include",
-      headers: headers,
-      body: JSON.stringify({
-        username: usernameUser,
-        email: emailUser,
-        password: passwordUser,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        if (json.response === "Conta Criada com sucesso") {
-          history.push("/login", { message: json.response });
-        } else if (json.error == "Email ja existe!") {
-          setMsg(json.error);
-        } else if (json.error == "Username ja existe!") {
-          setMsg(json.error);
-        }
-      })
-      .catch((error) => console.log("Authorization failed : " + error.message));
-    // debugger;
-  }
 }
-
 export default withRouter(Register);
