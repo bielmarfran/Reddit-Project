@@ -24,7 +24,7 @@ export default function PostCard({ postData, getValue }) {
             >
               <img
                 className="rounded-full border h-5 w-5"
-                src="/img/Outros.svg"
+                src={`/img/${topic}.svg`}
               />
               <span className="ml-2">{topic}</span>
             </a>

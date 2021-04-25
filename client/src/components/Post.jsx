@@ -85,7 +85,7 @@ export default function Post({ postData }) {
               </div>
               {/*dsds*/}
               {Object.keys(comments).map((i) => (
-                <Comment commentData={comments[i]} />
+                <Comment commentData={comments[i]} key={i} />
               ))}
             </div>
           </div>

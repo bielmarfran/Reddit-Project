@@ -34,7 +34,7 @@ function Post({ data }) {
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
           {Object.keys(post).map((i) => (
-            <PostInfo postData={post} />
+            <PostInfo postData={post} key={i} />
           ))}
         </div>
       </div>
