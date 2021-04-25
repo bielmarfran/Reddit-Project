@@ -1,6 +1,6 @@
 import React from "react";
-import MenuDrop from "../components/MenuDrop";
-import Modal from "../components/Modal";
+import MenuDrop from "./MenuDrop";
+import Modal from "../modal/Modal";
 
 export default function Header(hide) {
   return (

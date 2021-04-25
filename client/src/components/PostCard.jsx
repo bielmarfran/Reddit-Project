@@ -1,7 +1,7 @@
 import React from "react";
 import getTime from "../helpers/getTime";
 import { useHistory } from "react-router-dom";
-import { deletePost } from "../helpers/postOperations";
+import { deletePost } from "../helpers/api/postOperations";
 
 export default function PostCard({ postData, getValue }) {
   //console.log(postData, getValue);

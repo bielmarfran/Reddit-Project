@@ -3,8 +3,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { useHistory } from "react-router-dom";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { performLogout } from "../helpers/authOperations";
-performLogout;
+import { performLogout } from "../../helpers/api/authOperations";
+
 export default function MenuDrop() {
   let history = useHistory();
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
-import { performLogin } from "../helpers/authOperations";
+import { performLogin } from "../helpers/api/authOperations";
 import * as Yup from "yup";
 
 function Login({ location }) {

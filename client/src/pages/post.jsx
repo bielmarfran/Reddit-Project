@@ -1,11 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory, withRouter, useParams } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { callAlert } from "../helpers/callAlert";
-import { getPost } from "../helpers/postOperations";
+import { getPost } from "../helpers/api/postOperations";
 import PostInfo from "../components/Post";
-import Header from "../components/header";
+import Header from "../components/header/header";
 import Footer from "../components/footer";
 
 function Post({ data }) {

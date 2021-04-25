@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory, withRouter } from "react-router-dom";
-import { getAllPosts } from "../helpers/postOperations";
+import { getAllPosts } from "../helpers/api/postOperations";
 import PostCard from "../components/PostCard";
-import Header from "../components/header";
+import Header from "../components/header/header";
 import Footer from "../components/footer";
 
 function Feed() {

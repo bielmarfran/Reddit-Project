@@ -3,7 +3,7 @@ import { useState } from "react";
 import { withRouter, useHistory, Redirect } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
-import { performRegister } from "../helpers/registerOperations";
+import { performRegister } from "../helpers/api/registerOperations";
 import * as Yup from "yup";
 
 function Register() {

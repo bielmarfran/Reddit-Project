@@ -1,5 +1,4 @@
 import React from "react";
-import MenuDrop from "../components/MenuDrop";
 
 export default function Footer() {
   return (

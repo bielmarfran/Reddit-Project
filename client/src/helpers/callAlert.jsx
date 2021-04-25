@@ -1,7 +1,7 @@
 import React from "react";
-import AlertWarningRed from "../components/AlertWarningRed";
-import AlertAtentionBlue from "../components/AlertAtentionBlue";
-import AlertSuccessGreen from "../components/AlertSuccessGreen";
+import AlertWarningRed from "../components/alerts/AlertWarningRed";
+import AlertAtentionBlue from "../components/alerts/AlertAtentionBlue";
+import AlertSuccessGreen from "../components/alerts/AlertSuccessGreen";
 
 export function callAlert(state) {
   if (typeof state.error !== "undefined") {

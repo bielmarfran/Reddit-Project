@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const cookieParser = require("cookie-parser");
 const { createTokens, validateToken } = require("../Middleware/jtw");
 const { sequelize, User, Post } = require("../models");
 
