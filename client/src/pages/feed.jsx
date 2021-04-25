@@ -36,8 +36,8 @@ function Feed() {
             <PostCard postData={listOfPosts[i]} key={i} getValue={getValue} />
           ))}
         </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }

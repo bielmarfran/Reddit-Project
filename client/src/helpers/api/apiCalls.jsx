@@ -25,9 +25,15 @@ export async function postApi(request) {
       headers: request.headers,
       body: request.body,
     });
+
+    if (response.status == 500 || response.status == 404) {
+      return { error: "No Server" };
+    }
     const json = await response.json();
+
     return json;
   } catch (error) {
+    console.log(error);
     return error;
   }
 }

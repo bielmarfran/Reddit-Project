@@ -23,7 +23,7 @@ export default function Modal({ title }) {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
+    //console.log(data);
 
     const response = await createPost(data);
     console.log(response);

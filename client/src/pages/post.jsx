@@ -37,8 +37,8 @@ function Post({ data }) {
             <PostInfo postData={post} key={i} />
           ))}
         </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }
