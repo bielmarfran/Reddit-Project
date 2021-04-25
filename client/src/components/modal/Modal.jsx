@@ -128,7 +128,7 @@ export default function Modal({ title }) {
                           className="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
                         >
                           <option value=""></option>
-                          <option value="Comida">Comida</option>
+                          <option value="Comida"></option>
                           <option value="Carros">Carros</option>
                           <option value="Programacao">Programação</option>
                           <option value="Outros">Outros</option>

@@ -22,22 +22,24 @@ export default function Post({ postData }) {
     setListComments(postData.posts.comments);
   }, []);
 
-  // const addComment = (data) => {
-  //   const newList = listComments.filter((item) => item.uuid !== data);
-  //   setListComments(newList);
-  // };
+  const removeCommentDOM = (data) => {
+    console.log(data);
+    const newList = listComments.filter((item) => item.uuid !== data);
+    setListComments(newList);
+  };
 
   const initialValues = {
     body: "",
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, { resetForm }) => {
     console.log(data);
     const response = await postComment(data, uuid);
     if (response.uuid != null) {
       const newList = [...listComments];
       newList.push(response);
       setListComments(newList);
+      resetForm({});
     } else if (response.error == "Acesso não autorizado") {
       history.push("/login", { error: "Acesso não Autorizado / Expirado" });
     }
@@ -114,7 +116,7 @@ export default function Post({ postData }) {
                     name="body"
                     as="textarea"
                     id="body"
-                    placeholder="Teste"
+                    placeholder="Insira o seu Comentário"
                   ></Field>
                   <ErrorMessage
                     name="body"
@@ -138,7 +140,12 @@ export default function Post({ postData }) {
 
               {/*dsds*/}
               {Object.keys(listComments).map((i) => (
-                <Comment commentData={listComments[i]} key={i} />
+                <Comment
+                  commentData={listComments[i]}
+                  postUuid={uuid}
+                  key={i}
+                  removeCommentDOM={removeCommentDOM}
+                />
               ))}
             </div>
           </div>

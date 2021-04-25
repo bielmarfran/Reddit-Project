@@ -47,6 +47,7 @@ export async function deleteApi(request) {
       method: "DELETE",
       credentials: request.credentials,
       headers: request.headers,
+      body: request.body,
     });
 
     const json = await response.json();

@@ -1,5 +1,5 @@
 import React from "react";
-import { getApi, postApi } from "./apiCalls";
+import { getApi, postApi, deleteApi } from "./apiCalls";
 
 let headers = new Headers();
 
@@ -16,6 +16,21 @@ export async function postComment(requestInfo, uuid) {
   };
   //console.log(request);
   const response = await postApi(request);
+
+  return response;
+}
+
+export async function deleteComment(requestInfo, postUuid) {
+  console.log(requestInfo, postUuid);
+  const request = {
+    url: `/comment/${requestInfo}`,
+    mode: "cors",
+    credentials: "include",
+    headers: headers,
+    body: JSON.stringify({ postUuid: postUuid }),
+  };
+  console.log(request);
+  const response = await deleteApi(request);
 
   return response;
 }

@@ -1,26 +1,11 @@
 import React from "react";
 import getTime from "../helpers/getTime";
+import { deleteComment } from "../helpers/api/commentOperations";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
-export default function Comment({ commentData }) {
+export default function Comment({ commentData, postUuid, removeCommentDOM }) {
   //console.log(commentData);
-  /*commentData = {
-    uuid: "9e289a2e-6a26-449f-a49c-45b6106a15a7",
-    topic: "Comida",
-    title: "Post X2",
-    body: "Post X2",
-    countComments: 0,
-    commentsOrder: 0,
-    createdAt: "2021-04-22T20:17:14.000Z",
-    updatedAt: "2021-04-22T20:17:14.000Z",
-    user: {
-      username: "bielmarfran@gmail.com",
-      email: "bielmarfran@gmail.com",
-      profilePicture: null,
-    },
-    username: "bielmarfran@gmail.com",
-    owner: true,
-  };*/
+
   const uuid = commentData.uuid;
   const topic = commentData.topic;
   const autor = commentData.user.username;
@@ -56,15 +41,21 @@ export default function Comment({ commentData }) {
       <div className="ml-7 mb-5 mt-5 ">{body}</div>
     </div>
   );
+  async function handleClickRemoveComment() {
+    const response = await deleteComment(uuid, postUuid);
 
-  function handleClick() {
-    window.alert("sdsd");
+    if (response.response == "Comment Deleted!") {
+      console.log(response);
+      removeCommentDOM(uuid);
+    } else if (response.error == "Acesso não autorizado") {
+      history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+    }
   }
 
   function removeComment() {
     return (
       <div className="ml-auto hover:shadow-lg">
-        <a onClick={handleClick}>
+        <a onClick={handleClickRemoveComment}>
           <RemoveIcon className="w-5 h-5" aria-hidden="true" />
         </a>
       </div>
