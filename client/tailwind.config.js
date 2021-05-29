@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "jit",
   purge: {
     content: ["./src/**/*.jsx", "./index.html"],
   },
