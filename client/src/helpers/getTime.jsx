@@ -14,24 +14,31 @@ export default function getApi(time) {
 
   //console.log(Difference_In_Time / hour);
   var difYear = Difference_In_Time / year;
+  var time;
   if (difYear > 1) {
     var result = Math.trunc(difYear);
-    return result + " anos";
+    result > 1 ? (time = result + " anos") : (time = result + " ano");
+    return time;
   } else if (Difference_In_Time / month > 1) {
     var result = Math.trunc(Difference_In_Time / month);
-    return result + " meses";
+    result > 1 ? (time = result + " mese") : (time = result + " mês");
+    return time;
   } else if (Difference_In_Time / day > 1) {
     var result = Math.trunc(Difference_In_Time / day);
-    return result + " dias";
+    result > 1 ? (time = result + " dias") : (time = result + " dia");
+    return time;
   } else if (Difference_In_Time / hour > 1) {
     var result = Math.trunc(Difference_In_Time / hour);
-    return result + " horas";
+    result > 1 ? (time = result + " horas") : (time = result + " hora");
+    return time;
   } else if (Difference_In_Time / minute > 1) {
     var result = Math.trunc(Difference_In_Time / minute);
-    return result + " minutos";
+    result > 1 ? (time = result + " minutos") : (time = result + " minuto");
+    return time;
   } else {
     var result = Math.trunc(Difference_In_Time / second);
-    return result + " segundos";
+    result > 1 ? (time = result + " segundos") : (time = result + " segundo");
+    return time;
   }
 
   //console.log(Difference_In_Time / (1000 * 3600 * 24));
