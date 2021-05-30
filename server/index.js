@@ -78,7 +78,7 @@ app.post("/logout", validateToken, async (req, res) => {
 
 app.post("/upload", validateToken, async (req, res) => {
   const uuid = req.uuid;
-  //console.log(req);
+  console.warn("upload");
   let sampleFile;
   let uploadPath;
 
@@ -88,8 +88,8 @@ app.post("/upload", validateToken, async (req, res) => {
 
   const user = await User.findOne({ where: { uuid: uuid } });
 
-  sampleFile = req.files.sampleFile;
-  //console.log(sampleFile);
+  sampleFile = req.files.myFile;
+  console.log(sampleFile);
   const ext = sampleFile.name.substring(sampleFile.name.lastIndexOf("."));
   uploadPath = __dirname + "\\public\\" + req.username + ext;
 
@@ -101,8 +101,7 @@ app.post("/upload", validateToken, async (req, res) => {
   // Use the mv() method to place the file somewhere on your server
   sampleFile.mv(uploadPath, function (err) {
     if (err) return res.status(500).send(err);
-
-    res.send("File uploaded!");
+    return res.json({ response: "File uploaded!" });
   });
 });
 
