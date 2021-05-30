@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { CameraIcon } from "@heroicons/react/solid";
+import { XIcon } from "@heroicons/react/solid";
 import Dropzone from "react-dropzone";
 
 export default function Card() {
   //console.log(postData, getValue);
   const [fileCover, setFileCover] = useState(false);
   const [fileProfile, setFileProfile] = useState(false);
+  const [loadProfile, setLoadProfile] = useState(true);
   let history = useHistory();
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10 z-0">
@@ -45,15 +46,29 @@ export default function Card() {
                 class="bg w-full h-full object-cover object-center absolute z-0"
               ></img>
               <div class="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
-                <span className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100 border-solid border-4 border-gray-800 ">
-                  <svg
-                    className="h-full w-full text-gray-300"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </span>
+                {loadProfile ? (
+                  <img
+                    id="profile"
+                    className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100 border-solid border-4 border-gray-800"
+                    src={
+                      "http://localhost:8080/public/" +
+                      getUsernameCookie() +
+                      ".jpg"
+                    }
+                    onError={setDefaultImg}
+                  />
+                ) : (
+                  <span className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100 border-solid border-4 border-gray-800 ">
+                    <svg
+                      className="h-full w-full text-gray-300"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </span>
+                )}
+
                 <h1 class="text-2xl font-semibold">{getUsernameCookie()}</h1>
                 <h4 class="text-sm font-semibold">Joined Since '19</h4>
               </div>
@@ -77,12 +92,19 @@ export default function Card() {
                     className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
                   >
                     {fileProfile ? (
-                      <img
-                        id="frameProfile"
-                        src=""
-                        alt=""
-                        class="w-auto h-auto max-h-80  rounded"
-                      ></img>
+                      <div>
+                        <XIcon
+                          className="self-center w-8 h-8 ml-auto"
+                          aria-hidden="true"
+                          onClick={hideImgProfile}
+                        />
+                        <img
+                          id="frameProfile"
+                          src=""
+                          alt=""
+                          class="w-auto h-auto max-h-80  rounded"
+                        ></img>{" "}
+                      </div>
                     ) : (
                       <div className="space-y-1 text-center">
                         <svg
@@ -138,12 +160,19 @@ export default function Card() {
                     className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
                   >
                     {fileCover ? (
-                      <img
-                        id="frameCover"
-                        src=""
-                        alt=""
-                        class="w-auto h-auto max-h-80  rounded"
-                      ></img>
+                      <div>
+                        <XIcon
+                          className="self-center w-8 h-8 ml-auto"
+                          aria-hidden="true"
+                          onClick={hideImgCover}
+                        />
+                        <img
+                          id="frameCover"
+                          src=""
+                          alt=""
+                          class="w-auto h-auto max-h-80  rounded"
+                        ></img>{" "}
+                      </div>
                     ) : (
                       <div className="space-y-1 text-center">
                         <svg
@@ -233,6 +262,15 @@ export default function Card() {
     //     .catch((error) => {
     //       console.error(error);
     //     });
+  }
+  function hideImgProfile() {
+    setFileProfile(false);
+  }
+  function hideImgCover() {
+    setFileCover(false);
+  }
+  async function setDefaultImg() {
+    setLoadProfile(false);
   }
 }
 

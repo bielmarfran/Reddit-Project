@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import getTime from "../helpers/getTime";
 import { deleteComment } from "../helpers/api/commentOperations";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
 export default function Comment({ commentData, postUuid, removeCommentDOM }) {
   //console.log(commentData);
+  const [loadProfile, setLoadProfile] = useState(true);
 
   const uuid = commentData.uuid;
   const topic = commentData.topic;
@@ -26,11 +27,21 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
           href="#"
           className="font-semibold no-underline hover:underline text-black flex items-center"
         >
-          <img
-            id={profile}
-            className="rounded-full border h-5 w-5"
-            src="../../img/profile_default.svg"
-          />
+          {loadProfile ? (
+            <img
+              id={profile}
+              className="rounded-full border h-5 w-5"
+              src={"http://localhost:8080/public/" + autor + ".jpg"}
+              onError={setDefaultImg}
+            />
+          ) : (
+            <img
+              id={profile}
+              className="rounded-full border h-5 w-5"
+              src="../../img/profile_default.svg"
+            />
+          )}
+
           <span className="ml-2">{autor}</span>
         </a>
         <span className="text-grey ml-2">{time}</span>
@@ -63,6 +74,9 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
   }
   function editComment() {
     return <EditIcon className="w-5 h-5 ml-2" aria-hidden="true" />;
+  }
+  async function setDefaultImg() {
+    setLoadProfile(false);
   }
 }
 

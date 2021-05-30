@@ -6,6 +6,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import { performLogout } from "../../helpers/api/authOperations";
 
 export default function MenuDrop() {
+  const [loadProfile, setLoadProfile] = useState(true);
   let history = useHistory();
   return (
     <div className="">
@@ -14,11 +15,25 @@ export default function MenuDrop() {
           <>
             <div>
               <Menu.Button className="inline-flex justify-center w-full px-4 py-2 mt-0 text-sm font-medium text-black bg-gray-200 rounded-md bg-opacity-20  hover:bg-gray-200">
-                <img
-                  id="profile"
-                  className="rounded-full border  h-11 w-11"
-                  src="/img/profile_default.svg"
-                />
+                {loadProfile ? (
+                  <img
+                    id="profile"
+                    className="rounded-full border  h-11 w-11"
+                    src={
+                      "http://localhost:8080/public/" +
+                      getUsernameCookie() +
+                      ".jpg"
+                    }
+                    onError={setDefaultImg}
+                  />
+                ) : (
+                  <img
+                    id="profile"
+                    className="rounded-full border  h-11 w-11"
+                    src="/img/profile_default.svg"
+                  />
+                )}
+
                 <div className="ml-4 text-center self-center">
                   {typeof getUsernameCookie() !== "undefined"
                     ? getUsernameCookie()
@@ -140,6 +155,9 @@ export default function MenuDrop() {
 
   async function showButton() {
     history.push("/profile");
+  }
+  async function setDefaultImg() {
+    setLoadProfile(false);
   }
 }
 
