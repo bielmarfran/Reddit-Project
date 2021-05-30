@@ -52,6 +52,7 @@ export default function MenuDrop() {
                         className={`${
                           active ? "bg-gray-200 text-black" : "text-gray-900"
                         } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                        onClick={showButton}
                       >
                         {active ? (
                           <ProfileIcon
@@ -129,13 +130,16 @@ export default function MenuDrop() {
     var username = decodeURIComponent(cookieUsername);
     return username;
   }
+
   async function handleClickLogout() {
     const response = await performLogout();
     if (response.response == "Logout Successful") {
       history.push("/login", { message: response.response });
-    } // else if (response.error == "Acesso não autorizado") {
-    //showAlert(response.error);
-    //}
+    }
+  }
+
+  async function showButton() {
+    history.push("/profile");
   }
 }
 

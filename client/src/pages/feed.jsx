@@ -17,19 +17,18 @@ function Feed() {
 
   useEffect(() => {
     getAllPosts("").then((response) => {
-      console.log(response);
       if (typeof response.error !== "undefined")
         history.push("/login", { error: "Acesso não Autorizado / Expirado" });
       if (response == "TypeError: Failed to fetch")
         history.push("/login", { error: "Servidor Off" });
 
       setListOfPosts(response);
-    }); /**/
+    });
   }, []);
 
   return (
     <div className="bg-gray-200">
-      <Header hide={true} />
+      <Header createPost={true} />
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
           {Object.keys(listOfPosts).map((i) => (

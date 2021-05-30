@@ -2,7 +2,7 @@ import React from "react";
 import MenuDrop from "./MenuDrop";
 import Modal from "../modal/Modal";
 
-export default function Header(hide) {
+export default function Header(createPost) {
   return (
     <nav className="bg-white w-full flex relative justify-between items-center mx-auto py-6 px-8 h-20 sm:px-10 ">
       <div className="flex">
@@ -63,14 +63,14 @@ export default function Header(hide) {
       </div>
 
       <div className="flex  space-x-4 ">
-        <div className="self-center">{showButton(hide)}</div>
+        <div className="self-center">{showButton(createPost)}</div>
 
         <div className="self-center">{<MenuDrop />}</div>
       </div>
     </nav>
   );
-  function showButton(hide) {
-    if (hide.hide == true) {
+  function showButton(createPost) {
+    if (createPost.createPost == true) {
       return (
         <div>
           <Modal title={"Adicionar Novo Post"} />

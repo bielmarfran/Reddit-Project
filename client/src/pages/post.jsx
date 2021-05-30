@@ -30,7 +30,7 @@ function Post({ data }) {
   console.log(post);
   return (
     <div className="bg-gray-200">
-      <Header hide={false} />
+      <Header createPost={false} />
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
           {Object.keys(post).map((i) => (
