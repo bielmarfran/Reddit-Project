@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { XIcon } from "@heroicons/react/solid";
 import Dropzone from "react-dropzone";
+import { callAlert } from "../helpers/callAlert";
 
 export default function Card() {
   //console.log(postData, getValue);
   const [fileCover, setFileCover] = useState(false);
   const [fileProfile, setFileProfile] = useState(false);
   const [loadProfile, setLoadProfile] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   let history = useHistory();
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10 z-0">
+      {showAlert ? callAlert(alertMessage) : ""}
       <div className="flex border border-grey-light-alt hover:border-grey rounded bg-white hover:shadow-lg">
         <div className="grid grid-cols-2 gap-1 w-full">
           {/* <div>
@@ -220,11 +224,15 @@ export default function Card() {
     </div>
   );
   function uploadCover(acceptedFiles, fileRejections) {
-    setFileCover(true);
+    if (fileRejections.length > 0) {
+      setShowAlert(true);
+      setAlertMessage(fileRejections[0].errors[0].message);
+    } else {
+      setFileCover(true);
+      const file = acceptedFiles;
+      frameCover.src = URL.createObjectURL(file[0]);
+    }
 
-    //console.log(acceptedFiles, fileRejections);
-    const file = acceptedFiles;
-    frameCover.src = URL.createObjectURL(file[0]);
     //   const formData = new FormData();
     //   formData.append("myFile", file[0]);
     //   fetch("http://localhost:8080/upload", {
@@ -242,11 +250,18 @@ export default function Card() {
     //     });
   }
   function uploadProfile(acceptedFiles, fileRejections) {
-    setFileProfile(true);
+    if (fileRejections.length > 0) {
+      setShowAlert(true);
+      setAlertMessage(fileRejections[0].errors[0].message);
+    } else {
+      setFileProfile(true);
+      setShowAlert(false);
+      const file = acceptedFiles;
+      frameProfile.src = URL.createObjectURL(file[0]);
+    }
 
     //console.log(acceptedFiles, fileRejections);
-    const file = acceptedFiles;
-    frameProfile.src = URL.createObjectURL(file[0]);
+
     //   const formData = new FormData();
     //   formData.append("myFile", file[0]);
     //   fetch("http://localhost:8080/upload", {

@@ -9,7 +9,6 @@ import Footer from "../components/footer";
 function Profile() {
   let history = useHistory();
   const [listOfPosts, setListOfPosts] = useState([]);
-  //console.log(this.props);
   const getValue = (data) => {
     const newList = listOfPosts.filter((item) => item.uuid !== data);
     setListOfPosts(newList);

@@ -31,12 +31,3 @@ export async function performLogout() {
   const response = await postApi(request);
   return response;
 }
-/*
-   .then((response) => response.json())
-    .then((json) => {
-      json.response == "Logout Successful"
-        ? window.location.replace("http://localhost:3000/login.html")
-        : "";
-    })
-    .catch((error) => console.log("Authorization failed : " + error.message));
-*/

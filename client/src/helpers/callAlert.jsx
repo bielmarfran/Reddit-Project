@@ -4,6 +4,7 @@ import AlertAtentionBlue from "../components/alerts/AlertAtentionBlue";
 import AlertSuccessGreen from "../components/alerts/AlertSuccessGreen";
 
 export function callAlert(state) {
+  console.log("callAlert", state);
   if (typeof state.error !== "undefined") {
     return <AlertWarningRed errorMsg={state.error} />;
   } else if (typeof state.message !== "undefined") {
