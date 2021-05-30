@@ -16,8 +16,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" component={Feed} exact></Route>
-        {/*     <Route exact path="/profile" component={() => <Profile authorized = {true} />}/> */}
-        <ProtectedRoute path="/profile" component={Profile} isAuth={isAuth} />
+        <Route path="/profile" component={Profile} />
       </Switch>
       <Route path="/login" component={Login} exact />
       <Route path="/register" component={Register} exact />
