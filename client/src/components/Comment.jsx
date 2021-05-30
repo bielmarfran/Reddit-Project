@@ -29,14 +29,14 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
         >
           {loadProfile ? (
             <img
-              id={profile}
+              id={autor}
               className="rounded-full border h-5 w-5"
               src={"http://localhost:8080/public/" + autor + ".jpg"}
               onError={setDefaultImg}
             />
           ) : (
             <img
-              id={profile}
+              id={autor}
               className="rounded-full border h-5 w-5"
               src="../../img/profile_default.svg"
             />

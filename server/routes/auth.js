@@ -4,17 +4,17 @@ const { createTokens, validateToken } = require("../Middleware/jtw");
 const { sequelize, User, Post } = require("../models");
 
 router.get("/", async (req, res) => {
-  const uuid = req.uuid;
-  console.log(req.uuid);
+  const { email, password } = req.body;
+  console.log(req.email);
   try {
     const user = await User.findOne({
-      where: { uuid },
+      where: { email },
       include: "posts",
     });
     return res.json(user);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error Get" });
+    return res.status(500).json({ error: "Error Get Auth" });
   }
 });
 
