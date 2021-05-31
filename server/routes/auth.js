@@ -3,8 +3,9 @@ const router = express.Router();
 const { createTokens, validateToken } = require("../Middleware/jtw");
 const { sequelize, User, Post } = require("../models");
 
-router.get("/", async (req, res) => {
-  const { email, password } = req.body;
+router.get("/:email", async (req, res) => {
+  //const { email } = req.body;
+  const email = req.params.email;
   console.log(req.email);
   try {
     const user = await User.findOne({

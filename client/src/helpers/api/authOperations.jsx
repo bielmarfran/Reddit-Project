@@ -1,5 +1,5 @@
 import React from "react";
-import { postApi } from "./apiCalls";
+import { postApi, getApi } from "./apiCalls";
 
 let headers = new Headers();
 
@@ -29,5 +29,17 @@ export async function performLogout() {
     headers: headers,
   };
   const response = await postApi(request);
+  return response;
+}
+
+export async function getProfileInfo(requestInfo) {
+  const emailUser = requestInfo.email;
+  const request = {
+    url: `/auth/${emailUser}`,
+    mode: "cors",
+    credentials: "include",
+    //headers: headers,
+  };
+  const response = await getApi(request);
   return response;
 }

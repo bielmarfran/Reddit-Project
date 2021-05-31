@@ -1,27 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useHistory, withRouter } from "react-router-dom";
-import { getAllPosts } from "../helpers/api/postOperations";
+import { useHistory, withRouter, useParams } from "react-router-dom";
+import { getProfileInfo } from "../helpers/api/authOperations";
 import Card from "../components/Card";
 import Header from "../components/header/header";
 import Footer from "../components/footer";
 
-function Profile() {
+function Profile({ data }) {
+  let { email } = useParams();
   let history = useHistory();
-  const [listOfPosts, setListOfPosts] = useState([]);
-  const getValue = (data) => {
-    const newList = listOfPosts.filter((item) => item.uuid !== data);
-    setListOfPosts(newList);
-  };
+  const [profileData, setProfileData] = useState([]);
 
   useEffect(() => {
-    getAllPosts("").then((response) => {
+    getProfileInfo({ email: email }).then((response) => {
       if (typeof response.error !== "undefined")
         history.push("/login", { error: "Acesso não Autorizado / Expirado" });
       if (response == "TypeError: Failed to fetch")
         history.push("/login", { error: "Servidor Off" });
-
-      setListOfPosts(response);
+      setProfileData(response);
     });
   }, []);
   return (
@@ -29,7 +25,7 @@ function Profile() {
       <Header createPost={false} />
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
-          {<Card />}
+          {<Card profileData={profileData} />}
         </div>
         <Footer />
       </div>
