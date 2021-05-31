@@ -4,6 +4,7 @@ import { XIcon } from "@heroicons/react/solid";
 import Dropzone from "react-dropzone";
 import { callAlert } from "../helpers/callAlert";
 import getTime from "../helpers/getTime";
+import getTimeFull from "../helpers/getTimeFull";
 
 export default function Card({ profileData }) {
   let history = useHistory();
@@ -12,7 +13,6 @@ export default function Card({ profileData }) {
   const [loadProfile, setLoadProfile] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10 z-0">
       {showAlert ? callAlert(alertMessage) : ""}
@@ -74,7 +74,7 @@ export default function Card({ profileData }) {
                 )}
                 <h1 className="text-2xl font-semibold">{profileData.email}</h1>
                 <h4 className="text-sm font-semibold">
-                  {getTime(profileData.createdAt)}
+                  {getTimeFull(profileData.createdAt)}
                 </h4>
               </div>
             </div>
