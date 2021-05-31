@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import getTime from "../helpers/getTime";
 import { deleteComment } from "../helpers/api/commentOperations";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { useHistory } from "react-router-dom";
 
 export default function Comment({ commentData, postUuid, removeCommentDOM }) {
-  //console.log(commentData);
+  let history = useHistory();
   const [loadProfile, setLoadProfile] = useState(true);
 
   const uuid = commentData.uuid;
   const topic = commentData.topic;
-  const autor = commentData.user.username;
+  const author = commentData.user.username;
   const title = commentData.title;
   const body = commentData.body;
   const comments = commentData.countComments;
@@ -23,27 +23,28 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
         <hr></hr>
       </div>
       <div className="flex items-center text-xs ">
-        <a
+        <button
           href="#"
           className="font-semibold no-underline hover:underline text-black flex items-center"
+          onClick={showProfile}
         >
           {loadProfile ? (
             <img
-              id={autor}
+              id={author}
               className="rounded-full border h-5 w-5"
-              src={"http://localhost:8080/public/" + autor + ".jpg"}
+              src={"http://localhost:8080/public/" + author + ".jpg"}
               onError={setDefaultImg}
             />
           ) : (
             <img
-              id={autor}
+              id={author}
               className="rounded-full border h-5 w-5"
               src="../../img/profile_default.svg"
             />
           )}
 
-          <span className="ml-2">{autor}</span>
-        </a>
+          <span className="ml-2">{author}</span>
+        </button>
         <span className="text-grey ml-2">{time}</span>
         {commentData.owner ? editComment() : ""}
         {commentData.owner ? removeComment() : ""}
@@ -77,6 +78,9 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
   }
   async function setDefaultImg() {
     setLoadProfile(false);
+  }
+  async function showProfile() {
+    history.push(`/profile/${author}`);
   }
 }
 

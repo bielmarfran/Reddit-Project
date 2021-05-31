@@ -10,8 +10,6 @@ function Post({ data }) {
   let { id } = useParams();
   const [post, setPost] = useState([]);
   let history = useHistory();
-  var test = "tete";
-  console.log(id);
 
   useEffect(() => {
     getPost(id).then((response) => {

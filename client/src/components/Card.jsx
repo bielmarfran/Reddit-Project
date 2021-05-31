@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { XIcon } from "@heroicons/react/solid";
 import Dropzone from "react-dropzone";
 import { callAlert } from "../helpers/callAlert";
+import getTime from "../helpers/getTime";
 
-export default function Card() {
-  //console.log(postData, getValue);
+export default function Card({ profileData }) {
+  let history = useHistory();
   const [fileCover, setFileCover] = useState(false);
   const [fileProfile, setFileProfile] = useState(false);
   const [loadProfile, setLoadProfile] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  let history = useHistory();
+
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10 z-0">
       {showAlert ? callAlert(alertMessage) : ""}
@@ -43,21 +44,20 @@ export default function Card() {
             </div>
           </div> */}
           <div className="col-span-2">
-            <div class="top h-64 w-full bg-blue-600 overflow-hidden relative rounded">
+            <div className="top h-64 w-full bg-blue-600 overflow-hidden relative rounded">
               <img
                 src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
                 alt=""
-                class="bg w-full h-full object-cover object-center absolute z-0"
+                className="bg w-full h-full object-cover object-center absolute z-0"
               ></img>
-              <div class="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
+              <div className="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
                 {loadProfile ? (
                   <img
                     id="profile"
                     className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100 border-solid border-4 border-gray-800"
                     src={
                       "http://localhost:8080/public/" +
-                      getUsernameCookie() +
-                      ".jpg"
+                      profileData.profilePicture
                     }
                     onError={setDefaultImg}
                   />
@@ -72,9 +72,10 @@ export default function Card() {
                     </svg>
                   </span>
                 )}
-
-                <h1 class="text-2xl font-semibold">{getUsernameCookie()}</h1>
-                <h4 class="text-sm font-semibold">Joined Since '19</h4>
+                <h1 className="text-2xl font-semibold">{profileData.email}</h1>
+                <h4 className="text-sm font-semibold">
+                  {getTime(profileData.createdAt)}
+                </h4>
               </div>
             </div>
           </div>
@@ -106,7 +107,7 @@ export default function Card() {
                           id="frameProfile"
                           src=""
                           alt=""
-                          class="w-auto h-auto max-h-80  rounded"
+                          className="w-auto h-auto max-h-80  rounded"
                         ></img>{" "}
                       </div>
                     ) : (
@@ -174,7 +175,7 @@ export default function Card() {
                           id="frameCover"
                           src=""
                           alt=""
-                          class="w-auto h-auto max-h-80  rounded"
+                          className="w-auto h-auto max-h-80  rounded"
                         ></img>{" "}
                       </div>
                     ) : (
@@ -285,7 +286,9 @@ export default function Card() {
     setFileCover(false);
   }
   async function setDefaultImg() {
-    setLoadProfile(false);
+    if (profileData.length != 0) {
+      setLoadProfile(false);
+    }
   }
 }
 
@@ -311,10 +314,4 @@ export default function Card() {
             Brief description for your profile. URLs are hyperlinked.
           </p>
         </div> */
-}
-function getUsernameCookie() {
-  var cookie = document.cookie;
-  var cookieUsername = cookie.substring(cookie.lastIndexOf("=") + 1);
-  var username = decodeURIComponent(cookieUsername);
-  return username;
 }

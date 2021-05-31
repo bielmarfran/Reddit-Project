@@ -67,7 +67,7 @@ export default function MenuDrop() {
                         className={`${
                           active ? "bg-gray-200 text-black" : "text-gray-900"
                         } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                        onClick={showButton}
+                        onClick={showProfile}
                       >
                         {active ? (
                           <ProfileIcon
@@ -153,8 +153,8 @@ export default function MenuDrop() {
     }
   }
 
-  async function showButton() {
-    history.push("/profile");
+  async function showProfile() {
+    history.push(`/profile/${getUsernameCookie()}`);
   }
   async function setDefaultImg() {
     setLoadProfile(false);

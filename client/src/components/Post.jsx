@@ -10,7 +10,7 @@ export default function Post({ postData }) {
   const [listComments, setListComments] = useState([]);
   const uuid = postData.posts.uuid;
   const topic = postData.posts.topic;
-  const autor = postData.posts.user.username;
+  const author = postData.posts.user.username;
   const title = postData.posts.title;
   const body = postData.posts.body;
   const commentsCount = postData.posts.countComments;
@@ -74,7 +74,7 @@ export default function Post({ postData }) {
                 href="#"
                 className="text-grey mx-1 no-underline hover:underline"
               >
-                {autor}
+                {author}
               </a>
               <span className="text-grey">{time}</span>
             </div>
@@ -109,7 +109,7 @@ export default function Post({ postData }) {
               >
                 <Form className="">
                   <p className="text-xs ml-0.5 mb-0.5">
-                    Comentar como <a className="text-blue-500">{autor}</a>
+                    Comentar como <a className="text-blue-500">{author}</a>
                   </p>
                   <Field
                     className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"

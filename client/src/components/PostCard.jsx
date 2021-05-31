@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import getTime from "../helpers/getTime";
 import { useHistory } from "react-router-dom";
 import { deletePost } from "../helpers/api/postOperations";
 
 export default function PostCard({ postData, getValue }) {
-  //console.log(postData, getValue);
   let history = useHistory();
+  let show = false;
   const uuid = postData.uuid;
   const topic = postData.topic;
-  const autor = postData.user.username;
+  const author = postData.user.username;
   const title = postData.title;
   const comments = postData.countComments;
   var t = getTime(postData.updatedAt);
@@ -30,9 +30,13 @@ export default function PostCard({ postData, getValue }) {
             </a>
             <span className="text-grey-light mx-1 text-xxs">•</span>
             <span className="text-grey">Posted by</span>
-            <a href="#" className="text-grey mx-1 no-underline hover:underline">
-              {autor}
-            </a>
+            <button
+              href="#"
+              className="text-grey mx-1 no-underline hover:underline"
+              onClick={showProfile}
+            >
+              {author}
+            </button>
             <span className="text-grey">{time}</span>
           </div>
           <div>
@@ -57,8 +61,11 @@ export default function PostCard({ postData, getValue }) {
       </div>
     </div>
   );
-  function handleClick() {
-    history.push("/post/" + uuid);
+  async function handleClick() {
+    if (show === false) {
+      history.push("/post/" + uuid);
+    }
+    show = false;
   }
   async function handleClickRemovePost() {
     const response = await deletePost(uuid);
@@ -83,5 +90,9 @@ export default function PostCard({ postData, getValue }) {
         </a>
       </div>
     );
+  }
+  async function showProfile() {
+    show = true;
+    history.push(`/profile/${author}`);
   }
 }
