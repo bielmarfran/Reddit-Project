@@ -105,6 +105,7 @@ function Login({ location }) {
                   id="performLogin"
                   type="submit"
                   className="w-full py-3 mt-10 bg-blue-400 rounded-sm font-medium text-white uppercase focus:outline-none hover:bg-blue-500 hover:shadow-none"
+                  //className="w-full h-36 buttonBlue"
                 >
                   Login
                 </button>

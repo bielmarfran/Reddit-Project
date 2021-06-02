@@ -8,6 +8,7 @@ import * as Yup from "yup";
 
 export default function Post({ postData }) {
   const [listComments, setListComments] = useState([]);
+  const [editComment, setEditComment] = useState(false);
   const uuid = postData.posts.uuid;
   const topic = postData.posts.topic;
   const author = postData.posts.user.username;
@@ -23,14 +24,18 @@ export default function Post({ postData }) {
   }, []);
 
   const removeCommentDOM = (data) => {
-    console.log(data);
     const newList = listComments.filter((item) => item.uuid !== data);
     setListComments(newList);
   };
 
-  const initialValues = {
-    body: "",
+  const editCommentDOM = (data) => {
+    setEditComment(true);
+    setInitialValues({ body: data });
   };
+
+  const [initialValues, setInitialValues] = useState({
+    body: "",
+  });
 
   const onSubmit = async (data, { resetForm }) => {
     console.log(data);
@@ -43,10 +48,9 @@ export default function Post({ postData }) {
     } else if (response.error == "Acesso não autorizado") {
       history.push("/login", { error: "Acesso não Autorizado / Expirado" });
     }
-    console.log(response);
   };
   const validationMsg = {
-    bodyRequired: "Insira um Corpo!",
+    bodyRequired: "Insert a Body!",
   };
   const validationSchema = Yup.object().shape({
     body: Yup.string().required(validationMsg.bodyRequired),
@@ -103,20 +107,21 @@ export default function Post({ postData }) {
             <div className="w-full md:w-full px-3  mt-2">
               <div className="p-0 m-0"></div>
               <Formik
+                enableReinitialize={true}
                 initialValues={initialValues}
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}
               >
                 <Form className="">
                   <p className="text-xs ml-0.5 mb-0.5">
-                    Comentar como <a className="text-blue-500">{author}</a>
+                    Comment as <a className="text-blue-500">{author}</a>
                   </p>
                   <Field
                     className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
                     name="body"
                     as="textarea"
                     id="body"
-                    placeholder="Insira o seu Comentário"
+                    placeholder="Enter your Comment"
                   ></Field>
                   <ErrorMessage
                     name="body"
@@ -127,25 +132,37 @@ export default function Post({ postData }) {
                     className="modal-footer py-3 px-5 border0-t text-right"
                     id="commentButton"
                   >
-                    <button
-                      id="postComment"
-                      type="submit"
-                      //className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
-                      className="buttonBlue w-36"
-                    >
-                      Commentar
-                    </button>
+                    {editComment ? (
+                      <div className="mt-5">
+                        <button type="submit" className="buttonGreen w-36">
+                          Edit
+                        </button>
+
+                        <button type="button" className="buttonRed">
+                          Cancel
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        id="postComment"
+                        type="submit"
+                        //className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                        className="buttonBlue w-36"
+                      >
+                        Comment
+                      </button>
+                    )}
                   </div>
                 </Form>
               </Formik>
 
-              {/*dsds*/}
               {Object.keys(listComments).map((i) => (
                 <Comment
                   commentData={listComments[i]}
                   postUuid={uuid}
                   key={i}
                   removeCommentDOM={removeCommentDOM}
+                  editCommentDOM={editCommentDOM}
                 />
               ))}
             </div>

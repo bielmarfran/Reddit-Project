@@ -2,21 +2,25 @@ import React, { useState } from "react";
 import getTime from "../helpers/getTime";
 import { deleteComment } from "../helpers/api/commentOperations";
 import { useHistory } from "react-router-dom";
+import { PencilAltIcon as PencilAltIconSolid } from "@heroicons/react/solid";
+import { PencilAltIcon as PencilAltIconOutline } from "@heroicons/react/outline";
 const baseUrl = import.meta.env.VITE_API_URL;
 
-export default function Comment({ commentData, postUuid, removeCommentDOM }) {
+export default function Comment({
+  commentData,
+  postUuid,
+  removeCommentDOM,
+  editCommentDOM,
+}) {
   let history = useHistory();
   const [loadProfile, setLoadProfile] = useState(true);
+  const [isShow, setIsShown] = useState(false);
 
   const uuid = commentData.uuid;
-  const topic = commentData.topic;
   const author = commentData.user.username;
-  const title = commentData.title;
   const body = commentData.body;
-  const comments = commentData.countComments;
-  const profile = "commentData.countComments";
   var time = getTime(commentData.updatedAt);
-  console.log(`${baseUrl}/public/profile${author}.jpg`);
+
   const removePost = "";
   return (
     <div id="comment">
@@ -58,11 +62,20 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
     const response = await deleteComment(uuid, postUuid);
 
     if (response.response == "Comment Deleted!") {
-      console.log(response);
       removeCommentDOM(uuid);
     } else if (response.error == "Acesso não autorizado") {
       history.push("/login", { error: "Acesso não Autorizado / Expirado" });
     }
+  }
+  async function handleClickEditComment() {
+    editCommentDOM(body);
+
+    // const response = await deleteComment(uuid, postUuid);
+    // if (response.response == "Comment Deleted!") {
+    //   removeCommentDOM(uuid);
+    // } else if (response.error == "Acesso não autorizado") {
+    //   history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+    // }
   }
 
   function removeComment() {
@@ -75,7 +88,23 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
     );
   }
   function editComment() {
-    return <EditIcon className="w-5 h-5 ml-2" aria-hidden="true" />;
+    return (
+      <div
+        className="mr-auto"
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}
+      >
+        {isShow ? (
+          <a onClick={handleClickEditComment}>
+            <PencilAltIconSolid className="w-5 h-5 ml-2" aria-hidden="true" />
+          </a>
+        ) : (
+          <a onClick={handleClickEditComment}>
+            <PencilAltIconOutline className="w-5 h-5 ml-2" aria-hidden="true" />
+          </a>
+        )}
+      </div>
+    );
   }
   async function setDefaultImg() {
     setLoadProfile(false);
@@ -85,24 +114,24 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
   }
 }
 
-function EditIcon(props) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5 ml-2"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-      />
-    </svg>
-  );
-}
+// function EditIcon(props) {
+//   return (
+//     <svg
+//       xmlns="http://www.w3.org/2000/svg"
+//       className="h-5 w-5 ml-2"
+//       fill="none"
+//       viewBox="0 0 24 24"
+//       stroke="currentColor"
+//     >
+//       <path
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//         strokeWidth={2}
+//         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+//       />
+//     </svg>
+//   );
+// }
 
 function RemoveIcon(params) {
   return (

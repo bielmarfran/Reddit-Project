@@ -23,7 +23,6 @@ export default function Card({ profileData }) {
             <div className="top h-64 w-full bg-blue-600 overflow-hidden relative rounded">
               {loadCover ? (
                 <img
-                  //src={`/img/default_cover.jpg`}
                   src={`${baseUrl}/public/cover${profileData.email}.jpg`}
                   onError={setDefaultCoverImg}
                   alt="Cover Image"
