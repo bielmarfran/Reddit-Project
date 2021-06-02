@@ -56,7 +56,7 @@ export default function Modal({ title }) {
       <Transition show={open} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto "
+          className="fixed inset-0 z-10 overflow-y-auto"
           initialFocus={cancelButtonRef}
           static
           open={open}

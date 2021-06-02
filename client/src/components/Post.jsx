@@ -158,7 +158,11 @@ export default function Post({ postData }) {
                           Edit
                         </button>
 
-                        <button type="button" className="buttonRed">
+                        <button
+                          type="button"
+                          className="buttonRed"
+                          onClick={cancelEdit}
+                        >
                           Cancel
                         </button>
                       </div>
@@ -191,4 +195,8 @@ export default function Post({ postData }) {
       </div>
     </div>
   );
+  function cancelEdit() {
+    setEditComment({ edit: false, info: "" });
+    setInitialValues({ body: "" });
+  }
 }

@@ -251,7 +251,7 @@ export default function Card({ profileData }) {
         const formData = new FormData();
         formData.append("myFile", fileCover.file);
         formData.append("place", "cover");
-        fetch("${baseUrl}/upload", {
+        fetch(`${baseUrl}/upload`, {
           method: "POST",
           mode: "cors",
           credentials: "include",

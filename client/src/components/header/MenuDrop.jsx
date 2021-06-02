@@ -81,28 +81,6 @@ export default function MenuDrop() {
                       </button>
                     )}
                   </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <button
-                        className={`${
-                          active ? "bg-gray-200 text-black" : "text-gray-900"
-                        } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                      >
-                        {active ? (
-                          <DuplicateActiveIcon
-                            className="w-5 h-5 mr-2"
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <DuplicateInactiveIcon
-                            className="w-5 h-5 mr-2"
-                            aria-hidden="true"
-                          />
-                        )}
-                        <div className="ml-2">Duplicate</div>
-                      </button>
-                    )}
-                  </Menu.Item>
                 </div>
                 <div className="px-1 py-1">
                   <Menu.Item>
@@ -158,23 +136,23 @@ export default function MenuDrop() {
   }
 }
 
-function EditInactiveIcon(props) {
-  return (
-    <svg
-      {...props}
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4 13V16H7L16 7L13 4L4 13Z"
-        fill="#EDE9FE"
-        stroke="#A78BFA"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
+// function EditInactiveIcon(props) {
+//   return (
+//     <svg
+//       {...props}
+//       viewBox="0 0 20 20"
+//       fill="none"
+//       xmlns="http://www.w3.org/2000/svg"
+//     >
+//       <path
+//         d="M4 13V16H7L16 7L13 4L4 13Z"
+//         fill="#EDE9FE"
+//         stroke="#A78BFA"
+//         strokeWidth="2"
+//       />
+//     </svg>
+//   );
+// }
 
 function ProfileIcon(props) {
   return (
@@ -197,51 +175,51 @@ function ProfileIcon(props) {
   );
 }
 
-function EditActiveIcon(props) {
-  return (
-    <svg
-      {...props}
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4 13V16H7L16 7L13 4L4 13Z"
-        fill="#8B5CF6"
-        stroke="#C4B5FD"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
+// function EditActiveIcon(props) {
+//   return (
+//     <svg
+//       {...props}
+//       viewBox="0 0 20 20"
+//       fill="none"
+//       xmlns="http://www.w3.org/2000/svg"
+//     >
+//       <path
+//         d="M4 13V16H7L16 7L13 4L4 13Z"
+//         fill="#8B5CF6"
+//         stroke="#C4B5FD"
+//         strokeWidth="2"
+//       />
+//     </svg>
+//   );
+// }
 
-function DuplicateInactiveIcon(props) {
-  return (
-    <svg
-      {...props}
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M4 4H12V12H4V4Z" stroke="currentColor" strokeWidth="2" />
-      <path d="M8 8H16V16H8V8Z" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
-}
+// function DuplicateInactiveIcon(props) {
+//   return (
+//     <svg
+//       {...props}
+//       viewBox="0 0 20 20"
+//       fill="none"
+//       xmlns="http://www.w3.org/2000/svg"
+//     >
+//       <path d="M4 4H12V12H4V4Z" stroke="currentColor" strokeWidth="2" />
+//       <path d="M8 8H16V16H8V8Z" stroke="currentColor" strokeWidth="2" />
+//     </svg>
+//   );
+// }
 
-function DuplicateActiveIcon(props) {
-  return (
-    <svg
-      {...props}
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M4 4H12V12H4V4Z" stroke="currentColor" strokeWidth="2" />
-      <path d="M8 8H16V16H8V8Z" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
-}
+// function DuplicateActiveIcon(props) {
+//   return (
+//     <svg
+//       {...props}
+//       viewBox="0 0 20 20"
+//       fill="none"
+//       xmlns="http://www.w3.org/2000/svg"
+//     >
+//       <path d="M4 4H12V12H4V4Z" stroke="currentColor" strokeWidth="2" />
+//       <path d="M8 8H16V16H8V8Z" stroke="currentColor" strokeWidth="2" />
+//     </svg>
+//   );
+// }
 
 function DuplicateLogoutIcon(props) {
   return (
