@@ -10,9 +10,10 @@ import {
 import Dropzone from "react-dropzone";
 import { callAlert } from "../helpers/callAlert";
 import getTimeFull from "../helpers/getTimeFull";
+import { postFile } from "../helpers/api/profileOperations";
 const baseUrl = import.meta.env.VITE_API_URL;
 
-export default function Card({ profileData }) {
+export default function ProfileCard({ profileData }) {
   let history = useHistory();
   const [fileCover, setFileCover] = useState({ show: false, file: "" });
   const [fileProfile, setFileProfile] = useState({ show: false, file: "" });
@@ -329,47 +330,33 @@ export default function Card({ profileData }) {
       setLoadCover(false);
     }
   }
-  function saveFiles() {
+  async function saveFiles() {
     try {
-      if (fileCover.file !== undefined) {
-        const formData = new FormData();
-        formData.append("myFile", fileCover.file);
-        formData.append("place", "cover");
-        fetch(`${baseUrl}/upload`, {
-          method: "POST",
-          mode: "cors",
-          credentials: "include",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+      if (fileProfile.file !== undefined) {
+        const response = await postFile({
+          myFile: fileProfile.file,
+          place: "profile",
+        });
+        if (response.response != null) {
+          console.log(response);
+        } else if (response.error == "Unauthorized access") {
+          history.push("/login", { error: "Unauthorized access / Expired" });
+        }
       }
     } catch (error) {
       console.warn(error);
     }
     try {
-      if (fileProfile.file !== undefined) {
-        const formData = new FormData();
-        formData.append("myFile", fileProfile.file);
-        formData.append("place", "profile");
-        fetch(`${baseUrl}/upload`, {
-          method: "POST",
-          mode: "cors",
-          credentials: "include",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+      if (fileCover.file !== undefined) {
+        const response = await postFile({
+          myFile: fileCover.file,
+          place: "cover",
+        });
+        if (response.response != null) {
+          console.log(response);
+        } else if (response.error == "Unauthorized access") {
+          history.push("/login", { error: "Unauthorized access / Expired" });
+        }
       }
     } catch (error) {
       console.warn(error);

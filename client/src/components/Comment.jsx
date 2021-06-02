@@ -82,7 +82,7 @@ export default function Comment({
 
   function removeComment() {
     return (
-      <div className="ml-auto hover:shadow-lg">
+      <div className="ml-auto hover:border 2px border-gray-700 rounded">
         <a onClick={handleClickRemoveComment}>
           <RemoveIcon className="w-5 h-5" aria-hidden="true" />
         </a>

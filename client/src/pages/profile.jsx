@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory, withRouter, useParams } from "react-router-dom";
-import { getProfileInfo } from "../helpers/api/authOperations";
-import Card from "../components/Card";
+import { getProfileInfo } from "../helpers/api/profileOperations";
+import ProfileCard from "../components/ProfileCard";
 import Header from "../components/header/header";
 import Footer from "../components/footer";
 
@@ -25,7 +25,7 @@ function Profile({ data }) {
       <Header createPost={false} />
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
-          {<Card profileData={profileData} />}
+          {<ProfileCard profileData={profileData} />}
         </div>
         <Footer />
       </div>
