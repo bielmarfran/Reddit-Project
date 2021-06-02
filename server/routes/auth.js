@@ -3,7 +3,7 @@ const router = express.Router();
 const { createTokens, validateToken } = require("../Middleware/jtw");
 const { sequelize, User, Post } = require("../models");
 
-router.get("/:email", async (req, res) => {
+router.get("/:email", validateToken, async (req, res) => {
   //const { email } = req.body;
   const email = req.params.email;
   console.log(req.email);
@@ -12,6 +12,12 @@ router.get("/:email", async (req, res) => {
       where: { email },
       include: "posts",
     });
+    console.log(req.username, user.dataValues.username);
+    if (req.username == user.dataValues.username) {
+      user.dataValues["owner"] = true;
+    } else {
+      user.dataValues["owner"] = false;
+    }
     return res.json(user);
   } catch (error) {
     console.log(error);

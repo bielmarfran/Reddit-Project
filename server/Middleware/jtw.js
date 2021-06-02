@@ -23,7 +23,6 @@ const validateToken = (req, res, next) => {
       req.authenticated = true;
       req.uuid = validToken.uuid;
       req.username = validToken.username;
-      console.log(validToken);
       return next();
     }
   } catch (err) {
