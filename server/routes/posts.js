@@ -43,7 +43,7 @@ router.get("/:uuid", async (req, res) => {
     });
     const user = await User.findOne({ where: { uuid: req.uuid } });
 
-    const user2 = await User.findOne({ where: { id: post.userId } });
+    //const user2 = await User.findOne({ where: { id: post.userId } });
     post.dataValues.username = user.username;
     post.dataValues.comments.forEach((element) => {
       if (element.userID == user.id) {

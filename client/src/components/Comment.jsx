@@ -13,13 +13,15 @@ export default function Comment({
   editCommentDOM,
 }) {
   let history = useHistory();
+  //console.log(commentData);
   const [loadProfile, setLoadProfile] = useState(true);
   const [isShow, setIsShown] = useState(false);
-
   const uuid = commentData.uuid;
   const author = commentData.user.username;
   const body = commentData.body;
   var time = getTime(commentData.updatedAt);
+  time.includes(0) ? "now" : "";
+  time.startsWith(0) ? (time = "now") : "";
 
   const removePost = "";
   return (
@@ -68,7 +70,7 @@ export default function Comment({
     }
   }
   async function handleClickEditComment() {
-    editCommentDOM(body);
+    editCommentDOM({ body: body, info: commentData });
 
     // const response = await deleteComment(uuid, postUuid);
     // if (response.response == "Comment Deleted!") {

@@ -2,13 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import getTime from "../helpers/getTime";
 import Comment from "../components/Comment";
-import { postComment } from "../helpers/api/commentOperations";
+import { postComment, putComment } from "../helpers/api/commentOperations";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 export default function Post({ postData }) {
   const [listComments, setListComments] = useState([]);
-  const [editComment, setEditComment] = useState(false);
+  const [editComment, setEditComment] = useState({ edit: false, info: "" });
   const uuid = postData.posts.uuid;
   const topic = postData.posts.topic;
   const author = postData.posts.user.username;
@@ -29,8 +29,9 @@ export default function Post({ postData }) {
   };
 
   const editCommentDOM = (data) => {
-    setEditComment(true);
-    setInitialValues({ body: data });
+    setEditComment({ edit: true, info: data.info });
+
+    setInitialValues({ body: data.body });
   };
 
   const [initialValues, setInitialValues] = useState({
@@ -38,13 +39,32 @@ export default function Post({ postData }) {
   });
 
   const onSubmit = async (data, { resetForm }) => {
-    console.log(data);
     const response = await postComment(data, uuid);
     if (response.uuid != null) {
       const newList = [...listComments];
+      response["owner"] = true;
       newList.push(response);
       setListComments(newList);
       resetForm({});
+    } else if (response.error == "Acesso não autorizado") {
+      history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+    }
+  };
+
+  const onSubmitEdit = async (data, { resetForm }) => {
+    const response = await putComment(data, editComment.info.uuid);
+    if (response.uuid != null) {
+      const newList = [...listComments];
+      var id = newList.findIndex(
+        (element) => element.uuid == editComment.info.uuid
+      );
+      response["user"] = editComment.info.user;
+      response["owner"] = true;
+      newList[id] = response;
+      setListComments(newList);
+      resetForm({});
+      setEditComment({ edit: false, info: "" });
+      setInitialValues({ body: "" });
     } else if (response.error == "Acesso não autorizado") {
       history.push("/login", { error: "Acesso não Autorizado / Expirado" });
     }
@@ -109,7 +129,7 @@ export default function Post({ postData }) {
               <Formik
                 enableReinitialize={true}
                 initialValues={initialValues}
-                onSubmit={onSubmit}
+                onSubmit={editComment.edit ? onSubmitEdit : onSubmit}
                 validationSchema={validationSchema}
               >
                 <Form className="">
@@ -132,7 +152,7 @@ export default function Post({ postData }) {
                     className="modal-footer py-3 px-5 border0-t text-right"
                     id="commentButton"
                   >
-                    {editComment ? (
+                    {editComment.edit ? (
                       <div className="mt-5">
                         <button type="submit" className="buttonGreen w-36">
                           Edit

@@ -39,7 +39,24 @@ export async function postApi(request) {
   }
 }
 
-export function putApi(state) {}
+export async function putApi(request) {
+  try {
+    const response = await fetch(baseUrl + request.url, {
+      mode: request.mode,
+      method: "PUT",
+      credentials: request.credentials,
+      headers: request.headers,
+      body: request.body,
+    });
+    if (response.status == 500 || response.status == 404) {
+      return { error: "No Server" };
+    }
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    return error;
+  }
+}
 
 export async function deleteApi(request) {
   try {
