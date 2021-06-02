@@ -1,21 +1,42 @@
 const express = require("express");
 const router = express.Router();
-const cookieParser = require("cookie-parser");
 const { createTokens, validateToken } = require("../Middleware/jtw");
-const { sequelize, User, Post } = require("../models");
+const { sequelize, User, Post, Comment } = require("../models");
 
-router.get("/", async (req, res) => {
-  const uuid = req.uuid;
-  console.log(req.uuid);
+router.get("/:email", validateToken, async (req, res) => {
+  //const { email } = req.body;
+  const email = req.params.email;
   try {
     const user = await User.findOne({
-      where: { uuid },
-      include: "posts",
+      where: { email },
+      // include: [
+      //   {
+      //     model: Comment,
+      //     as: "comments",
+      //   },
+      //   {
+      //     model: Post,
+      //     as: "posts",
+
+      //   },
+      // ],
+      //include: "posts",
     });
+    const countComments = await Comment.count({ where: { userId: user.id } });
+    const countPosts = await Post.count({ where: { userId: user.id } });
+
+    console.log(countComments, countPosts);
+    user.dataValues["countComments"] = countComments;
+    user.dataValues["countPosts"] = countPosts;
+    if (req.username == user.dataValues.username) {
+      user.dataValues["owner"] = true;
+    } else {
+      user.dataValues["owner"] = false;
+    }
     return res.json(user);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error Get" });
+    return res.status(500).json({ error: "Error Get Auth" });
   }
 });
 
@@ -25,9 +46,9 @@ router.post("/", async (req, res) => {
     const user = await User.findOne({ where: { email: email } }).then(
       async function (user) {
         if (!user) {
-          return res.status(400).json({ error: "Acesso não autorizado" });
+          return res.status(400).json({ error: "Unauthorized access" });
         } else if (!(await user.validPassword(password))) {
-          return res.status(400).json({ error: "Acesso não autorizado" });
+          return res.status(400).json({ error: "Unauthorized access" });
         }
         const acessToken = createTokens(user);
         res.cookie("access-token", acessToken, {
@@ -46,16 +67,13 @@ router.post("/", async (req, res) => {
           sameSite: "Strict",
           domain: "localhost",
         });
-        return res.json({ response: "Logado com Sucesso" });
+        return res.json({ response: "Successfully logged in" });
       }
     );
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error Get" });
+    return res.status(500).json({ error: "Login Error" });
   }
-});
-router.post("/", (req, res) => {
-  res.send("Test");
 });
 
 router.post("/register", async (req, res) => {
@@ -65,14 +83,14 @@ router.post("/register", async (req, res) => {
     const userEmail = await User.findOne({ where: { email } });
 
     if (userUsername != null) {
-      res.status(418).send({ error: "Username ja existe!" });
+      res.status(418).send({ error: "Username already in use!" });
     } else if (userEmail != null) {
-      res.status(418).send({ error: "Email ja existe!" });
+      res.status(418).send({ error: "Email already in use!" });
     } else {
       const user = await User.create({ username, email, password });
     }
 
-    return res.json({ response: "Conta Criada com sucesso" });
+    return res.json({ response: "Account created successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);

@@ -13,7 +13,7 @@ function performLogout() {
   })
     .then((response) => response.json())
     .then((json) => {
-      json.response == "Logout OK"
+      json.response == "Logout Logout Successful"
         ? window.location.replace("http://localhost:3000/login.html")
         : "";
     })

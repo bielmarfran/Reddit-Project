@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
         id: undefined,
         password: undefined,
         uuid: undefined,
-        createdAt: undefined,
         updatedAt: undefined,
       };
     }

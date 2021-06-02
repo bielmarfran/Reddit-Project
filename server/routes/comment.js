@@ -20,7 +20,7 @@ router.put("/", async (req, res) => {
     return res.json(comment);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error PUT" });
+    return res.status(500).json({ error: "Error Put" });
   }
 });
 
@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
   const { body, postUuid } = req.body; //
   const userUuid = req.uuid;
   try {
-    console.log("-----------", body, userUuid, postUuid);
     const user = await User.findOne({ where: { uuid: userUuid } });
     const post = await Post.findOne({ where: { uuid: postUuid } });
     post.countComments++;

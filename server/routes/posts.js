@@ -25,7 +25,6 @@ router.get("/", async (req, res) => {
 
 router.get("/:uuid", async (req, res) => {
   const uuid = req.params.uuid;
-  //console.log("DENTRO ROTA",req.uuid);
   try {
     var post = await Post.findOne({
       where: { uuid },
@@ -43,7 +42,7 @@ router.get("/:uuid", async (req, res) => {
     });
     const user = await User.findOne({ where: { uuid: req.uuid } });
 
-    const user2 = await User.findOne({ where: { id: post.userId } });
+    //const user2 = await User.findOne({ where: { id: post.userId } });
     post.dataValues.username = user.username;
     post.dataValues.comments.forEach((element) => {
       if (element.userID == user.id) {
