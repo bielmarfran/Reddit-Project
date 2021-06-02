@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { performLogout } from "../../helpers/api/authOperations";
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export default function MenuDrop() {
   const [loadProfile, setLoadProfile] = useState(true);
@@ -19,11 +20,7 @@ export default function MenuDrop() {
                   <img
                     id="profile"
                     className="rounded-full border  h-11 w-11"
-                    src={
-                      "http://localhost:8080/public/" +
-                      getUsernameCookie() +
-                      ".jpg"
-                    }
+                    src={`${baseUrl}/public/profile${getUsernameCookie()}.jpg`}
                     onError={setDefaultImg}
                   />
                 ) : (

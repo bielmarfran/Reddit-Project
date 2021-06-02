@@ -78,7 +78,7 @@ app.post("/logout", validateToken, async (req, res) => {
 
 app.post("/upload", validateToken, async (req, res) => {
   const uuid = req.uuid;
-  console.warn("upload");
+  const place = req.body.place;
   let sampleFile;
   let uploadPath;
 
@@ -91,9 +91,9 @@ app.post("/upload", validateToken, async (req, res) => {
   sampleFile = req.files.myFile;
   console.log(sampleFile);
   const ext = sampleFile.name.substring(sampleFile.name.lastIndexOf("."));
-  uploadPath = __dirname + "\\public\\" + req.username + ext;
+  uploadPath = __dirname + "\\public\\" + place + req.username + ext;
 
-  user.profilePicture = req.username + ext;
+  user.profilePicture = place + req.username + ext;
 
   user.save();
   console.log(uploadPath);

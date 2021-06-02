@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import getTime from "../helpers/getTime";
 import { deleteComment } from "../helpers/api/commentOperations";
 import { useHistory } from "react-router-dom";
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export default function Comment({ commentData, postUuid, removeCommentDOM }) {
   let history = useHistory();
@@ -14,8 +15,8 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
   const body = commentData.body;
   const comments = commentData.countComments;
   const profile = "commentData.countComments";
-  var t = getTime(commentData.updatedAt);
-  var time = t;
+  var time = getTime(commentData.updatedAt);
+  console.log(`${baseUrl}/public/profile${author}.jpg`);
   const removePost = "";
   return (
     <div id="comment">
@@ -32,7 +33,7 @@ export default function Comment({ commentData, postUuid, removeCommentDOM }) {
             <img
               id={author}
               className="rounded-full border h-5 w-5"
-              src={"http://localhost:8080/public/" + author + ".jpg"}
+              src={`${baseUrl}/public/profile${author}.jpg`}
               onError={setDefaultImg}
             />
           ) : (

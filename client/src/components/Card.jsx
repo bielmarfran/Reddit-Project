@@ -3,14 +3,15 @@ import { useHistory } from "react-router-dom";
 import { XIcon } from "@heroicons/react/solid";
 import Dropzone from "react-dropzone";
 import { callAlert } from "../helpers/callAlert";
-import getTime from "../helpers/getTime";
 import getTimeFull from "../helpers/getTimeFull";
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export default function Card({ profileData }) {
   let history = useHistory();
-  const [fileCover, setFileCover] = useState(false);
-  const [fileProfile, setFileProfile] = useState(false);
+  const [fileCover, setFileCover] = useState({ show: false, file: "" });
+  const [fileProfile, setFileProfile] = useState({ show: false, file: "" });
   const [loadProfile, setLoadProfile] = useState(true);
+  const [loadCover, setLoadCover] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   return (
@@ -18,47 +19,30 @@ export default function Card({ profileData }) {
       {showAlert ? callAlert(alertMessage) : ""}
       <div className="flex border border-grey-light-alt hover:border-grey rounded bg-white hover:shadow-lg">
         <div className="grid grid-cols-2 gap-1 w-full">
-          {/* <div>
-            {" "}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 ml-12 mt-4 mb-4">
-                Avatar
-              </label>
-              <div className="mt-1 flex items-center mt-10 ml-5">
-                <span className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100">
-                  <svg
-                    className="h-full w-full text-gray-300"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </span>
-              </div>
-              <button
-                type="button"
-                className="ml-8 mt-4 mb-4 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Change
-              </button>
-            </div>
-          </div> */}
           <div className="col-span-2">
             <div className="top h-64 w-full bg-blue-600 overflow-hidden relative rounded">
-              <img
-                src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-                alt=""
-                className="bg w-full h-full object-cover object-center absolute z-0"
-              ></img>
+              {loadCover ? (
+                <img
+                  //src={`/img/default_cover.jpg`}
+                  src={`${baseUrl}/public/cover${profileData.email}.jpg`}
+                  onError={setDefaultCoverImg}
+                  alt="Cover Image"
+                  className="bg w-full h-full object-cover object-center absolute z-0"
+                ></img>
+              ) : (
+                <img
+                  src={`/img/default_cover.jpg`}
+                  alt="Cover Image"
+                  className="bg w-full h-full object-cover object-center absolute z-0"
+                ></img>
+              )}
+
               <div className="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
                 {loadProfile ? (
                   <img
                     id="profile"
                     className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100 border-solid border-4 border-gray-800"
-                    src={
-                      "http://localhost:8080/public/" +
-                      profileData.profilePicture
-                    }
+                    src={`${baseUrl}/public/${profileData.profilePicture}`}
                     onError={setDefaultImg}
                   />
                 ) : (
@@ -96,7 +80,7 @@ export default function Card({ profileData }) {
                     {...getRootProps()}
                     className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
                   >
-                    {fileProfile ? (
+                    {fileProfile.show ? (
                       <div>
                         <XIcon
                           className="self-center w-8 h-8 ml-auto"
@@ -164,7 +148,7 @@ export default function Card({ profileData }) {
                     {...getRootProps()}
                     className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
                   >
-                    {fileCover ? (
+                    {fileCover.show ? (
                       <div>
                         <XIcon
                           className="self-center w-8 h-8 ml-auto"
@@ -215,8 +199,9 @@ export default function Card({ profileData }) {
             </Dropzone>
           </div>
           <button
-            type="submit"
+            type="button"
             className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            onClick={saveFiles}
           >
             Save
           </button>
@@ -229,65 +214,82 @@ export default function Card({ profileData }) {
       setShowAlert(true);
       setAlertMessage(fileRejections[0].errors[0].message);
     } else {
-      setFileCover(true);
       const file = acceptedFiles;
+      setFileCover({ show: true, file: file[0] });
       frameCover.src = URL.createObjectURL(file[0]);
     }
-
-    //   const formData = new FormData();
-    //   formData.append("myFile", file[0]);
-    //   fetch("http://localhost:8080/upload", {
-    //     method: "POST",
-    //     mode: "cors",
-    //     credentials: "include",
-    //     body: formData,
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
   }
   function uploadProfile(acceptedFiles, fileRejections) {
     if (fileRejections.length > 0) {
       setShowAlert(true);
       setAlertMessage(fileRejections[0].errors[0].message);
     } else {
-      setFileProfile(true);
       setShowAlert(false);
       const file = acceptedFiles;
+      setFileProfile({ show: true, file: file[0] });
       frameProfile.src = URL.createObjectURL(file[0]);
     }
-
-    //console.log(acceptedFiles, fileRejections);
-
-    //   const formData = new FormData();
-    //   formData.append("myFile", file[0]);
-    //   fetch("http://localhost:8080/upload", {
-    //     method: "POST",
-    //     mode: "cors",
-    //     credentials: "include",
-    //     body: formData,
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
   }
   function hideImgProfile() {
-    setFileProfile(false);
+    setFileProfile({ show: false, file: "" });
   }
   function hideImgCover() {
-    setFileCover(false);
+    setFileCover({ show: false, file: "" });
   }
   async function setDefaultImg() {
     if (profileData.length != 0) {
       setLoadProfile(false);
+    }
+  }
+  async function setDefaultCoverImg() {
+    if (profileData.length != 0) {
+      setLoadCover(false);
+    }
+  }
+  function saveFiles() {
+    try {
+      if (fileCover.file !== undefined) {
+        const formData = new FormData();
+        formData.append("myFile", fileCover.file);
+        formData.append("place", "cover");
+        fetch("${baseUrl}/upload", {
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+    try {
+      if (fileProfile.file !== undefined) {
+        const formData = new FormData();
+        formData.append("myFile", fileProfile.file);
+        formData.append("place", "profile");
+        fetch(`${baseUrl}/upload`, {
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } catch (error) {
+      console.warn(error);
     }
   }
 }
@@ -314,4 +316,32 @@ export default function Card({ profileData }) {
             Brief description for your profile. URLs are hyperlinked.
           </p>
         </div> */
+}
+
+{
+  /* <div>
+            {" "}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 ml-12 mt-4 mb-4">
+                Avatar
+              </label>
+              <div className="mt-1 flex items-center mt-10 ml-5">
+                <span className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100">
+                  <svg
+                    className="h-full w-full text-gray-300"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </span>
+              </div>
+              <button
+                type="button"
+                className="ml-8 mt-4 mb-4 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Change
+              </button>
+            </div>
+          </div> */
 }
