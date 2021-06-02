@@ -81,7 +81,7 @@ export default function PostCard({ postData, getValue }) {
         <a onClick={handleClickRemovePost}>
           <svg
             id="removePost-${post.uuid}"
-            className="ml-auto fill-current text-gray-700 w-6 h-6 mr-7 cursor-pointer hover:shadow-lg"
+            className="ml-auto fill-current text-gray-700 w-6 h-6 mr-7 cursor-pointer hover:border 2px border-gray-700 rounded"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 18 18"
           >

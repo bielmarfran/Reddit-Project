@@ -7,26 +7,28 @@ headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
 headers.append("Origin", "http://localhost:3000");
 
-export async function performLogin(requestInfo) {
+export async function getProfileInfo(requestInfo) {
   const emailUser = requestInfo.email;
-  const passwordUser = requestInfo.password;
   const request = {
-    url: `/auth`,
+    url: `/auth/${emailUser}`,
     mode: "cors",
     credentials: "include",
-    headers: headers,
-    body: JSON.stringify({ email: emailUser, password: passwordUser }),
+    //headers: headers,
   };
-  const response = await postApi(request);
+  const response = await getApi(request);
   return response;
 }
 
-export async function performLogout() {
+export async function postFile(requestInfo) {
+  const formData = new FormData();
+  formData.append("myFile", requestInfo.myFile);
+  formData.append("place", requestInfo.place);
+  console.log(formData);
   const request = {
-    url: `/logout`,
+    url: `/upload`,
     mode: "cors",
     credentials: "include",
-    headers: headers,
+    body: formData,
   };
   const response = await postApi(request);
   return response;
