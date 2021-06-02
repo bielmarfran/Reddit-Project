@@ -34,9 +34,9 @@ export default function Modal({ title }) {
     }
   };
   const validationMsg = {
-    topicRequired: "Escolha um Topico!",
-    titleRequired: "Insira um Titulo!",
-    bodyRequired: "Insira um Corpo!",
+    topicRequired: "Choose a Topic!",
+    titleRequired: "Enter a Title!",
+    bodyRequired: "Insert a Body!",
   };
   const validationSchema = Yup.object().shape({
     topic: Yup.string().required(validationMsg.topicRequired),
@@ -51,7 +51,7 @@ export default function Modal({ title }) {
         onClick={openModal}
         className="px-6 py-2 text-md font-bold text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
-        Criar Post
+        Create Post
       </button>
       <Transition show={open} as={Fragment}>
         <Dialog
@@ -106,7 +106,7 @@ export default function Modal({ title }) {
                   <Form className="mt-10">
                     <div className="py-1">
                       <label htmlFor="topic" className="mr-2">
-                        Escolha to Topico:
+                        Choose Topic:
                       </label>
 
                       <div className="relative inline-flex">
@@ -128,10 +128,10 @@ export default function Modal({ title }) {
                           className="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
                         >
                           <option value=""></option>
-                          <option value="Comida"></option>
-                          <option value="Carros">Carros</option>
-                          <option value="Programacao">Programação</option>
-                          <option value="Outros">Outros</option>
+                          <option value="Food">Food</option>
+                          <option value="Cars">Cars</option>
+                          <option value="Programing">Programing</option>
+                          <option value="Random">Random</option>
                         </Field>
                       </div>
                       <div className="">
@@ -147,14 +147,14 @@ export default function Modal({ title }) {
                         htmlFor="email"
                         className="block text-xs font-semibold text-gray-600 uppercase"
                       >
-                        Titulo
+                        Title
                       </label>
 
                       <Field
                         id="title"
                         type="text"
                         name="title"
-                        placeholder="Titulo do Post"
+                        placeholder="Title of Post"
                         className="block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
                         required
                       />
@@ -171,14 +171,14 @@ export default function Modal({ title }) {
                         htmlFor="email"
                         className="block text-xs font-semibold text-gray-600 uppercase"
                       >
-                        Corpo do Post
+                        Body Post
                       </label>
 
                       <Field
                         as="textarea"
                         id="body"
                         name="body"
-                        placeholder="Corpo"
+                        placeholder="Body"
                         className="block w-full py-3 px-1 mt-2 text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
                         required
                       />
@@ -191,19 +191,16 @@ export default function Modal({ title }) {
                       </div>
                     </div>
                     <div className="mt-5">
-                      <button
-                        type="submit"
-                        className="inline-flex justify-center w-36 px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                      >
-                        Criar
+                      <button type="submit" className="buttonBlue w-36">
+                        Create
                       </button>
 
                       <button
                         type="button"
-                        className="inline-flex justify-center ml-4 px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                        className="buttonRed"
                         onClick={closeModal}
                       >
-                        Cancelar
+                        Cancel
                       </button>
                     </div>
                   </Form>

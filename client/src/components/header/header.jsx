@@ -73,7 +73,7 @@ export default function Header(createPost) {
     if (createPost.createPost == true) {
       return (
         <div>
-          <Modal title={"Adicionar Novo Post"} />
+          <Modal title={"New Post"} />
         </div>
       );
       /* <button

@@ -23,7 +23,6 @@ app.use((req, res, next) => {
     "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Origin"
   );
 
-  //app.use(cors({credentials: true, origin: 'http://localhost:3000'}));//
   next();
 });
 

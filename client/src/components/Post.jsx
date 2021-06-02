@@ -130,7 +130,8 @@ export default function Post({ postData }) {
                     <button
                       id="postComment"
                       type="submit"
-                      className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                      //className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-500 rounded shadow ripple hover:shadow-lg hover:bg-blue-600 focus:outline-none"
+                      className="buttonBlue w-36"
                     >
                       Commentar
                     </button>

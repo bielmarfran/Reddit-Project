@@ -124,7 +124,7 @@ export default function MenuDrop() {
                             aria-hidden="true"
                           />
                         )}
-                        <div className="ml-2">Sair</div>
+                        <div className="ml-2">Exit</div>
                       </button>
                     )}
                   </Menu.Item>

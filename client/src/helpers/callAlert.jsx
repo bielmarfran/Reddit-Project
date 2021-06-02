@@ -8,7 +8,7 @@ export function callAlert(state) {
   if (typeof state.error !== "undefined") {
     return <AlertWarningRed errorMsg={state.error} />;
   } else if (typeof state.message !== "undefined") {
-    return <AlertAtentionBlue errorMsg={state.message} />;
+    return <AlertAtentionBlue atentionMsg={state.message} />;
   } else if (typeof state.success !== "undefined") {
     return <AlertSuccessGreen successMsg={state.message} />;
   } else if (typeof state !== "undefined") {
