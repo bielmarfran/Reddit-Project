@@ -14,7 +14,7 @@ function Profile({ data }) {
   useEffect(() => {
     getProfileInfo({ email: email }).then((response) => {
       if (typeof response.error !== "undefined")
-        history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+        history.push("/login", { error: "Unauthorized access / Expirado" });
       if (response == "TypeError: Failed to fetch")
         history.push("/login", { error: "Servidor Off" });
       setProfileData(response);

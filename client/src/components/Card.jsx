@@ -114,9 +114,9 @@ export default function Card({ profileData }) {
                 <div className="flex flex-row items-center justify-between">
                   <div className="flex flex-col">
                     <div className="text-xs uppercase font-light text-gray-500">
-                      REPUTAION
+                      REPUTATION
                     </div>
-                    <div className="text-xl font-bold">45</div>
+                    <div className="text-xl font-bold">75</div>
                   </div>
                   <BadgeCheckIcon className="self-center w-7 h-7 ml-auto" />
                 </div>
@@ -131,22 +131,8 @@ export default function Card({ profileData }) {
                     <div className="text-xs uppercase font-light text-gray-500">
                       STARS
                     </div>
-                    <div className="text-xl font-bold">45</div>
+                    <div className="text-xl font-bold">1</div>
                   </div>
-                  {/* <svg
-                    className="stroke-current text-gray-500"
-                    fill="none"
-                    height="24"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    viewbox="0 0 24 24"
-                    width="24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                  </svg> */}
                   <StarIcon className="self-center w-7 h-7 ml-auto" />
                 </div>
               </div>

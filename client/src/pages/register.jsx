@@ -20,22 +20,22 @@ function Register() {
     console.log(data);
     const response = await performRegister(data);
     console.log(response);
-    if (response.response === "Conta Criada com sucesso") {
+    if (response.response === "Account created successfully") {
       history.push("/login", { message: response.response });
-    } else if (response.error == "Email ja existe!") {
+    } else if (response.error == "Email already in use!") {
       setMsg(response.error);
-    } else if (response.error == "Username ja existe!") {
+    } else if (response.error == "Username already in use!") {
       setMsg(response.error);
     }
   };
   const validationMsg = {
-    usernameMin: "Mínimo 4 caracteres!",
-    usernameRequired: "Insira um username!",
-    email: "Insira um email valido!",
-    emailRequired: "Insira um email!",
-    passwordRequired: "Insira uma senha!",
-    passwordMin: "Mínimo 8 caracteres!",
-    passwordMax: "Máximo de 32 caracteres!",
+    usernameMin: "Minimum 4 characters!",
+    usernameRequired: "Please enter a username!",
+    email: "Please enter a valid email!",
+    emailRequired: "Please enter an email!",
+    passwordRequired: "Please enter a password!",
+    passwordMin: "Minimum 8 characters!",
+    passwordMax: "Maximum 32 characters!",
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string()

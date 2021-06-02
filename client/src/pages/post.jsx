@@ -14,7 +14,7 @@ function Post({ data }) {
   useEffect(() => {
     getPost(id).then((response) => {
       if (typeof response.error !== "undefined")
-        history.push("/login", { error: "Acesso não Autorizado" });
+        history.push("/login", { error: "Unauthorized access" });
       if (response == "TypeError: Failed to fetch")
         history.push("/login", { error: "Servidor Off" });
 

@@ -11,8 +11,8 @@ export default function PostCard({ postData, getValue }) {
   const author = postData.user.username;
   const title = postData.title;
   const comments = postData.countComments;
-  var t = getTime(postData.updatedAt);
-  var time = t;
+  var time = getTime(postData.createdAt);
+
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10">
       <div className="flex border border-grey-light-alt hover:border-grey rounded bg-white cursor-pointer hover:shadow-lg">
@@ -71,8 +71,8 @@ export default function PostCard({ postData, getValue }) {
     const response = await deletePost(uuid);
     if (response.response == "Post Deleted!") {
       getValue(uuid);
-    } else if (response.error == "Acesso não autorizado") {
-      history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+    } else if (response.error == "Unauthorized access") {
+      history.push("/login", { error: "Unauthorized access / Expirado" });
     }
   }
   function removePost() {

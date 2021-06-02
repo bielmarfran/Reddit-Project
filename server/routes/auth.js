@@ -46,9 +46,9 @@ router.post("/", async (req, res) => {
     const user = await User.findOne({ where: { email: email } }).then(
       async function (user) {
         if (!user) {
-          return res.status(400).json({ error: "Acesso não autorizado" });
+          return res.status(400).json({ error: "Unauthorized access" });
         } else if (!(await user.validPassword(password))) {
-          return res.status(400).json({ error: "Acesso não autorizado" });
+          return res.status(400).json({ error: "Unauthorized access" });
         }
         const acessToken = createTokens(user);
         res.cookie("access-token", acessToken, {
@@ -67,16 +67,13 @@ router.post("/", async (req, res) => {
           sameSite: "Strict",
           domain: "localhost",
         });
-        return res.json({ response: "Logado com Sucesso" });
+        return res.json({ response: "Successfully logged in" });
       }
     );
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error Get" });
+    return res.status(500).json({ error: "Login Error" });
   }
-});
-router.post("/", (req, res) => {
-  res.send("Test");
 });
 
 router.post("/register", async (req, res) => {
@@ -86,14 +83,14 @@ router.post("/register", async (req, res) => {
     const userEmail = await User.findOne({ where: { email } });
 
     if (userUsername != null) {
-      res.status(418).send({ error: "Username ja existe!" });
+      res.status(418).send({ error: "Username already in use!" });
     } else if (userEmail != null) {
-      res.status(418).send({ error: "Email ja existe!" });
+      res.status(418).send({ error: "Email already in use!" });
     } else {
       const user = await User.create({ username, email, password });
     }
 
-    return res.json({ response: "Conta Criada com sucesso" });
+    return res.json({ response: "Account created successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);

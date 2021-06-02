@@ -18,7 +18,7 @@ function Feed() {
   useEffect(() => {
     getAllPosts("").then((response) => {
       if (typeof response.error !== "undefined")
-        history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+        history.push("/login", { error: "Unauthorized access / Expirado" });
       if (response == "TypeError: Failed to fetch")
         history.push("/login", { error: "Servidor Off" });
 

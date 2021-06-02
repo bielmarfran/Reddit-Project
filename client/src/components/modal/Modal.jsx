@@ -29,7 +29,7 @@ export default function Modal({ title }) {
     console.log(response);
     if (response.uuid != null) {
       closeModal();
-    } else if (response.error == "Acesso não autorizado") {
+    } else if (response.error == "Unauthorized access") {
       showAlert(response.error);
     }
   };

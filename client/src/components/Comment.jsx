@@ -65,8 +65,8 @@ export default function Comment({
 
     if (response.response == "Comment Deleted!") {
       removeCommentDOM(uuid);
-    } else if (response.error == "Acesso não autorizado") {
-      history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+    } else if (response.error == "Unauthorized access") {
+      history.push("/login", { error: "Unauthorized access / Expirado" });
     }
   }
   async function handleClickEditComment() {
@@ -75,8 +75,8 @@ export default function Comment({
     // const response = await deleteComment(uuid, postUuid);
     // if (response.response == "Comment Deleted!") {
     //   removeCommentDOM(uuid);
-    // } else if (response.error == "Acesso não autorizado") {
-    //   history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+    // } else if (response.error == "Unauthorized access") {
+    //   history.push("/login", { error: "Unauthorized access / Expirado" });
     // }
   }
 

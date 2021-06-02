@@ -15,9 +15,7 @@ export default function Post({ postData }) {
   const title = postData.posts.title;
   const body = postData.posts.body;
   const commentsCount = postData.posts.countComments;
-  //const comments = postData.posts.comments;
-  var t = getTime(postData.posts.updatedAt);
-  var time = t;
+  var time = getTime(postData.posts.createdAt);
 
   useEffect(() => {
     setListComments(postData.posts.comments);
@@ -46,8 +44,8 @@ export default function Post({ postData }) {
       newList.push(response);
       setListComments(newList);
       resetForm({});
-    } else if (response.error == "Acesso não autorizado") {
-      history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+    } else if (response.error == "Unauthorized access") {
+      history.push("/login", { error: "Unauthorized access / Expirado" });
     }
   };
 
@@ -65,8 +63,8 @@ export default function Post({ postData }) {
       resetForm({});
       setEditComment({ edit: false, info: "" });
       setInitialValues({ body: "" });
-    } else if (response.error == "Acesso não autorizado") {
-      history.push("/login", { error: "Acesso não Autorizado / Expirado" });
+    } else if (response.error == "Unauthorized access") {
+      history.push("/login", { error: "Unauthorized access / Expirado" });
     }
   };
   const validationMsg = {

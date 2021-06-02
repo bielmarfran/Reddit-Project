@@ -17,18 +17,18 @@ function Login({ location }) {
     console.log(data);
     const response = await performLogin(data);
     console.log(response);
-    if (response.response == "Logado com Sucesso") {
+    if (response.response == "Successfully logged in") {
       history.push("/", { message: response.response });
-    } else if (response.error == "Acesso não autorizado") {
+    } else if (response.error == "Unauthorized access") {
       showAlert(response.error);
     }
   };
   const validationMsg = {
-    email: "Insira um email valido!",
-    emailRequired: "Insira um email!",
-    passwordRequired: "Insira uma senha!",
-    passwordMin: "Mínimo 8 caracteres!",
-    passwordMax: "Máximo de 32 caracteres!",
+    email: "Please enter a valid email!",
+    emailRequired: "Please enter an email!",
+    passwordRequired: "Please enter a password!",
+    passwordMin: "Minimum 8 characters!",
+    passwordMax: "Maximum 32 characters!",
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -112,7 +112,7 @@ function Login({ location }) {
 
                 <div className="sm:flex sm:flex-wrap mt-8 sm:mb-4 text-sm text-center">
                   <a onClick={handleClick} className="flex-2 underline">
-                    Criar Conta
+                    Create an account
                   </a>
                 </div>
               </Form>
