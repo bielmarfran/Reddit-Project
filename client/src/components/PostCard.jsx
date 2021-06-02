@@ -29,7 +29,7 @@ export default function PostCard({ postData, getValue }) {
               <span className="ml-2">{topic}</span>
             </a>
             <span className="text-grey-light mx-1 text-xxs">•</span>
-            <span className="text-grey">Posted by</span>
+            <span className="text-grey hidden  md:block">Posted by</span>
             <button
               href="#"
               className="text-grey mx-1 no-underline hover:underline"

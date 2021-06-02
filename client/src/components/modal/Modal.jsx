@@ -49,7 +49,7 @@ export default function Modal({ title }) {
       <button
         type="button"
         onClick={openModal}
-        className="px-6 py-2 text-md font-bold text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        className="px-6 py-2 mx-2 text-md font-bold text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
         Create Post
       </button>
