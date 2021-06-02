@@ -25,7 +25,6 @@ router.get("/", async (req, res) => {
 
 router.get("/:uuid", async (req, res) => {
   const uuid = req.params.uuid;
-  //console.log("DENTRO ROTA",req.uuid);
   try {
     var post = await Post.findOne({
       where: { uuid },

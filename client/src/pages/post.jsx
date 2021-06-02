@@ -19,13 +19,8 @@ function Post({ data }) {
         history.push("/login", { error: "Servidor Off" });
 
       setPost(response);
-      console.log(response);
     });
   }, []);
-  /**
-   *
-   */
-  console.log(post);
   return (
     <div className="bg-gray-200">
       <Header createPost={false} />

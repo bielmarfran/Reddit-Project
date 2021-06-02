@@ -1,18 +1,33 @@
 const express = require("express");
 const router = express.Router();
 const { createTokens, validateToken } = require("../Middleware/jtw");
-const { sequelize, User, Post } = require("../models");
+const { sequelize, User, Post, Comment } = require("../models");
 
 router.get("/:email", validateToken, async (req, res) => {
   //const { email } = req.body;
   const email = req.params.email;
-  console.log(req.email);
   try {
     const user = await User.findOne({
       where: { email },
-      include: "posts",
+      // include: [
+      //   {
+      //     model: Comment,
+      //     as: "comments",
+      //   },
+      //   {
+      //     model: Post,
+      //     as: "posts",
+
+      //   },
+      // ],
+      //include: "posts",
     });
-    console.log(req.username, user.dataValues.username);
+    const countComments = await Comment.count({ where: { userId: user.id } });
+    const countPosts = await Post.count({ where: { userId: user.id } });
+
+    console.log(countComments, countPosts);
+    user.dataValues["countComments"] = countComments;
+    user.dataValues["countPosts"] = countPosts;
     if (req.username == user.dataValues.username) {
       user.dataValues["owner"] = true;
     } else {

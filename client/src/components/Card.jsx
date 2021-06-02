@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { XIcon } from "@heroicons/react/solid";
+import {
+  StarIcon,
+  ChatIcon,
+  PencilIcon,
+  BadgeCheckIcon,
+} from "@heroicons/react/outline";
 import Dropzone from "react-dropzone";
 import { callAlert } from "../helpers/callAlert";
 import getTimeFull from "../helpers/getTimeFull";
@@ -14,6 +20,7 @@ export default function Card({ profileData }) {
   const [loadCover, setLoadCover] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  console.log(profileData);
 
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10 z-0">
@@ -63,8 +70,90 @@ export default function Card({ profileData }) {
               </div>
             </div>
           </div>
+          <div className="col-span-1">
+            <div className="w-full p-5">
+              <div className="widget w-full p-4 rounded-lg bg-white border border-gray-300 dark:bg-gray-900 dark:border-gray-800">
+                <div className="flex flex-row items-center justify-between">
+                  <div className="flex flex-col">
+                    <div className="text-xs uppercase font-light text-gray-500">
+                      POST
+                    </div>
+                    <div className="text-xl font-bold">
+                      {profileData.length !== undefined
+                        ? profileData.username
+                        : profileData.countPosts}
+                    </div>
+                  </div>
+                  <PencilIcon className="self-center w-7 h-7 ml-auto" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-span-1">
+            <div className="w-full p-5">
+              <div className="widget w-full p-4 rounded-lg bg-white border border-gray-300 dark:bg-gray-900 dark:border-gray-800">
+                <div className="flex flex-row items-center justify-between">
+                  <div className="flex flex-col">
+                    <div className="text-xs uppercase font-light text-gray-500">
+                      COMMENTS
+                    </div>
+                    <div className="text-xl font-bold">
+                      {profileData.length !== undefined
+                        ? profileData.username
+                        : profileData.countComments}
+                    </div>
+                  </div>
+                  <ChatIcon className="self-center w-7 h-7 ml-auto" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-span-1">
+            <div className="w-full p-5">
+              <div className="widget w-full p-4 rounded-lg bg-white border border-gray-300 dark:bg-gray-900 dark:border-gray-800">
+                <div className="flex flex-row items-center justify-between">
+                  <div className="flex flex-col">
+                    <div className="text-xs uppercase font-light text-gray-500">
+                      REPUTAION
+                    </div>
+                    <div className="text-xl font-bold">45</div>
+                  </div>
+                  <BadgeCheckIcon className="self-center w-7 h-7 ml-auto" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-span-1">
+            <div className="w-full p-5">
+              <div className="widget w-full p-4 rounded-lg bg-white border border-gray-300 dark:bg-gray-900 dark:border-gray-800">
+                <div className="flex flex-row items-center justify-between">
+                  <div className="flex flex-col">
+                    <div className="text-xs uppercase font-light text-gray-500">
+                      STARS
+                    </div>
+                    <div className="text-xl font-bold">45</div>
+                  </div>
+                  {/* <svg
+                    className="stroke-current text-gray-500"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewbox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                  </svg> */}
+                  <StarIcon className="self-center w-7 h-7 ml-auto" />
+                </div>
+              </div>
+            </div>
+          </div>
           {profileData.owner ? (
-            <div className="col-span-4">
+            <div className="col-span-2">
               <div className="col-span-2 p-5">
                 <label className="block text-sm font-medium text-gray-700">
                   Profile photo
@@ -115,7 +204,7 @@ export default function Card({ profileData }) {
                             <div className="flex text-sm text-gray-600">
                               <label
                                 htmlFor="file-upload"
-                                className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
                               >
                                 <span>Upload a file</span>
                                 <input {...getInputProps()} />
@@ -182,7 +271,7 @@ export default function Card({ profileData }) {
                             <div className="flex text-sm text-gray-600">
                               <label
                                 htmlFor="file-upload"
-                                className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
                               >
                                 <span>Upload a file</span>
                                 <input {...getInputProps()} />
@@ -199,13 +288,16 @@ export default function Card({ profileData }) {
                   )}
                 </Dropzone>
               </div>
-              <button
-                type="button"
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onClick={saveFiles}
-              >
-                Save
-              </button>
+              <div className="col-span-2 p-5">
+                <button
+                  type="button"
+                  //className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="buttonBlue w-full"
+                  onClick={saveFiles}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           ) : (
             ""
@@ -319,7 +411,7 @@ function getUsernameCookie() {
               id="about"
               name="about"
               rows={3}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+              className="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
               placeholder="you@example.com"
               defaultValue={""}
             />
@@ -350,7 +442,7 @@ function getUsernameCookie() {
               </div>
               <button
                 type="button"
-                className="ml-8 mt-4 mb-4 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="ml-8 mt-4 mb-4 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 Change
               </button>
