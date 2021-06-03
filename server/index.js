@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = 8080;
 const cors = require("cors");
-//const db = require("./db");
+require("dotenv").config();
+var production = false;
+if (process.env.PORT !== undefined) {
+  production = true;
+}
 
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
@@ -12,10 +16,23 @@ const { sequelize, User, Post, Comment } = require("./models");
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
-app.options("*", cors({ credentials: true, origin: "http://localhost:3000" }));
+app.options(
+  "*",
+  cors({
+    credentials: true,
+    origin: production
+      ? "https://thirsty-villani-f5cdd2.netlify.app"
+      : "http://localhost:3000",
+  })
+);
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Origin",
+    production
+      ? "https://thirsty-villani-f5cdd2.netlify.app"
+      : "http://localhost:3000"
+  );
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -37,7 +54,7 @@ app.use("/comment", validateToken, commentRouter);
 const authRouter = require("./routes/auth");
 app.use("/auth", authRouter);
 
-app.listen(PORT, async () => {
+app.listen(process.env.PORT || PORT, async () => {
   console.log(`its alive on http://localhost:${PORT}`);
   await sequelize.authenticate();
   console.log("Database Connected");

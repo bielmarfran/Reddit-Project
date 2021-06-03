@@ -5,7 +5,7 @@ let headers = new Headers();
 
 headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
-headers.append("Origin", "http://localhost:3000");
+//headers.append("Origin", "https://thirsty-villani-f5cdd2.netlify.app/");
 
 export async function performRegister(requestInfo) {
   const usernameUser = requestInfo.username;
@@ -32,7 +32,7 @@ export async function performRegister(requestInfo) {
 
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
-    headers.append("Origin", "http://localhost:3000");
+    headers.append("Origin", "https://thirsty-villani-f5cdd2.netlify.app/");
 
     const usernameUser = data.username;
     const emailUser = data.email;

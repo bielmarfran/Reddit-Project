@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { createTokens, validateToken } = require("../Middleware/jtw");
 const { sequelize, User, Post, Comment } = require("../models");
+var production = false;
+if (process.env.PORT !== undefined) {
+  production = true;
+}
 
 router.get("/:email", validateToken, async (req, res) => {
   //const { email } = req.body;
@@ -55,17 +59,21 @@ router.post("/", async (req, res) => {
           maxAge: 60 * 60 * 24 * 30 * 1000, //
           httpOnly: true,
           path: "/",
-          secure: false,
-          sameSite: "Strict",
-          domain: "localhost",
+          secure: true,
+          sameSite: "none",
+          domain: production
+            ? "social-plataform-backend.herokuapp.com"
+            : "localhost",
         });
         res.cookie("username", user.username, {
           maxAge: 60 * 60 * 24 * 30 * 1000,
           httpOnly: false,
           path: "/",
-          secure: false,
-          sameSite: "Strict",
-          domain: "localhost",
+          secure: true,
+          sameSite: "none",
+          domain: production
+            ? "social-plataform-backend.herokuapp.com"
+            : "localhost",
         });
         return res.json({ response: "Successfully logged in" });
       }

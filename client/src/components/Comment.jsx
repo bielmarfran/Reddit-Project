@@ -4,7 +4,10 @@ import { deleteComment } from "../helpers/api/commentOperations";
 import { useHistory } from "react-router-dom";
 import { PencilAltIcon as PencilAltIconSolid } from "@heroicons/react/solid";
 import { PencilAltIcon as PencilAltIconOutline } from "@heroicons/react/outline";
-const baseUrl = import.meta.env.VITE_API_URL;
+var baseUrl;
+window.location.hostname === "localhost"
+  ? (baseUrl = import.meta.env.VITE_API_URL_DEV)
+  : (baseUrl = import.meta.env.VITE_API_URL_PRODUTION);
 
 export default function Comment({
   commentData,

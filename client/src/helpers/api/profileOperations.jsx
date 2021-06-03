@@ -5,7 +5,7 @@ let headers = new Headers();
 
 headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
-headers.append("Origin", "http://localhost:3000");
+//headers.append("Origin", "https://thirsty-villani-f5cdd2.netlify.app/");
 
 export async function getProfileInfo(requestInfo) {
   const emailUser = requestInfo.email;

@@ -1,5 +1,8 @@
 import React from "react";
-const baseUrl = import.meta.env.VITE_API_URL;
+var baseUrl;
+window.location.hostname === "localhost"
+  ? (baseUrl = import.meta.env.VITE_API_URL_DEV)
+  : (baseUrl = import.meta.env.VITE_API_URL_PRODUTION);
 
 export async function getApi(request) {
   try {

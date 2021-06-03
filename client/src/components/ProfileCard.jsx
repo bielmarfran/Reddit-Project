@@ -11,8 +11,10 @@ import Dropzone from "react-dropzone";
 import { callAlert } from "../helpers/callAlert";
 import getTimeFull from "../helpers/getTimeFull";
 import { postFile } from "../helpers/api/profileOperations";
-const baseUrl = import.meta.env.VITE_API_URL;
-
+var baseUrl;
+window.location.hostname === "localhost"
+  ? (baseUrl = import.meta.env.VITE_API_URL_DEV)
+  : (baseUrl = import.meta.env.VITE_API_URL_PRODUTION);
 export default function ProfileCard({ profileData }) {
   let history = useHistory();
   const [fileCover, setFileCover] = useState({ show: false, file: "" });

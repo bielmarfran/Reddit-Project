@@ -4,7 +4,10 @@ import { useHistory } from "react-router-dom";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { performLogout } from "../../helpers/api/authOperations";
-const baseUrl = import.meta.env.VITE_API_URL;
+var baseUrl;
+window.location.hostname === "localhost"
+  ? (baseUrl = import.meta.env.VITE_API_URL_DEV)
+  : (baseUrl = import.meta.env.VITE_API_URL_PRODUTION);
 
 export default function MenuDrop() {
   const [loadProfile, setLoadProfile] = useState(true);
