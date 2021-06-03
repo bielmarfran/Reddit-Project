@@ -6,10 +6,9 @@ import PostCard from "../components/PostCard";
 import Header from "../components/header/header";
 import Footer from "../components/footer";
 
-function Feed() {
+function Feed(props) {
   let history = useHistory();
   const [listOfPosts, setListOfPosts] = useState([]);
-  //console.log(this.props);
   const getValue = (data) => {
     const newList = listOfPosts.filter((item) => item.uuid !== data);
     setListOfPosts(newList);

@@ -7,18 +7,16 @@ import * as Yup from "yup";
 
 function Login({ location }) {
   let history = useHistory();
-  console.log(location);
 
   const initialValues = {
     email: "",
     password: "",
   };
   const onSubmit = async (data) => {
-    console.log(data);
     const response = await performLogin(data);
-    console.log(response);
     if (response.response == "Successfully logged in") {
-      history.push("/", { message: response.response });
+      history.push("/", { email: data.email });
+      localStorage.setItem("email", data.email);
     } else if (response.error == "Unauthorized access") {
       showAlert(response.error);
     }

@@ -16,6 +16,7 @@ export default function Post({ postData }) {
   const body = postData.posts.body;
   const commentsCount = postData.posts.countComments;
   var time = getTime(postData.posts.createdAt);
+  const email = localStorage.getItem("email");
 
   useEffect(() => {
     setListComments(postData.posts.comments);
@@ -132,8 +133,7 @@ export default function Post({ postData }) {
               >
                 <Form className="">
                   <p className="text-xs ml-0.5 mb-0.5">
-                    Comment as{" "}
-                    <a className="text-blue-500">{getUsernameCookie()}</a>
+                    Comment as <a className="text-blue-500">{email}</a>
                   </p>
                   <Field
                     className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"

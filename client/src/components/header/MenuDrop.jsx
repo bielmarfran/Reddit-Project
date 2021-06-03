@@ -8,9 +8,9 @@ var baseUrl;
 window.location.hostname === "localhost"
   ? (baseUrl = import.meta.env.VITE_API_URL_DEV)
   : (baseUrl = import.meta.env.VITE_API_URL_PRODUTION);
-
 export default function MenuDrop() {
   const [loadProfile, setLoadProfile] = useState(true);
+  const email = localStorage.getItem("email");
   let history = useHistory();
   return (
     <div className="">
@@ -23,7 +23,7 @@ export default function MenuDrop() {
                   <img
                     id="profile"
                     className="rounded-full border  h-11 w-11"
-                    src={`${baseUrl}/public/profile${getUsernameCookie()}.jpg`}
+                    src={`${baseUrl}/public/profile${email}.jpg`}
                     onError={setDefaultImg}
                   />
                 ) : (
@@ -35,9 +35,7 @@ export default function MenuDrop() {
                 )}
 
                 <div className="ml-4 text-center self-center">
-                  {typeof getUsernameCookie() !== "undefined"
-                    ? getUsernameCookie()
-                    : "Username"}
+                  {typeof email !== "undefined" ? email : "Username"}
                 </div>
 
                 <ChevronDownIcon
@@ -132,7 +130,7 @@ export default function MenuDrop() {
   }
 
   async function showProfile() {
-    history.push(`/profile/${getUsernameCookie()}`);
+    history.push(`/profile/${email}`);
   }
   async function setDefaultImg() {
     setLoadProfile(false);
