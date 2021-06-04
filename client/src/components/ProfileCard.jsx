@@ -33,7 +33,7 @@ export default function ProfileCard({ profileData }) {
             <div className="top h-64 w-full bg-blue-600 overflow-hidden relative rounded">
               {loadCover ? (
                 <img
-                  src={`${baseUrl}/public/cover${profileData.email}.jpg`}
+                  src={`${profileData.coverPicture}`}
                   onError={setDefaultCoverImg}
                   alt="Cover Image"
                   className="bg w-full h-full object-cover object-center absolute z-0"
@@ -51,7 +51,7 @@ export default function ProfileCard({ profileData }) {
                   <img
                     id="profile"
                     className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100 border-solid border-4 border-gray-800"
-                    src={`${baseUrl}/public/${profileData.profilePicture}`}
+                    src={`${profileData.profilePicture}`}
                     onError={setDefaultImg}
                   />
                 ) : (

@@ -15,8 +15,10 @@ function Login({ location }) {
   const onSubmit = async (data) => {
     const response = await performLogin(data);
     if (response.response == "Successfully logged in") {
-      history.push("/", { email: data.email });
       localStorage.setItem("email", data.email);
+      localStorage.setItem("cover", response.photos.cover);
+      localStorage.setItem("profile", response.photos.profile);
+      history.push("/", { email: data.email });
     } else if (response.error == "Unauthorized access") {
       showAlert(response.error);
     }

@@ -11,6 +11,7 @@ window.location.hostname === "localhost"
 export default function MenuDrop() {
   const [loadProfile, setLoadProfile] = useState(true);
   const email = localStorage.getItem("email");
+  const profile = localStorage.getItem("profile");
   let history = useHistory();
   return (
     <div className="">
@@ -23,7 +24,7 @@ export default function MenuDrop() {
                   <img
                     id="profile"
                     className="rounded-full border  h-11 w-11"
-                    src={`${baseUrl}/public/profile${email}.jpg`}
+                    src={`${profile}`}
                     onError={setDefaultImg}
                   />
                 ) : (

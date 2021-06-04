@@ -65,17 +65,14 @@ router.post("/", async (req, res) => {
             ? "social-plataform-backend.herokuapp.com"
             : "localhost",
         });
-        res.cookie("username", user.username, {
-          maxAge: 60 * 60 * 24 * 30 * 1000,
-          httpOnly: false,
-          path: "/",
-          secure: true,
-          sameSite: "none",
-          domain: production
-            ? "social-plataform-backend.herokuapp.com"
-            : "localhost",
-        });
-        return res.json({ response: "Successfully logged in" });
+        console.log(user.dataValues);
+        return res.json({
+          response: "Successfully logged in",
+          photos: {
+            profile: user.dataValues.profilePicture,
+            cover: user.dataValues.coverPicture,
+          },
+        }); //
       }
     );
   } catch (error) {
