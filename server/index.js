@@ -77,14 +77,6 @@ app.post("/logout", validateToken, async (req, res) => {
           sameSite: "Strict",
           domain: "localhost",
         });
-        res.cookie("username", user.username, {
-          maxAge: 0,
-          httpOnly: false,
-          path: "/",
-          secure: false,
-          sameSite: "Strict",
-          domain: "localhost",
-        });
 
         return res.json({ response: "Logout Successful" });
       }
@@ -119,7 +111,9 @@ app.post("/upload", validateToken, async (req, res) => {
       uploadPath,
       { folder: `social/${place}/` },
       function (error, result) {
-        user.profilePicture = result.secure_url;
+        place === "profile"
+          ? (user.profilePicture = result.secure_url)
+          : (user.coverPicture = result.secure_url);
         user.save();
         fs.rmSync(uploadPath, {
           force: true,

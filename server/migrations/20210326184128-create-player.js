@@ -28,6 +28,10 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      coverPicture: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
