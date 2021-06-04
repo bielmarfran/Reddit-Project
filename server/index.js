@@ -66,6 +66,7 @@ app.listen(process.env.PORT || PORT, async () => {
 });
 
 //app.use("/public", express.static("./public"));
+
 //app.use(express.static("/public"));
 /*
 app.get("/public", (req, res) => {

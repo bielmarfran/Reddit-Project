@@ -8,7 +8,6 @@ router.get("/", async (req, res) => {
   try {
     const user = await User.findOne({ where: { uuid: uuid } });
     const post = await Post.findAll({ include: "user" });
-    console.log(post);
 
     post.forEach((element) => {
       element.dataValues.username = user.username;
@@ -68,7 +67,7 @@ router.post("/", async (req, res) => {
     const post = await Post.create({ topic, title, body, userId: user.id });
     post.dataValues.owner = true;
     post.dataValues.user = { username: user.username, email: user.email };
-
+    console.log("---------------", post);
     return res.json(post);
   } catch (error) {
     console.log(error);

@@ -5,7 +5,7 @@ import { createPost } from "../../helpers/api/postOperations";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-export default function Modal({ title }) {
+export default function Modal(props) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef();
 
@@ -23,11 +23,9 @@ export default function Modal({ title }) {
   };
 
   const onSubmit = async (data) => {
-    //console.log(data);
-
     const response = await createPost(data);
-    console.log(response);
     if (response.uuid != null) {
+      props.addPostDOM(response);
       closeModal();
     } else if (response.error == "Unauthorized access") {
       showAlert(response.error);
@@ -96,7 +94,7 @@ export default function Modal({ title }) {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  {title}
+                  {props.title}
                 </Dialog.Title>
                 <Formik
                   initialValues={initialValues}

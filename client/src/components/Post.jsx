@@ -29,7 +29,6 @@ export default function Post({ postData }) {
 
   const editCommentDOM = (data) => {
     setEditComment({ edit: true, info: data.info });
-
     setInitialValues({ body: data.body });
   };
 

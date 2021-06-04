@@ -25,9 +25,16 @@ function Feed(props) {
     });
   }, []);
 
+  const addPostDOM = (data) => {
+    const newList = [...listOfPosts];
+    newList.push(data);
+    console.log(newList);
+    setListOfPosts(newList);
+  };
+
   return (
     <div className="bg-gray-200">
-      <Header createPost={true} />
+      <Header createPost={true} addPostDOM={addPostDOM} />
       <div className="flex flex-col h-screen justify-between">
         <div id="app" className="mb-auto grid">
           {Object.keys(listOfPosts).map((i) => (
