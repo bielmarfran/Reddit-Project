@@ -98,30 +98,35 @@ app.post("/upload", validateToken, async (req, res) => {
   }
 
   const user = await User.findOne({ where: { uuid: uuid } });
-
   sampleFile = req.files.myFile;
-  console.log(sampleFile);
   const ext = sampleFile.name.substring(sampleFile.name.lastIndexOf("."));
-  uploadPath = __dirname + "\\public\\" + place + req.username + ext;
+  uploadPath = production
+    ? __dirname + "//public//" + place + req.username + ext
+    : __dirname + "\\public\\" + place + req.username + ext;
 
   // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(uploadPath, function (err) {
-    if (err) return res.status(500).send(err);
-    cloudinary.uploader.upload(
-      uploadPath,
-      { folder: `social/${place}/` },
-      function (error, result) {
-        place === "profile"
-          ? (user.profilePicture = result.secure_url)
-          : (user.coverPicture = result.secure_url);
-        user.save();
-        fs.rmSync(uploadPath, {
-          force: true,
-        });
-        return res.json({ response: "File uploaded!" });
-      }
-    );
-  });
+  try {
+    sampleFile.mv(uploadPath, function (err) {
+      if (err) return res.status(500).send(err);
+      cloudinary.uploader.upload(
+        uploadPath,
+        { folder: `social/${place}/` },
+        function (error, result) {
+          console.log(error, result);
+          place === "profile"
+            ? (user.profilePicture = result.secure_url)
+            : (user.coverPicture = result.secure_url);
+          user.save();
+          fs.rmSync(uploadPath, {
+            force: true,
+          });
+          return res.json({ response: "File uploaded!", user });
+        }
+      );
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.use("/public", express.static("./public"));
