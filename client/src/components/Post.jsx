@@ -199,9 +199,3 @@ export default function Post({ postData }) {
     setInitialValues({ body: "" });
   }
 }
-function getUsernameCookie() {
-  var cookie = document.cookie;
-  var cookieUsername = cookie.substring(cookie.lastIndexOf("=") + 1);
-  var username = decodeURIComponent(cookieUsername);
-  return username;
-}

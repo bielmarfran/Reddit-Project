@@ -115,12 +115,6 @@ export default function MenuDrop() {
       </Menu>
     </div>
   );
-  function getUsernameCookie() {
-    var cookie = document.cookie;
-    var cookieUsername = cookie.substring(cookie.lastIndexOf("=") + 1);
-    var username = decodeURIComponent(cookieUsername);
-    return username;
-  }
 
   async function handleClickLogout() {
     const response = await performLogout();

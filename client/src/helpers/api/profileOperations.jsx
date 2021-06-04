@@ -23,7 +23,6 @@ export async function postFile(requestInfo) {
   const formData = new FormData();
   formData.append("myFile", requestInfo.myFile);
   formData.append("place", requestInfo.place);
-  console.log(formData);
   const request = {
     url: `/upload`,
     mode: "cors",

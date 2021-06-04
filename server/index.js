@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const PORT = 8080;
 const cors = require("cors");
+const fs = require("fs");
 require("dotenv").config();
+var cloudinary = require("cloudinary").v2;
+
 var production = false;
 if (process.env.PORT !== undefined) {
   production = true;
@@ -109,15 +112,21 @@ app.post("/upload", validateToken, async (req, res) => {
   const ext = sampleFile.name.substring(sampleFile.name.lastIndexOf("."));
   uploadPath = __dirname + "\\public\\" + place + req.username + ext;
 
-  user.profilePicture = place + req.username + ext;
-
-  user.save();
-  console.log(uploadPath);
-
   // Use the mv() method to place the file somewhere on your server
   sampleFile.mv(uploadPath, function (err) {
     if (err) return res.status(500).send(err);
-    return res.json({ response: "File uploaded!" });
+    cloudinary.uploader.upload(
+      uploadPath,
+      { folder: `social/${place}/` },
+      function (error, result) {
+        user.profilePicture = result.secure_url;
+        user.save();
+        fs.rmSync(uploadPath, {
+          force: true,
+        });
+        return res.json({ response: "File uploaded!" });
+      }
+    );
   });
 });
 

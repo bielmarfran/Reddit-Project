@@ -23,7 +23,6 @@ export default function ProfileCard({ profileData }) {
   const [loadCover, setLoadCover] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  console.log(profileData);
 
   return (
     <div className="w-full sm:w-10/12 md:8/12 lg:w-7/12  mx-auto py-2 px-10 z-0">
@@ -364,13 +363,6 @@ export default function ProfileCard({ profileData }) {
       console.warn(error);
     }
   }
-}
-
-function getUsernameCookie() {
-  var cookie = document.cookie;
-  var cookieUsername = cookie.substring(cookie.lastIndexOf("=") + 1);
-  var username = decodeURIComponent(cookieUsername);
-  return username;
 }
 
 {
