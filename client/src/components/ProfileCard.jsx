@@ -339,7 +339,10 @@ export default function ProfileCard({ profileData }) {
           place: "profile",
         });
         if (response.response != null) {
-          console.log(response);
+          localStorage.setItem("profile", response.user.profilePicture);
+          profileData.profilePicture = response.user.profilePicture;
+          setLoadProfile(true);
+          setFileProfile({ show: false, file: "" });
         } else if (response.error == "Unauthorized access") {
           history.push("/login", { error: "Unauthorized access / Expired" });
         }
@@ -354,7 +357,10 @@ export default function ProfileCard({ profileData }) {
           place: "cover",
         });
         if (response.response != null) {
-          console.log(response);
+          localStorage.setItem("cover", response.user.coverPicture);
+          profileData.coverPicture = response.user.coverPicture;
+          setLoadCover(true);
+          setFileCover({ show: false, file: "" });
         } else if (response.error == "Unauthorized access") {
           history.push("/login", { error: "Unauthorized access / Expired" });
         }

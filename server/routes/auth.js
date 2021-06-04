@@ -7,42 +7,42 @@ if (process.env.PORT !== undefined) {
   production = true;
 }
 
-router.get("/:email", validateToken, async (req, res) => {
-  //const { email } = req.body;
-  const email = req.params.email;
-  try {
-    const user = await User.findOne({
-      where: { email },
-      // include: [
-      //   {
-      //     model: Comment,
-      //     as: "comments",
-      //   },
-      //   {
-      //     model: Post,
-      //     as: "posts",
+// router.get("/:email", validateToken, async (req, res) => {
+//   //const { email } = req.body;
+//   const email = req.params.email;
+//   try {
+//     const user = await User.findOne({
+//       where: { email },
+//       // include: [
+//       //   {
+//       //     model: Comment,
+//       //     as: "comments",
+//       //   },
+//       //   {
+//       //     model: Post,
+//       //     as: "posts",
 
-      //   },
-      // ],
-      //include: "posts",
-    });
-    const countComments = await Comment.count({ where: { userId: user.id } });
-    const countPosts = await Post.count({ where: { userId: user.id } });
+//       //   },
+//       // ],
+//       //include: "posts",
+//     });
+//     const countComments = await Comment.count({ where: { userId: user.id } });
+//     const countPosts = await Post.count({ where: { userId: user.id } });
 
-    console.log(countComments, countPosts);
-    user.dataValues["countComments"] = countComments;
-    user.dataValues["countPosts"] = countPosts;
-    if (req.username == user.dataValues.username) {
-      user.dataValues["owner"] = true;
-    } else {
-      user.dataValues["owner"] = false;
-    }
-    return res.json(user);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "Error Get Auth" });
-  }
-});
+//     console.log(countComments, countPosts);
+//     user.dataValues["countComments"] = countComments;
+//     user.dataValues["countPosts"] = countPosts;
+//     if (req.username == user.dataValues.username) {
+//       user.dataValues["owner"] = true;
+//     } else {
+//       user.dataValues["owner"] = false;
+//     }
+//     return res.json(user);
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({ error: "Error Get Auth" });
+//   }
+// });
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
@@ -78,6 +78,30 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Login Error" });
+  }
+});
+
+router.post("/logout", validateToken, async (req, res) => {
+  const uuid = req.uuid;
+  try {
+    const user = await User.findOne({ where: { uuid: uuid } }).then(
+      async function (user) {
+        const acessToken = createTokens(user);
+        res.cookie("access-token", acessToken, {
+          maxAge: 0,
+          httpOnly: true,
+          path: "/",
+          secure: false,
+          sameSite: "Strict",
+          domain: "localhost",
+        });
+
+        return res.json({ response: "Logout Successful" });
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error POST" });
   }
 });
 

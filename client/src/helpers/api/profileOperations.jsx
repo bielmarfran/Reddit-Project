@@ -10,7 +10,7 @@ headers.append("Accept", "application/json");
 export async function getProfileInfo(requestInfo) {
   const emailUser = requestInfo.email;
   const request = {
-    url: `/auth/${emailUser}`,
+    url: `/profile/${emailUser}`,
     mode: "cors",
     credentials: "include",
     //headers: headers,
@@ -24,7 +24,7 @@ export async function postFile(requestInfo) {
   formData.append("myFile", requestInfo.myFile);
   formData.append("place", requestInfo.place);
   const request = {
-    url: `/upload`,
+    url: `/profile/upload`,
     mode: "cors",
     credentials: "include",
     body: formData,

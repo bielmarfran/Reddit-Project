@@ -23,7 +23,7 @@ export async function performLogin(requestInfo) {
 
 export async function performLogout() {
   const request = {
-    url: `/logout`,
+    url: `/auth/logout`,
     mode: "cors",
     credentials: "include",
     headers: headers,
