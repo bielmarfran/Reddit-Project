@@ -7,43 +7,6 @@ if (process.env.PORT !== undefined) {
   production = true;
 }
 
-// router.get("/:email", validateToken, async (req, res) => {
-//   //const { email } = req.body;
-//   const email = req.params.email;
-//   try {
-//     const user = await User.findOne({
-//       where: { email },
-//       // include: [
-//       //   {
-//       //     model: Comment,
-//       //     as: "comments",
-//       //   },
-//       //   {
-//       //     model: Post,
-//       //     as: "posts",
-
-//       //   },
-//       // ],
-//       //include: "posts",
-//     });
-//     const countComments = await Comment.count({ where: { userId: user.id } });
-//     const countPosts = await Post.count({ where: { userId: user.id } });
-
-//     console.log(countComments, countPosts);
-//     user.dataValues["countComments"] = countComments;
-//     user.dataValues["countPosts"] = countPosts;
-//     if (req.username == user.dataValues.username) {
-//       user.dataValues["owner"] = true;
-//     } else {
-//       user.dataValues["owner"] = false;
-//     }
-//     return res.json(user);
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({ error: "Error Get Auth" });
-//   }
-// });
-
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -65,9 +28,9 @@ router.post("/", async (req, res) => {
             ? "social-plataform-backend.herokuapp.com"
             : "localhost",
         });
-        console.log(user.dataValues);
         return res.json({
           response: "Successfully logged in",
+          username: user.dataValues.username,
           photos: {
             profile: user.dataValues.profilePicture,
             cover: user.dataValues.coverPicture,

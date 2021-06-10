@@ -16,12 +16,13 @@ export default function Comment({
   editCommentDOM,
 }) {
   let history = useHistory();
-  //console.log(commentData);
+  console.log(commentData);
   const [loadProfile, setLoadProfile] = useState(true);
   const [isShow, setIsShown] = useState(false);
   const uuid = commentData.uuid;
   const author = commentData.user.username;
   const body = commentData.body;
+  const profilePhoto = commentData.user.profilePicture;
   var time = getTime(commentData.updatedAt);
   time.includes(0) ? "now" : "";
   time.startsWith(0) ? (time = "now") : "";
@@ -42,7 +43,7 @@ export default function Comment({
             <img
               id={author}
               className="rounded-full border h-5 w-5"
-              src={`${baseUrl}/public/profile${author}.jpg`}
+              src={`${profilePhoto}`}
               onError={setDefaultImg}
             />
           ) : (
@@ -69,18 +70,11 @@ export default function Comment({
     if (response.response == "Comment Deleted!") {
       removeCommentDOM(uuid);
     } else if (response.error == "Unauthorized access") {
-      history.push("/login", { error: "Unauthorized access / Expirado" });
+      history.push("/login", { error: "Unauthorized access / Expired" });
     }
   }
   async function handleClickEditComment() {
     editCommentDOM({ body: body, info: commentData });
-
-    // const response = await deleteComment(uuid, postUuid);
-    // if (response.response == "Comment Deleted!") {
-    //   removeCommentDOM(uuid);
-    // } else if (response.error == "Unauthorized access") {
-    //   history.push("/login", { error: "Unauthorized access / Expirado" });
-    // }
   }
 
   function removeComment() {

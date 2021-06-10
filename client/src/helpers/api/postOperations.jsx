@@ -1,16 +1,17 @@
-import React from "react";
 import { getApi, deleteApi, postApi } from "./apiCalls";
 
 let headers = new Headers();
 
 headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
+headers.append("Test", localStorage.getItem("Test"));
 
 export async function getPost(requestInfo) {
   const request = {
     url: `/posts/${requestInfo}`,
     mode: "cors",
     credentials: "include",
+    headers: headers,
   };
   const response = await getApi(request);
   return response;
@@ -42,6 +43,7 @@ export async function deletePost(requestInfo) {
     url: `/posts/${requestInfo}`,
     mode: "cors",
     credentials: "include",
+    headers: headers,
   };
   const response = await deleteApi(request);
   return response;
@@ -57,42 +59,3 @@ export async function getAllPosts(requestInfo) {
   const response = await getApi(request);
   return response;
 }
-
-/*
-
-function createPost() {
-  let headers = new Headers();
-  var e = document.getElementById("postTopic");
-  var value = e.options[e.selectedIndex].value;
-  const postTopic = e.options[e.selectedIndex].text;
-  const postTitle = document.getElementById("postTitle").value;
-  const postBody = document.getElementById("postBody").value;
-
-  headers.append("Content-Type", "application/json");
-  headers.append("Accept", "application/json");
-
-     
-
-  //console.log(uuid, commentBody);
-  fetch("http://localhost:8080/posts", {
-    mode: "cors",
-    method: "POST",
-    credentials: "include",
-    headers: headers,
-    body: JSON.stringify({
-      topic: postTopic,
-      title: postTitle,
-      body: postBody,
-    }),
-  })
-    .then((response) => response.json())
-    .then((json) => {
-      if (json.uuid != null) {
-        createPostDom(json);
-        modalClose("mymodalcentered");
-      }
-    })
-    .catch((error) => console.log("Authorization failed : " + error.message));
-  //debugger;
-}
-*/

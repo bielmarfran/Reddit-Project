@@ -70,7 +70,7 @@ function Register() {
                     Social
                   </div>
                   <div className="text-3xl text-center font-base text-black mt-4">
-                    Registro
+                    Registration
                   </div>
                   {msg === "" ? "" : callAlert(msg)}
                   <Formik
@@ -84,7 +84,7 @@ function Register() {
                           htmlFor="usernameUser"
                           className="block text-xs font-semibold text-gray-600 uppercase"
                         >
-                          Nome do Usuario
+                          Username
                         </label>
                         <Field
                           id="usernameUser"
@@ -130,7 +130,7 @@ function Register() {
                           htmlFor="password"
                           className="block text-xs font-semibold text-gray-600 uppercase"
                         >
-                          Senha
+                          Password
                         </label>
                         <Field
                           id="password"
@@ -153,7 +153,7 @@ function Register() {
                           htmlFor="password_confirm"
                           className="block text-xs font-semibold text-gray-600 uppercase"
                         >
-                          Confimar Senha
+                          Confirm Password
                         </label>
                         <Field
                           id="password_confirm"
@@ -172,13 +172,13 @@ function Register() {
                       </div>
                       <div className="flex justify-start mt-4">
                         <span className="text-red-500 hidden" id="errorEmail">
-                          O email esta incorreto
+                          The email is incorrect.
                         </span>
                         <span
                           className="text-red-500 hidden"
                           id="errorPassword"
                         >
-                          As senhas sao diferentes
+                          The passwords are different.
                         </span>
                       </div>
                       <button
@@ -186,7 +186,7 @@ function Register() {
                         type="submit"
                         className="button"
                       >
-                        Registrar
+                        Register
                       </button>
                     </Form>
                   </Formik>
@@ -196,7 +196,7 @@ function Register() {
                       onClick={handleClick}
                       className="text-black font-normal border-b-2 border-gray-200 hover:border-teal-500"
                     >
-                      Você já tem uma conta?
+                      Have an account?
                       <span className="text-black font-semibold"> Login </span>
                     </a>
                   </div>

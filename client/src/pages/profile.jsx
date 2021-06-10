@@ -7,14 +7,14 @@ import Header from "../components/header/header";
 import Footer from "../components/footer";
 
 function Profile({ data }) {
-  let { email } = useParams();
+  let { username } = useParams();
   let history = useHistory();
   const [profileData, setProfileData] = useState([]);
 
   useEffect(() => {
-    getProfileInfo({ email: email }).then((response) => {
+    getProfileInfo({ username: username }).then((response) => {
       if (typeof response.error !== "undefined")
-        history.push("/login", { error: "Unauthorized access / Expirado" });
+        history.push("/login", { error: "Unauthorized access / Expired" });
       if (response == "TypeError: Failed to fetch")
         history.push("/login", { error: "Servidor Off" });
       setProfileData(response);

@@ -5,15 +5,18 @@ let headers = new Headers();
 
 headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
-//headers.append("Origin", "https://thirsty-villani-f5cdd2.netlify.app/");
+headers.append("Test", localStorage.getItem("Test"));
+
+let headers2 = new Headers();
+headers2.append("Test", localStorage.getItem("Test"));
 
 export async function getProfileInfo(requestInfo) {
-  const emailUser = requestInfo.email;
+  const username = requestInfo.username;
   const request = {
-    url: `/profile/${emailUser}`,
+    url: `/profile/${username}`,
     mode: "cors",
     credentials: "include",
-    //headers: headers,
+    headers: headers,
   };
   const response = await getApi(request);
   return response;
@@ -27,6 +30,7 @@ export async function postFile(requestInfo) {
     url: `/profile/upload`,
     mode: "cors",
     credentials: "include",
+    headers: headers2,
     body: formData,
   };
   const response = await postApi(request);

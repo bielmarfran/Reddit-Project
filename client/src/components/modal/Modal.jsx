@@ -35,11 +35,14 @@ export default function Modal(props) {
     topicRequired: "Choose a Topic!",
     titleRequired: "Enter a Title!",
     bodyRequired: "Insert a Body!",
+    bodyMax: "Maximum 255 characters!",
   };
   const validationSchema = Yup.object().shape({
     topic: Yup.string().required(validationMsg.topicRequired),
     title: Yup.string().required(validationMsg.titleRequired),
-    body: Yup.string().required(validationMsg.bodyRequired),
+    body: Yup.string()
+      .required(validationMsg.bodyRequired)
+      .max(255, validationMsg.bodyMax),
   });
 
   return (

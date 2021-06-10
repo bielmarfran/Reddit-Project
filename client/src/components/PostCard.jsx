@@ -72,7 +72,7 @@ export default function PostCard({ postData, getValue }) {
     if (response.response == "Post Deleted!") {
       getValue(uuid);
     } else if (response.error == "Unauthorized access") {
-      history.push("/login", { error: "Unauthorized access / Expirado" });
+      history.push("/login", { error: "Unauthorized access / Expired" });
     }
   }
   function removePost() {

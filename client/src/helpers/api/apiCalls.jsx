@@ -10,8 +10,8 @@ export async function getApi(request) {
       mode: request.mode,
       method: "GET",
       credentials: request.credentials,
-      //headers: headers,
-      //body: request.body,
+      headers: request.headers,
+      //body: { test: test },
     });
     const json = await response.json();
     return json;

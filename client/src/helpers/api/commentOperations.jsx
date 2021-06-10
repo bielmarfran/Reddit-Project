@@ -5,6 +5,7 @@ let headers = new Headers();
 
 headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
+headers.append("Test", localStorage.getItem("Test"));
 
 export async function postComment(requestInfo, uuid) {
   const request = {

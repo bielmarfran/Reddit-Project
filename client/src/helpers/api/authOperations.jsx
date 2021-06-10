@@ -5,7 +5,7 @@ let headers = new Headers();
 
 headers.append("Content-Type", "application/json");
 headers.append("Accept", "application/json");
-//headers.append("Origin", "https://thirsty-villani-f5cdd2.netlify.app/");
+headers.append("Test", localStorage.getItem("Test"));
 
 export async function performLogin(requestInfo) {
   const emailUser = requestInfo.email;

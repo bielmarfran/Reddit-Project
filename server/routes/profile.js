@@ -10,12 +10,12 @@ if (process.env.PORT !== undefined) {
   production = true;
 }
 
-router.get("/:email", async (req, res) => {
+router.get("/:username", async (req, res) => {
   //const { email } = req.body;
-  const email = req.params.email;
+  const username = req.params.username;
   try {
     const user = await User.findOne({
-      where: { email },
+      where: { username },
       // include: [
       //   {
       //     model: Comment,
@@ -47,7 +47,7 @@ router.get("/:email", async (req, res) => {
   }
 });
 
-router.post("/upload", validateToken, async (req, res) => {
+router.post("/upload", async (req, res) => {
   const uuid = req.uuid;
   const place = req.body.place;
   let sampleFile;

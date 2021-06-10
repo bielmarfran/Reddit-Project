@@ -16,7 +16,7 @@ export default function Post({ postData }) {
   const body = postData.posts.body;
   const commentsCount = postData.posts.countComments;
   var time = getTime(postData.posts.createdAt);
-  const email = localStorage.getItem("email");
+  const username = localStorage.getItem("username");
 
   useEffect(() => {
     setListComments(postData.posts.comments);
@@ -45,7 +45,7 @@ export default function Post({ postData }) {
       setListComments(newList);
       resetForm({});
     } else if (response.error == "Unauthorized access") {
-      history.push("/login", { error: "Unauthorized access / Expirado" });
+      history.push("/login", { error: "Unauthorized access / Expired" });
     }
   };
 
@@ -64,14 +64,17 @@ export default function Post({ postData }) {
       setEditComment({ edit: false, info: "" });
       setInitialValues({ body: "" });
     } else if (response.error == "Unauthorized access") {
-      history.push("/login", { error: "Unauthorized access / Expirado" });
+      history.push("/login", { error: "Unauthorized access / Expired" });
     }
   };
   const validationMsg = {
     bodyRequired: "Insert a Body!",
+    bodyMax: "Maximum 255 characters!",
   };
   const validationSchema = Yup.object().shape({
-    body: Yup.string().required(validationMsg.bodyRequired),
+    body: Yup.string()
+      .required(validationMsg.bodyRequired)
+      .max(255, validationMsg.bodyMax),
   });
 
   return (
@@ -132,7 +135,7 @@ export default function Post({ postData }) {
               >
                 <Form className="">
                   <p className="text-xs ml-0.5 mb-0.5">
-                    Comment as <a className="text-blue-500">{email}</a>
+                    Comment as <a className="text-blue-500">{username}</a>
                   </p>
                   <Field
                     className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"

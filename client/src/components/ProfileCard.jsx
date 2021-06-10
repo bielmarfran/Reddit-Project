@@ -65,7 +65,9 @@ export default function ProfileCard({ profileData }) {
                     </svg>
                   </span>
                 )}
-                <h1 className="text-2xl font-semibold">{profileData.email}</h1>
+                <h1 className="text-2xl font-semibold">
+                  {profileData.username}
+                </h1>
                 <h4 className="text-sm font-semibold">
                   {getTimeFull(profileData.createdAt)}
                 </h4>

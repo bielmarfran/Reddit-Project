@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { callAlert } from "../helpers/callAlert";
@@ -7,18 +7,18 @@ import * as Yup from "yup";
 
 function Login({ location }) {
   let history = useHistory();
-
-  const initialValues = {
+  const [initialValues, setInitialValues] = useState({
     email: "",
     password: "",
-  };
+  });
+
   const onSubmit = async (data) => {
     const response = await performLogin(data);
     if (response.response == "Successfully logged in") {
-      localStorage.setItem("email", data.email);
+      localStorage.setItem("username", response.username);
       localStorage.setItem("cover", response.photos.cover);
       localStorage.setItem("profile", response.photos.profile);
-      history.push("/", { email: data.email });
+      history.push("/", { username: response.username });
     } else if (response.error == "Unauthorized access") {
       showAlert(response.error);
     }
@@ -53,6 +53,7 @@ function Login({ location }) {
               : ""}
 
             <Formik
+              enableReinitialize={true}
               initialValues={initialValues}
               onSubmit={onSubmit}
               validationSchema={validationSchema}
@@ -115,6 +116,15 @@ function Login({ location }) {
                     Create an account
                   </a>
                 </div>
+                <button
+                  id="teste"
+                  type="submit"
+                  className="w-full py-3 mt-10 bg-green-600 rounded-sm font-medium text-white uppercase focus:outline-none hover:bg-green-700 hover:shadow-none"
+                  //className="w-full h-36 buttonBlue"
+                  onClick={handleClickTestAccount}
+                >
+                  Test Account
+                </button>
               </Form>
             </Formik>
           </div>
@@ -124,6 +134,10 @@ function Login({ location }) {
   );
   function handleClick() {
     history.push("/register");
+  }
+  function handleClickTestAccount() {
+    localStorage.setItem("Test", "true");
+    onSubmit({ email: "test@gmail.com", password: "12345678" });
   }
 }
 

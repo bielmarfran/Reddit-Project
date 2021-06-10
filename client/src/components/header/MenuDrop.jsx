@@ -10,7 +10,7 @@ window.location.hostname === "localhost"
   : (baseUrl = import.meta.env.VITE_API_URL_PRODUTION);
 export default function MenuDrop() {
   const [loadProfile, setLoadProfile] = useState(true);
-  const email = localStorage.getItem("email");
+  const username = localStorage.getItem("username");
   const profile = localStorage.getItem("profile");
   let history = useHistory();
   return (
@@ -36,7 +36,7 @@ export default function MenuDrop() {
                 )}
 
                 <div className="ml-4 text-center self-center">
-                  {typeof email !== "undefined" ? email : "Username"}
+                  {typeof username !== "undefined" ? username : "Username"}
                 </div>
 
                 <ChevronDownIcon
@@ -125,7 +125,7 @@ export default function MenuDrop() {
   }
 
   async function showProfile() {
-    history.push(`/profile/${email}`);
+    history.push(`/profile/${username}`);
   }
   async function setDefaultImg() {
     setLoadProfile(false);
