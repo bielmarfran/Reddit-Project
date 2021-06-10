@@ -69,3 +69,14 @@ The idea was to develop a generic social/forum platform, where I get inspired by
     npm install
 
     nodemon
+    
+## DB
+Config your local mysql environment and create your DB. Then go to :
+
+    cd server
+    
+    cd config
+    
+    config.json
+    
+ Edit the file according to your environment and data.
