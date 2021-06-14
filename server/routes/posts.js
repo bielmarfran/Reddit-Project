@@ -22,6 +22,29 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/topic/:topic", async (req, res) => {
+  const uuid = req.uuid;
+  const topic = req.params.topic;
+  try {
+    const user = await User.findOne({ where: { uuid: uuid } });
+    const post = await Post.findAll({
+      where: { topic: topic },
+      include: "user",
+    });
+
+    post.forEach((element) => {
+      element.dataValues.username = user.username;
+      element.userId == user.id
+        ? (element.dataValues.owner = true)
+        : (element.dataValues.owner = false);
+    });
+    return res.json(post);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error Get" + error });
+  }
+});
+
 router.get("/:uuid", async (req, res) => {
   const uuid = req.params.uuid;
   try {
