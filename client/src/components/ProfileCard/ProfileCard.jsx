@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/outline";
 import Dropzone from "react-dropzone";
 import { callAlert } from "../../helpers/callAlert";
-import getTimeFull from "../../helpers/getTimeFull";
+import getTimeFull from "../../helpers/getTimeFull/getTimeFull";
 import { postFile } from "../../helpers/api/profileOperations";
 var baseUrl;
 window.location.hostname === "localhost"

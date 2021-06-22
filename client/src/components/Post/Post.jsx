@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import getTime from "../../helpers/getTime";
+import getTime from "../../helpers/getTime/getTime";
 import Comment from "../Comment/Comment";
 import { postComment, putComment } from "../../helpers/api/commentOperations";
 import { Formik , Form, Field, ErrorMessage } from "formik";

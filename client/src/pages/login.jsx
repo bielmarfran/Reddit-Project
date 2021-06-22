@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { callAlert } from "../helpers/callAlert";
+import { callAlert } from "../helpers/callAlert/callAlert";
 import { performLogin } from "../helpers/api/authOperations";
 import * as Yup from "yup";
 

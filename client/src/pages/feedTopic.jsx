@@ -37,7 +37,7 @@ function Feed(props) {
     <div className="bg-gray-200">
       <Header createPost={true} addPostDOM={addPostDOM} />
       <img
-        src={`/img/${topic}-cover.jpg`}
+        src={`/img/${topic}-cover.webp`}
         alt=""
         className="overflow-hidden object-cover h-56  w-full rounded-t"
       />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import getTime from "../../helpers/getTime";
+import getTime from "../../helpers/getTime/getTime";
 import { deleteComment } from "../../helpers/api/commentOperations";
 import { useHistory } from "react-router-dom";
 import { PencilAltIcon as PencilAltIconSolid } from "@heroicons/react/solid";
