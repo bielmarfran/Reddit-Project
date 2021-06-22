@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import getTime from "../helpers/getTime";
 import Comment from "../components/Comment";
 import { postComment, putComment } from "../helpers/api/commentOperations";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik , Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 export default function Post({ postData }) {

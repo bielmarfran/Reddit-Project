@@ -39,7 +39,7 @@ function Feed(props) {
       <img
         src={`/img/${topic}-cover.jpg`}
         alt=""
-        class="overflow-hidden object-cover h-56  w-full rounded-t"
+        className="overflow-hidden object-cover h-56  w-full rounded-t"
       />
       {/* <div className="bg-white h-24">
         <img
@@ -48,7 +48,6 @@ function Feed(props) {
         />
       </div> */}
       <div className="flex flex-col h-screen ">
-        {/*justify-between */}
         <div
           id="app"
           className="mb-auto grid lg:grid-cols-12 lg:justify-items-stretch"
@@ -65,19 +64,19 @@ function Feed(props) {
               : "Erros"}
           </div>
           <div className="order-first lg:order-none lg:col-span-3 ">
-            <div class="lg:m-3 shadow-md hover:shadow-lg hover:bg-gray-100 rounded-lg bg-white my-8 mx-8">
+            <div className="lg:m-3 shadow-md hover:shadow-lg hover:bg-gray-100 rounded-lg bg-white my-8 mx-8">
               <div className="h-14 bg-gray-600 rounded-t font-medium text-3xl text-white">
                 <span className="block my-auto align-middle pl-4 pt-2.5">
                   Info
                 </span>
               </div>
-              <div class="p-4">
-                <h3 class="font-normal text-xl my-2">
+              <div className="p-4">
+                <h3 className="font-normal text-xl my-2">
                   A block for those with questions about {topic}.
                 </h3>
-                <h2 class="text-lg my-2">Rules.</h2>
-                <div class="flex text-justify">
-                  <div class="w-full"></div>
+                <h2 className="text-lg my-2">Rules.</h2>
+                <div className="flex text-justify">
+                  <div className="w-full"></div>
                 </div>
               </div>
             </div>
