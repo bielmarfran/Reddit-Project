@@ -1,3 +1,4 @@
 node_modules/*
 MyEditor.jsx
 dist/*
+coverage

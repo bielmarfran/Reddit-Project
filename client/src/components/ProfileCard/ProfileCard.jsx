@@ -8,7 +8,7 @@ import {
   BadgeCheckIcon,
 } from "@heroicons/react/outline";
 import Dropzone from "react-dropzone";
-import { callAlert } from "../../helpers/callAlert";
+import { callAlert } from "../../helpers/callAlert/callAlert";
 import getTimeFull from "../../helpers/getTimeFull/getTimeFull";
 import { postFile } from "../../helpers/api/profileOperations";
 var baseUrl;
