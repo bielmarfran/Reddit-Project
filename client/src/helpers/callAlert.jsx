@@ -1,5 +1,5 @@
 import React from "react";
-import Alert from "../components/alerts/Alert";
+import Alert from "../components/Alerts/Alert";
 // import AlertAtentionBlue from "../components/alerts/AlertAtentionBlue";
 // import AlertSuccessGreen from "../components/alerts/AlertSuccessGreen";
 

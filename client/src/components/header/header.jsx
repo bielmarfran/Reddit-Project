@@ -1,5 +1,5 @@
 import React from "react";
-import MenuDrop from "./MenuDrop";
+import MenuDrop from "../MenuDrop/MenuDrop";
 import Modal from "../modal/Modal";
 
 export default function Header(props) {

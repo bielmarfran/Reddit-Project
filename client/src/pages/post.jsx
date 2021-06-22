@@ -2,9 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory, withRouter, useParams } from "react-router-dom";
 import { getPost } from "../helpers/api/postOperations";
-import PostInfo from "../components/Post";
-import Header from "../components/header/header";
-import Footer from "../components/footer";
+import PostInfo from "../components/Post/Post";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 function Post({ data }) {
   let { id } = useParams();

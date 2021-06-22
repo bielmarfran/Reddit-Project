@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import getTime from "../helpers/getTime";
-import { deleteComment } from "../helpers/api/commentOperations";
+import getTime from "../../helpers/getTime";
+import { deleteComment } from "../../helpers/api/commentOperations";
 import { useHistory } from "react-router-dom";
 import { PencilAltIcon as PencilAltIconSolid } from "@heroicons/react/solid";
 import { PencilAltIcon as PencilAltIconOutline } from "@heroicons/react/outline";

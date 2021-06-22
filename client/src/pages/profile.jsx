@@ -2,9 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory, withRouter, useParams } from "react-router-dom";
 import { getProfileInfo } from "../helpers/api/profileOperations";
-import ProfileCard from "../components/ProfileCard";
-import Header from "../components/header/header";
-import Footer from "../components/footer";
+import ProfileCard from "../components/ProfileCard/ProfileCard";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 function Profile({ data }) {
   let { username } = useParams();
